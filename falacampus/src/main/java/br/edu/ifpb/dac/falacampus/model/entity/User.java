@@ -26,8 +26,6 @@ public class User {
 	@ManyToOne
 	private Departament departament;
 	
-	
-	
 	public User() {
 		
 	}
