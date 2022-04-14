@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.edu.ifpb.dac.falacampus.model.entity.User;
+import br.edu.ifpb.dac.falacampus.model.enums.Role;
 
 public class UserDto {
 	
@@ -11,6 +12,7 @@ public class UserDto {
 	private String name;
 	private String email;
 	private Long registration;
+	private Role role;
 	private String departamentName;
 	
 	public UserDto() {
@@ -22,6 +24,7 @@ public class UserDto {
 		this.name = user.getName();
 		this.email = user.getEmail();
 		this.registration = user.getRegistration();
+		this.role = user.getRole();
 		this.departamentName = user.getDepartament().getName();
 	}
 	
@@ -55,6 +58,14 @@ public class UserDto {
 
 	public void setRegistration(Long registration) {
 		this.registration = registration;
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public String getDepartamentName() {
