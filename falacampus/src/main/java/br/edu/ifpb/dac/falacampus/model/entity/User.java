@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
 
+@Entity
 public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,7 @@ public class User {
 	private Role role = Role.ALUNO;
 	private String password;
 	@ManyToOne
-	private List<Departament> departaments = new ArrayList<>();
+	private Departament departament;
 	
 	
 	
@@ -33,14 +35,14 @@ public class User {
 	}
 	
 	public User(Long id, String name, String email, Long registration, Role role, String password,
-			List<Departament> departaments) {
+			Departament departament) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.registration = registration;
 		this.role = role;
 		this.password = password;
-		this.departaments = departaments;
+		this.departament = departament;
 	}
 
 	public Long getId() {
@@ -91,17 +93,17 @@ public class User {
 		this.password = password;
 	}
 	
-	public List<Departament> getDepartaments() {
-		return departaments;
+	public Departament getDepartament() {
+		return departament;
 	}
 	
-	public void setDepartaments(List<Departament> departaments) {
-		this.departaments = departaments;
+	public void setDepartaments(Departament departament) {
+		this.departament = departament;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(departaments, email, id, name, password, registration, role);
+		return Objects.hash(departament, email, id, name, password, registration, role);
 	}
 
 	@Override
@@ -113,7 +115,7 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(departaments, other.departaments) && Objects.equals(email, other.email)
+		return Objects.equals(departament, other.departament) && Objects.equals(email, other.email)
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password) && Objects.equals(registration, other.registration)
 				&& role == other.role;

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Departament {
 	
 	public Departament() {
@@ -24,7 +26,7 @@ public class Departament {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@OneToMany
+	@OneToMany(mappedBy = "departament")
 	private List<User> users = new ArrayList<>();
 	
 	public Long getId() {
