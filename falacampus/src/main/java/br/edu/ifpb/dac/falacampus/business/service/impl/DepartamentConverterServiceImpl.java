@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
+import br.edu.ifpb.dac.falacampus.business.service.UserService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
@@ -30,8 +32,6 @@ public class DepartamentConverterServiceImpl implements DepartamentConverterServ
 		
 		entity.setId(dto.getId());
 		entity.setName(dto.getName());
-		//entity.setUsers(dto.getUsers());
-		//Faltando concluir essa parte
 		
 		return entity;
 	}
@@ -42,8 +42,6 @@ public class DepartamentConverterServiceImpl implements DepartamentConverterServ
 		
 		dto.setId(entity.getId());
 		dto.setName(entity.getName());
-		//dto.setUsers(entity.getUsers());
-		//Faltando concluir essa parte
 		
 		return dto;
 	}

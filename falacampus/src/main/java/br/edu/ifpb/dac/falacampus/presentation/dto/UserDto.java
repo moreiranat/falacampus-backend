@@ -3,7 +3,6 @@ package br.edu.ifpb.dac.falacampus.presentation.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
 
@@ -14,7 +13,8 @@ public class UserDto {
 	private String email;
 	private Long registration;
 	private Role role;
-	private Departament departament;
+	private Long departamentId;
+	private String departamentName;
 	
 	public UserDto() {
 		
@@ -26,7 +26,7 @@ public class UserDto {
 		this.email = user.getEmail();
 		this.registration = user.getRegistration();
 		this.role = user.getRole();
-		this.departament = user.getDepartament();
+		this.departamentId = user.getDepartament().getId();
 	}
 	
 	public Long getId() {
@@ -69,12 +69,20 @@ public class UserDto {
 		this.role = role;
 	}
 
-	public Departament getDepartament() {
-		return departament;
+	public Long getDepartamentId() {
+		return departamentId;
 	}
 
-	public void setDepartament(Departament departament) {
-		this.departament = departament;
+	public void setDepartamentId(Long departamentId) {
+		this.departamentId = departamentId.longValue();
+	}
+	
+	public String getDepartamentName() {
+		return departamentName;
+	}
+
+	public void setDepartamentName(String departamentName) {
+		this.departamentName = departamentName;
 	}
 
 	public static List<UserDto> converter(List<User> users) {
