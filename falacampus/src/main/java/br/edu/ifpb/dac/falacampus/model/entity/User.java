@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
@@ -24,6 +25,7 @@ public class User {
 	private Role role = Role.ALUNO;
 	private String password;
 	@ManyToOne
+	@JoinColumn(name = "departament_id")
 	private Departament departament;
 	
 	public User() {
@@ -93,7 +95,7 @@ public class User {
 		return departament;
 	}
 	
-	public void setDepartaments(Departament departament) {
+	public void setDepartament(Departament departament) {
 		this.departament = departament;
 	}
 
