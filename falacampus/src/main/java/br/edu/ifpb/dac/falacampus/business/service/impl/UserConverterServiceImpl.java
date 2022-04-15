@@ -1,8 +1,9 @@
-package br.edu.ifpb.dac.falacampus.business.service;
+package br.edu.ifpb.dac.falacampus.business.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
+
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
