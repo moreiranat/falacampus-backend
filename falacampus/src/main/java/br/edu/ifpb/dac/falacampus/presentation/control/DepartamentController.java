@@ -61,25 +61,12 @@ public class DepartamentController {
 		}
 	}
 
-	@GetMapping(value = "/departament")
-	public ResponseEntity<List<Departament>> getAllDeResponseEntity() {
-		try {
-			List<Departament> departamentos = new ArrayList<Departament>();
-
-			if (departamentos.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			} else {
-				return new ResponseEntity<>(departamentos, HttpStatus.OK);
-			}
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
 	@GetMapping
-	public ResponseEntity find(@RequestParam(value = "id", required = false) Long id,
+	public ResponseEntity find (
+		    @RequestParam(value = "id", required = false) Long id,
 			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "users", required = false) List users) {
+			@RequestParam(value = "users", required = false) List<User> users
+		) {
 
 		try {
 

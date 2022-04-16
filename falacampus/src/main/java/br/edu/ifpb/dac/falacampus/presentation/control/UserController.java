@@ -26,18 +26,18 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 public class UserController {
 	
 	@Autowired
-	private UserConverterService converterService;
+	private UserConverterService userConverterService;
 	@Autowired
 	private UserService userService;
 	
 	@PostMapping
 	public ResponseEntity save(@RequestBody UserDto dto) {
 		try {
-			User entity = converterService.dtoToUser(dto);
+			User entity = userConverterService.dtoToUser(dto);
 			
 			entity = userService.save(entity);
 
-			dto = converterService.userToDTO(entity);
+			dto = userConverterService.userToDTO(entity);
 			
 			return new ResponseEntity(dto, HttpStatus.CREATED);
 			
@@ -51,9 +51,9 @@ public class UserController {
 	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody UserDto dto) {
 		try {
 			dto.setId(id);
-			User entity = converterService.dtoToUser(dto);
+			User entity = userConverterService.dtoToUser(dto);
 			entity = userService.update(entity);
-			dto = converterService.userToDTO(entity);
+			dto = userConverterService.userToDTO(entity);
 			
 			return ResponseEntity.ok(dto);
 		} catch(Exception e) {
@@ -91,7 +91,7 @@ public class UserController {
 			filter.setRegistration(registration);
 			
 			List<User> entities = userService.find(filter);
-			List<UserDto> dtos = converterService.userToDTOList(entities);
+			List<UserDto> dtos = userConverterService.userToDTOList(entities);
 			
 			return ResponseEntity.ok(dtos);
 			
