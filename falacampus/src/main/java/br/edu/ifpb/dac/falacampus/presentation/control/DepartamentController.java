@@ -1,8 +1,6 @@
 package br.edu.ifpb.dac.falacampus.presentation.control;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,16 +20,15 @@ import br.edu.ifpb.dac.falacampus.business.service.impl.DepartamentConverterServ
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
-import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @RestController
 @RequestMapping("/api/departament")
 public class DepartamentController {
-	@Autowired(required = true)
-	private DepartamentService departamentService;
-
-	@Autowired(required = true)
+	
+	@Autowired
 	private DepartamentConverterService departamentConvertService;
+	@Autowired
+	private DepartamentService departamentService;
 
 	@PostMapping
 	public ResponseEntity save(@RequestBody DepartamentDto dto) {
@@ -45,7 +42,6 @@ public class DepartamentController {
 			return new ResponseEntity(dto, HttpStatus.CREATED);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}

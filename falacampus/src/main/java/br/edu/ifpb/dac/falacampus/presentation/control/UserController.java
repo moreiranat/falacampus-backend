@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import br.edu.ifpb.dac.falacampus.business.service.UserService;
 import br.edu.ifpb.dac.falacampus.business.service.impl.UserConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
+import br.edu.ifpb.dac.falacampus.model.enums.Role;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @RestController
@@ -42,7 +44,6 @@ public class UserController {
 			return new ResponseEntity(dto, HttpStatus.CREATED);
 			
 		} catch(Exception e) {
-			e.printStackTrace();
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
@@ -78,8 +79,8 @@ public class UserController {
 				@RequestParam(value = "name", required = false) String name,
 				@RequestParam(value = "email", required = false) String email,
 				@RequestParam(value = "registration", required = false) Long registration,
-				@RequestParam(value = "departamentId", required = false) Departament departamentId,
-				@RequestParam(value = "departamentName", required = false) Departament departamentName
+				@RequestParam(value = "role", required = false) Role role,
+				@RequestParam(value = "departamentId", required = false) Long departamentId
 			) {
 		
 		try {
@@ -89,6 +90,8 @@ public class UserController {
 			filter.setName(name);
 			filter.setEmail(email);
 			filter.setRegistration(registration);
+			filter.setRole(role);
+			filter.getDepartament().getId();
 			
 			List<User> entities = userService.find(filter);
 			List<UserDto> dtos = userConverterService.userToDTOList(entities);

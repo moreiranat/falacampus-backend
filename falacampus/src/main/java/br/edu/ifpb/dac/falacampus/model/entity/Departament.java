@@ -1,5 +1,6 @@
 package br.edu.ifpb.dac.falacampus.model.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +14,9 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Departament {
+public class Departament implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,6 +60,10 @@ public class Departament {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

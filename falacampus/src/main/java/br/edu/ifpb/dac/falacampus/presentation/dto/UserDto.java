@@ -13,8 +13,8 @@ public class UserDto {
 	private String email;
 	private Long registration;
 	private Role role;
+	private String password;
 	private Long departamentId;
-	private String departamentName;
 	
 	public UserDto() {
 		
@@ -26,8 +26,8 @@ public class UserDto {
 		this.email = user.getEmail();
 		this.registration = user.getRegistration();
 		this.role = user.getRole();
+		//this.password = user.getPassword();
 		this.departamentId = user.getDepartament().getId();
-		this.departamentName = user.getDepartament().getName();
 	}
 	
 	public static List<UserDto> converter(List<User> users) {
@@ -73,6 +73,14 @@ public class UserDto {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Long getDepartamentId() {
 		return departamentId;
@@ -80,14 +88,6 @@ public class UserDto {
 
 	public void setDepartamentId(Long departamentId) {
 		this.departamentId = departamentId.longValue();
-	}
-	
-	public String getDepartamentName() {
-		return departamentName;
-	}
-
-	public void setDepartamentName(String departamentName) {
-		this.departamentName = departamentName;
 	}
 
 }

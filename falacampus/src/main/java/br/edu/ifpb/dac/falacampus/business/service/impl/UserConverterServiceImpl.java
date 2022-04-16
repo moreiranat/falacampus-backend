@@ -2,6 +2,8 @@ package br.edu.ifpb.dac.falacampus.business.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
@@ -13,6 +15,7 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 public class UserConverterServiceImpl implements UserConverterService{
 
 	@Override
+	@Bean
 	public List<UserDto> userToDTOList(List<User> entities) {
 		List<UserDto> dtos = new ArrayList<>();
 		
@@ -28,13 +31,12 @@ public class UserConverterServiceImpl implements UserConverterService{
 		User entity = new User();
 		DepartamentService departamentService = new DepartamentService();
 
-		entity.setId(dto.getId());
+		//entity.setId(dto.getId());
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 		entity.setRegistration(dto.getRegistration());
 		entity.setRole(dto.getRole());
 		entity.setDepartament(departamentService.findById(dto.getDepartamentId()));
-		entity.setDepartament(departamentService.findByName(dto.getDepartamentName()));
 		
 		return entity;
 	}

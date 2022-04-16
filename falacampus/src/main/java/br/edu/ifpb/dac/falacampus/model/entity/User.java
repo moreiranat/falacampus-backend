@@ -1,5 +1,6 @@
 package br.edu.ifpb.dac.falacampus.model.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -14,7 +15,9 @@ import javax.persistence.ManyToOne;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
 
 @Entity
-public class User {
+public class User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,6 +101,10 @@ public class User {
 	
 	public void setDepartament(Departament departament) {
 		this.departament = departament;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
