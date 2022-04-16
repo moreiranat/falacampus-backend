@@ -26,15 +26,17 @@ public class UserConverterServiceImpl implements UserConverterService{
 	@Override
 	public User dtoToUser(UserDto dto) {
 		User entity = new User();
-		DepartamentService d = new DepartamentService();
-		
+		DepartamentService departamentService = new DepartamentService();
+
 		entity.setId(dto.getId());
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 		entity.setRegistration(dto.getRegistration());
 		entity.setRole(dto.getRole());
-		entity.setDepartament(d.findById(dto.getDepartamentId()));
-					
+		
+		entity.setDepartament(departamentService.findById(dto.getDepartamentId()));
+		entity.setDepartament(departamentService.findByName(dto.getDepartamentName()));
+		
 		return entity;
 	}
 
@@ -42,13 +44,6 @@ public class UserConverterServiceImpl implements UserConverterService{
 	public UserDto userToDTO(User entity) {
 		UserDto dto = new UserDto();
 		
-		dto.setId(entity.getId());
-		dto.setName(entity.getName());
-		dto.setEmail(entity.getEmail());
-		dto.setRegistration(entity.getRegistration());
-		dto.setRole(entity.getRole());
-		dto.setDepartamentId(entity.getDepartament().getId());
-				
 		return dto;
 	}
 

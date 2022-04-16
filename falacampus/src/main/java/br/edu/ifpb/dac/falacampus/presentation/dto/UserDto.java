@@ -27,6 +27,11 @@ public class UserDto {
 		this.registration = user.getRegistration();
 		this.role = user.getRole();
 		this.departamentId = user.getDepartament().getId();
+		this.departamentName = user.getDepartament().getName();
+	}
+	
+	public static List<UserDto> converter(List<User> users) {
+		return users.stream().map(UserDto::new).collect(Collectors.toList());
 	}
 	
 	public Long getId() {
@@ -83,10 +88,6 @@ public class UserDto {
 
 	public void setDepartamentName(String departamentName) {
 		this.departamentName = departamentName;
-	}
-
-	public static List<UserDto> converter(List<User> users) {
-		return users.stream().map(UserDto::new).collect(Collectors.toList());
 	}
 
 }

@@ -60,4 +60,16 @@ public class DepartamentService {
 		
 	}
 
+	public Departament findByName(String name) {
+		return departamentRepository.findByName(name);
+	}
+
+//	public static Departament findByName(String name) {
+//		return departamentRepository.findByName(name);
+//	}
+
+//	public static Departament findByName(String name) {
+//		return departamentRepository.findByName(name);
+//	}
+
 }
