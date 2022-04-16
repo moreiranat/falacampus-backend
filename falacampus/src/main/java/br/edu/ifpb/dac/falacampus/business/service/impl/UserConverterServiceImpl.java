@@ -43,6 +43,13 @@ public class UserConverterServiceImpl implements UserConverterService{
 	public UserDto userToDTO(User entity) {
 		UserDto dto = new UserDto();
 		
+		dto.setId(entity.getId());
+		dto.setName(entity.getName());
+		dto.setEmail(entity.getEmail());
+		dto.setRegistration(entity.getRegistration());
+		dto.setRole(entity.getRole());
+		dto.setDepartamentId(entity.getDepartament().getId());
+		
 		return dto;
 	}
 

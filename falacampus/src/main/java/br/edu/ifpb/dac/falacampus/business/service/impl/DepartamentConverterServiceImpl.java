@@ -40,6 +40,9 @@ public class DepartamentConverterServiceImpl implements DepartamentConverterServ
 	public DepartamentDto departamentToDTO(Departament entity) {
 		DepartamentDto dto = new DepartamentDto();
 		
+		dto.setId(entity.getId());
+		dto.setName(entity.getName());
+		
 		return dto;
 	}
 	
