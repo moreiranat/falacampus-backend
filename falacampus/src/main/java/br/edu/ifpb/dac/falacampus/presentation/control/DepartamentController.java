@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
 import br.edu.ifpb.dac.falacampus.business.service.impl.DepartamentConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
+import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
-
+import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @RestController
 @RequestMapping("/api/departament")
@@ -31,34 +33,31 @@ public class DepartamentController {
 	@Autowired(required = true)
 	private DepartamentConverterService departamentConvertService;
 
-	@PostMapping(value = "departament")
-
-	public ResponseEntity<Departament> salve(@RequestBody Departament departamento) {
+	@PostMapping
+	public ResponseEntity save(@RequestBody DepartamentDto dto) {
 		try {
-			Departament depar = departamentService.save(departamento);
-			return new ResponseEntity<>(depar, HttpStatus.CREATED);
+			Departament entity = departamentConvertService.dtoToDepartament(dto);
+
+			entity = departamentService.save(entity);
+
+			dto = departamentConvertService.departamentToDTO(entity);
+
+			return new ResponseEntity(dto, HttpStatus.CREATED);
+
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<HttpStatus> deleteDepartament(@PathVariable("id") long id) {
+	@DeleteMapping("{id}")
+	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
 			departamentService.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
 
-	@GetMapping(value = "/departament/{id}")
-	public ResponseEntity<Departament> getDetinoById(@PathVariable("id") long id) {
-		Optional<Departament> informacoesDepartamentos = Optional.ofNullable(departamentService.findById(id));
-		if (informacoesDepartamentos.isPresent()) {
-			return new ResponseEntity<>(informacoesDepartamentos.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 
@@ -74,6 +73,27 @@ public class DepartamentController {
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping
+	public ResponseEntity find(@RequestParam(value = "id", required = false) Long id,
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "users", required = false) List users) {
+
+		try {
+
+			Departament departamento = new Departament();
+			departamento.setId(id);
+			departamento.setName(name);
+			departamento.setUsers(users);
+
+			List<Departament> entities = departamentService.find(departamento);
+			List<DepartamentDto> dtos = departamentConvertService.departamentToDTO(entities);
+			return ResponseEntity.ok(dtos);
+
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 
