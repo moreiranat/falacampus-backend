@@ -26,7 +26,7 @@ public class UserDto {
 		this.email = user.getEmail();
 		this.registration = user.getRegistration();
 		this.role = user.getRole();
-		//this.password = user.getPassword();
+		this.password = user.getPassword();
 		this.departamentId = user.getDepartament().getId();
 	}
 	
@@ -87,7 +87,7 @@ public class UserDto {
 	}
 
 	public void setDepartamentId(Long departamentId) {
-		this.departamentId = departamentId.longValue();
+		this.departamentId = departamentId;
 	}
 
 }

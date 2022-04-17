@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
 import br.edu.ifpb.dac.falacampus.business.service.impl.UserConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
@@ -31,14 +32,27 @@ public class UserController {
 	private UserConverterService userConverterService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private DepartamentService departamentService;
 	
 	@PostMapping
 	public ResponseEntity save(@RequestBody UserDto dto) {
+		
 		try {
-			User entity = userConverterService.dtoToUser(dto);
+			if (dto.getDepartamentId() == null) {
+				throw new IllegalStateException("departamentId cannot be null");
+			}
 			
+			Long departamentId = dto.getDepartamentId();
+			Departament departament = departamentService.findById(departamentId);
+			
+			if(departament == null) {
+				throw new IllegalStateException(String.format("Cound not find any departament with id=%1", departamentId));
+			}
+			
+			User entity = userConverterService.dtoToUser(dto);
+			entity.setDepartament(departament);
 			entity = userService.save(entity);
-
 			dto = userConverterService.userToDTO(entity);
 			
 			return new ResponseEntity(dto, HttpStatus.CREATED);
@@ -52,7 +66,17 @@ public class UserController {
 	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody UserDto dto) {
 		try {
 			dto.setId(id);
+			
+			Long departamentId = dto.getDepartamentId();
+			Departament departament = departamentService.findById(departamentId);
+			
+			if(departament == null) {
+				throw new IllegalStateException(String.format("Cound not find any departament with id=%1", id));
+			}
+			
 			User entity = userConverterService.dtoToUser(dto);
+			entity.setDepartament(departament);
+			
 			entity = userService.update(entity);
 			dto = userConverterService.userToDTO(entity);
 			
@@ -80,7 +104,7 @@ public class UserController {
 				@RequestParam(value = "email", required = false) String email,
 				@RequestParam(value = "registration", required = false) Long registration,
 				@RequestParam(value = "role", required = false) Role role,
-				@RequestParam(value = "departamentId", required = false) Long departamentId
+				@RequestParam(value = "departamentId") Long departamentId
 			) {
 		
 		try {
@@ -91,7 +115,14 @@ public class UserController {
 			filter.setEmail(email);
 			filter.setRegistration(registration);
 			filter.setRole(role);
-			filter.getDepartament().getId();
+			
+			Departament departament = departamentService.findById(departamentId);
+			
+			if(departament == null) {
+				throw new IllegalStateException(String.format("Cound not find any departament whit id=%1", departamentId));
+			}
+			
+			filter.setDepartament(departament);
 			
 			List<User> entities = userService.find(filter);
 			List<UserDto> dtos = userConverterService.userToDTOList(entities);

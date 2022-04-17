@@ -45,6 +45,20 @@ public class DepartamentController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody DepartamentDto dto) {
+		try {
+			dto.setId(id);
+			Departament departament = departamentConvertService.dtoToDepartament(dto);
+			departament = departamentService.update(departament);
+			dto = departamentConvertService.departamentToDTO(departament);
+
+			return ResponseEntity.ok(dto);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
 
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
@@ -60,8 +74,8 @@ public class DepartamentController {
 	@GetMapping
 	public ResponseEntity find (
 		    @RequestParam(value = "id", required = false) Long id,
-			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "users", required = false) List<User> users
+			@RequestParam(value = "name", required = false) String name
+			//@RequestParam(value = "users", required = false) List<User> users
 		) {
 
 		try {
@@ -69,26 +83,12 @@ public class DepartamentController {
 			Departament departamento = new Departament();
 			departamento.setId(id);
 			departamento.setName(name);
-			departamento.setUsers(users);
+			//departamento.setUsers(users);
 
 			List<Departament> entities = departamentService.find(departamento);
 			List<DepartamentDto> dtos = departamentConvertService.departamentToDTO(entities);
 			return ResponseEntity.ok(dtos);
 
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-	}
-
-	@PutMapping("{id}")
-	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody DepartamentDto dto) {
-		try {
-			dto.setId(id);
-			Departament departament = departamentConvertService.dtoToDepartament(dto);
-			departament = departamentService.update(id);
-			dto = departamentConvertService.departamentToDTO(departament);
-
-			return ResponseEntity.ok(dto);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}

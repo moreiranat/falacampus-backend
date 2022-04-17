@@ -1,7 +1,9 @@
 package br.edu.ifpb.dac.falacampus.business.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -44,9 +46,11 @@ public class DepartamentService {
 	}
 	
 	public Departament findById(Long id) {
-		if(id == null) {
-			throw new IllegalStateException("Id cannot be null...departament");
+		
+		if (id == null) {
+			throw new IllegalStateException("Id cannot be null");
 		}
+		
 		return departamentRepository.findById(id).get();
 	}
 
@@ -61,10 +65,6 @@ public class DepartamentService {
 		
 		return departamentRepository.findAll(example);
 		
-	}
-
-	public Departament findByName(String name) {
-		return departamentRepository.findByName(name);
 	}
 
 }
