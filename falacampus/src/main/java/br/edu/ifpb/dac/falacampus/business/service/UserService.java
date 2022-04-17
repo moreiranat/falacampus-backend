@@ -51,7 +51,7 @@ public class UserService {
 		return userRepository.findById(id).get();
 	}
 
-	public Iterable<User> findAll() {
+	public List<User> findAll() {
 		return userRepository.findAll();
 	}
 	

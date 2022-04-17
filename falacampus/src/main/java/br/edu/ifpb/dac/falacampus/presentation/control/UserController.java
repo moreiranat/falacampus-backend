@@ -2,6 +2,7 @@ package br.edu.ifpb.dac.falacampus.presentation.control;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,6 +86,18 @@ public class UserController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
+	@GetMapping("/all")
+	public List<User> findAll() throws Exception {
+		
+		List<User> result = userService.findAll();
+		
+		if (result.isEmpty()){
+			throw new Exception("List is empty!");
+			
+		} else {
+			return userService.findAll();	
+		}
+	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
@@ -97,6 +110,18 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        User user = userService.findById(id);
+        if (user != null) {
+        	UserDto userDto = new UserDto();
+            BeanUtils.copyProperties(user, userDto);
+            return ResponseEntity.ok(userDto);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+	
 	@GetMapping
 	public ResponseEntity find (
 				@RequestParam(value = "id", required = false) Long id,
@@ -104,7 +129,7 @@ public class UserController {
 				@RequestParam(value = "email", required = false) String email,
 				@RequestParam(value = "registration", required = false) Long registration,
 				@RequestParam(value = "role", required = false) Role role,
-				@RequestParam(value = "departamentId") Long departamentId
+				@RequestParam(value = "departamentId", required = false) Long departamentId
 			) {
 		
 		try {
