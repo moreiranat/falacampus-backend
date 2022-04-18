@@ -146,5 +146,18 @@ public class UserController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
+	
+	@GetMapping("/all")
+	public List<User> findAll() throws Exception {
+
+		List<User> result = userService.findAll();
+
+		if (result.isEmpty()){
+			throw new Exception("List is empty!");
+
+		} else {
+			return userService.findAll();	
+		}
+	}
 
 }
