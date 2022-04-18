@@ -29,7 +29,7 @@ public class User implements Serializable {
 	private Long registration;
 	
 	@Enumerated(EnumType.STRING)
-	private Role role = Role.ALUNO;
+	private Role role = Role.STUDENT;
 	
 	private String password;
 	

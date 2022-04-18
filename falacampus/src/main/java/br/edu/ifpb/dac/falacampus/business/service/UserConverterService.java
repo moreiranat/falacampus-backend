@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.business.service.impl;
+package br.edu.ifpb.dac.falacampus.business.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
