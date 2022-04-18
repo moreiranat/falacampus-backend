@@ -97,7 +97,6 @@ public class DepartamentController {
 			Departament departamento = new Departament();
 			departamento.setId(id);
 			departamento.setName(name);
-			//departamento.setUsers(users);
 
 			List<Departament> entities = departamentService.find(departamento);
 			List<DepartamentDto> dtos = departamentConvertService.departamentToDTO(entities);

@@ -63,7 +63,6 @@ public class DepartamentService {
 				.withStringMatcher(StringMatcher.CONTAINING));
 		
 		return departamentRepository.findAll(example);
-		
 	}
 
 }
