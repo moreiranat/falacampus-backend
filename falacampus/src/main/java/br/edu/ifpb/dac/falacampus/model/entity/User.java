@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
 
 @Entity
@@ -22,12 +21,18 @@ public class User implements Serializable {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
+	
 	private String email;
+	
 	private Long registration;
+	
 	@Enumerated(EnumType.STRING)
 	private Role role = Role.ALUNO;
+	
 	private String password;
+	
 	@ManyToOne
 	@JoinColumn(name = "departament_id")
 	private Departament departament;

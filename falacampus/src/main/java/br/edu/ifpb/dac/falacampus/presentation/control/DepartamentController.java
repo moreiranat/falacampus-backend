@@ -2,6 +2,7 @@ package br.edu.ifpb.dac.falacampus.presentation.control;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import br.edu.ifpb.dac.falacampus.business.service.impl.DepartamentConverterServ
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
+import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @RestController
 @RequestMapping("/api/departament")
@@ -71,11 +73,23 @@ public class DepartamentController {
 		}
 	}
 
+	@GetMapping("{id}")
+    public ResponseEntity<DepartamentDto> getDepartamentById(@PathVariable Long id) {
+		Departament departament = departamentService.findById(id);
+        if (departament != null) {
+        	DepartamentDto departamentDto = new DepartamentDto();
+            BeanUtils.copyProperties(departament, departamentDto);
+            return ResponseEntity.ok(departamentDto);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+	
 	@GetMapping
 	public ResponseEntity find (
 		    @RequestParam(value = "id", required = false) Long id,
 			@RequestParam(value = "name", required = false) String name
-			//@RequestParam(value = "users", required = false) List<User> users
+			
 		) {
 
 		try {
