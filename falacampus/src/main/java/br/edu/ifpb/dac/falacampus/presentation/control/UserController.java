@@ -87,19 +87,6 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/all")
-	public List<User> findAll() throws Exception {
-		
-		List<User> result = userService.findAll();
-		
-		if (result.isEmpty()){
-			throw new Exception("List is empty!");
-			
-		} else {
-			return userService.findAll();	
-		}
-	}
-	
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
