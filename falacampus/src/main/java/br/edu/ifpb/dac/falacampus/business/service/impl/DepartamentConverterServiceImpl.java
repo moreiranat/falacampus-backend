@@ -2,18 +2,16 @@ package br.edu.ifpb.dac.falacampus.business.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
-import br.edu.ifpb.dac.falacampus.business.service.UserService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
-import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @Component
-public class DepartamentConverterServiceImpl implements DepartamentConverterService{
-
+public class DepartamentConverterServiceImpl implements DepartamentConverterService {
+	
 	@Override
 	@Bean
 	public List<DepartamentDto> departamentToDTO(List<Departament> entities) {

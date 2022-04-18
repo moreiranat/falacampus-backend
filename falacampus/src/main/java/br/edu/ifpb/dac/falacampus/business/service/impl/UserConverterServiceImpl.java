@@ -12,7 +12,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @Component
-public class UserConverterServiceImpl implements UserConverterService{
+public class UserConverterServiceImpl implements UserConverterService {
 
 	@Autowired
 	private DepartamentService departamentService;
