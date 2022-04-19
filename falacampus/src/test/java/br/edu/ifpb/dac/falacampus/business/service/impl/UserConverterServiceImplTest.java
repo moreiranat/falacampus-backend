@@ -8,14 +8,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.edu.ifpb.dac.falacampus.business.service.DepartamentConverterService;
-import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
 import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
-import br.edu.ifpb.dac.falacampus.presentation.control.DepartamentController;
-import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 class UserConverterServiceImplTest {
