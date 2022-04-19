@@ -45,8 +45,9 @@ public class UserService {
 	}
 	
 	public User findById(Long id) {
+		
 		if(id == null) {
-			throw new IllegalStateException("Id cannot be null");
+			throw new IllegalStateException("Id cannot be null...user");
 		}
 		return userRepository.findById(id).get();
 	}

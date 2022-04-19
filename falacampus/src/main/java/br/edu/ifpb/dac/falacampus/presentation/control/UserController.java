@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
+import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
-import br.edu.ifpb.dac.falacampus.business.service.impl.UserConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
@@ -86,18 +86,6 @@ public class UserController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-	@GetMapping("/all")
-	public List<User> findAll() throws Exception {
-		
-		List<User> result = userService.findAll();
-		
-		if (result.isEmpty()){
-			throw new Exception("List is empty!");
-			
-		} else {
-			return userService.findAll();	
-		}
-	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
@@ -156,6 +144,19 @@ public class UserController {
 			
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/all")
+	public List<User> findAll() throws Exception {
+
+		List<User> result = userService.findAll();
+
+		if (result.isEmpty()){
+			throw new Exception("List is empty!");
+
+		} else {
+			return userService.findAll();	
 		}
 	}
 
