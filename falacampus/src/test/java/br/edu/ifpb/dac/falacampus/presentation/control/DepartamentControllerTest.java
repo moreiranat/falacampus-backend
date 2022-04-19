@@ -17,12 +17,12 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
 
 class DepartamentControllerTest {
 
-	DepartamentConverterService departamentConvertServiceImpl = new DepartamentConverterServiceImpl();
-	
-	DepartamentService departamentService = new DepartamentService();
-	
-	DepartamentDto dto; 
-	
+	DepartamentConverterService departamentConvertServiceImpl ;
+	DepartamentService departamentService ;
+
+	DepartamentDto dto;
+	DepartamentController departamentController ;
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
@@ -33,21 +33,43 @@ class DepartamentControllerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		 departamentController 	= new DepartamentController();
+		 departamentConvertServiceImpl= new DepartamentConverterServiceImpl();
+		 departamentService= new DepartamentService();
+		 dto = new DepartamentDto();
+		 
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 	}
 
+	/*
+	 * @Test void saveDepartamentTest() {
+	 * 
+	 * dto = new DepartamentDto(); // Within a code block, if an assertion fails the
+	 * // subsequent code in the same block will be skipped. assertAll("Biblioteca",
+	 * () -> { String departamentName = dto.getName();
+	 * assertNotNull(departamentName);
+	 * 
+	 * // Executed only if the previous assertion is valid. assertAll("Biblioteca",
+	 * () -> assertTrue(departamentName.startsWith("B")), () ->
+	 * assertTrue(departamentName.endsWith("a"))); });
+	 * 
+	 * }
+	 */
+	
 	@Test
-	void saveDepartamentTest() {
+	void standardAssertions() {
+		 
+		 dto.setId( 1L);
+		 dto.setName("Biblioteca");
+		assertEquals(dto, departamentController.save(dto));  
 		
-		dto = new DepartamentDto();
-		dto.setId(1L);
-		dto.setName("Maria");
 		
-	    assertEquals(dto, dto);
-		
+		//assertEquals(4, departamentController.save(dto), "The optional failure message is now the last parameter");
+		//assertTrue('a' < 'b', () -> "Assertion messages can be lazily evaluated -- "
+				//+ "to avoid constructing complex messages unnecessarily.");
 	}
 
 }
