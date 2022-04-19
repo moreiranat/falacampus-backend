@@ -20,7 +20,7 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 class UserConverterServiceImplTest {
 
-	
+	  
 	private static UserConverterService userConverterService;
     private static UserDto dto;
     private static User user;
