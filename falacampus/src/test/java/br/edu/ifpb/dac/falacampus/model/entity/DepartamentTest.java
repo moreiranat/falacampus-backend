@@ -9,9 +9,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DepartamentTest {
+	
+	private static Departament departament;
+	private static User user;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
 	}
 
 	@AfterAll
@@ -26,9 +30,6 @@ class DepartamentTest {
 	void tearDown() throws Exception {
 	}
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+	
 
 }

@@ -28,13 +28,12 @@ class DepartamentConverterServiceImplTest {
         
         departamentConvertServiceImpl = new DepartamentConverterServiceImpl();
         departament = new Departament();
-        
         dto = new DepartamentDto();
+
         departament.setId(1L);
         departament.setName("Biblioteca");
         departament.setUsers(userList);
         
-        dto = new DepartamentDto();
         dto.setId(1L);
         dto.setName("Biblioteca");
     }
@@ -53,24 +52,6 @@ class DepartamentConverterServiceImplTest {
     }
     
     @Test
-    public void departamentToDto() {
-        DepartamentDto dtoConverted = departamentConverterService.departamentToDTO(departament);
-        assertAll("Testing departament to dto",
-            () -> assertEquals(dtoConverted.getId(), departament.getId()),
-            () -> assertEquals(dtoConverted.getName(), departament.getName())
-        );
-    }
-    
-    @Test
-    public void dtoToDepartament() {
-        Departament departamentConverted = departamentConverterService.dtoToDepartament(dto);
-        assertAll("Testing dto to departament",
-                () -> assertEquals(departamentConverted.getId(), dto.getId()),
-                () -> assertEquals(departamentConverted.getName(), dto.getName())
-        );
-    }
-
-    @Test
     void departamentToDTOTest() {    
     
         assertEquals(DepartamentDto.class, departamentConvertServiceImpl.departamentToDTO(departament).getClass());
@@ -84,11 +65,23 @@ class DepartamentConverterServiceImplTest {
     
     }
     
-    //@Test
-    //void departamentToDTOTest2()
+    @Test
+    public void departamentToDto() {
+        DepartamentDto departamentDtoConverted = departamentConverterService.departamentToDTO(departament);
+        assertAll("departamentToDto",
+            () -> assertEquals(departamentDtoConverted.getId(), departament.getId()),
+            () -> assertEquals(departamentDtoConverted.getName(), departament.getName())
+        );
+    }
     
-    
-    //@Test
-    //void dtoToDepartamentTest()
+    @Test
+    public void dtoToDepartament() {
+        Departament convertedDepartament = departamentConverterService.dtoToDepartament(dto);
+        assertAll("dtoToDepartament",
+                () -> assertEquals(convertedDepartament.getId(), dto.getId()),
+                () -> assertEquals(convertedDepartament.getName(), dto.getName())
+        );
+    }
+
 
 }
