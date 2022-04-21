@@ -37,12 +37,12 @@ public class CommentService {
 		return null;
 	}
 	
-	public Answer findById(Long id) {
+	public Comment findById(Long id) {
 		return null;
 		
 	}
 
-	public Iterable<Answer> findAll() {
+	public List<Comment> findAll() {
 		return null;
 	}
 	
