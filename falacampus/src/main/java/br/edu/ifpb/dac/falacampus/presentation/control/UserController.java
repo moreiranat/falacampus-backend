@@ -98,18 +98,6 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-        User user = userService.findById(id);
-        if (user != null) {
-        	UserDto userDto = new UserDto();
-            BeanUtils.copyProperties(user, userDto);
-            return ResponseEntity.ok(userDto);
-        }
-
-        return ResponseEntity.notFound().build();
-    }
-	
 	@GetMapping
 	public ResponseEntity find (
 				@RequestParam(value = "id", required = false) Long id,
@@ -159,5 +147,17 @@ public class UserController {
 			return userService.findAll();	
 		}
 	}
+	
+	@GetMapping("{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        User user = userService.findById(id);
+        if (user != null) {
+        	UserDto userDto = new UserDto();
+            BeanUtils.copyProperties(user, userDto);
+            return ResponseEntity.ok(userDto);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 
 }

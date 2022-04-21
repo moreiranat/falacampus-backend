@@ -21,18 +21,12 @@ public class User implements Serializable {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String name;
-	
 	private String email;
-	
 	private Long registration;
-	
 	@Enumerated(EnumType.STRING)
 	private Role role = Role.STUDENT;
-	
 	private String password;
-	
 	@ManyToOne
 	@JoinColumn(name = "departament_id")
 	private Departament departament;

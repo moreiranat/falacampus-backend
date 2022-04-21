@@ -21,9 +21,7 @@ public class Departament implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String name;
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "departament")
 	private List<User> users = new ArrayList<>();
