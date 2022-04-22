@@ -18,6 +18,7 @@ public class DepartamentService {
 	private DepartamentRepository departamentRepository;
 	
 	public Departament save(Departament departament) {
+		
 		return departamentRepository.save(departament);
 	}
 	

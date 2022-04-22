@@ -4,12 +4,20 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Answer implements Serializable {
@@ -18,13 +26,29 @@ public class Answer implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "answer_id")
 	private Long id;
+	
+	@NotNull
+	@NotEmpty
 	private String message;
+	
+	@NotNull
+	@NotEmpty
 	@OneToOne
 	private Comment comment;
+	
+	@NotNull
+	@NotEmpty
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDateTime creationDate = LocalDateTime.now();
+	
+	@NotNull
+	@NotEmpty
 	@ManyToOne
 	private User author;
+	
+	@NotNull
 	private Boolean solution = false;
 	
 	public Answer() {
@@ -40,6 +64,8 @@ public class Answer implements Serializable {
 		this.author = author;
 		this.solution = solution;
 	}
+
+	
 
 	public Long getId() {
 		return id;

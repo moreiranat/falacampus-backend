@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import br.edu.ifpb.dac.falacampus.model.enums.CommentType;
 import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
@@ -24,20 +30,50 @@ public class Comment implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "comment_id")
 	private Long id;
+	
+	@NotNull
+	@NotEmpty
+	@Column(name = "comment_title")
 	private String title;
+	
+	@NotNull
+	@NotEmpty
+	@Column(name = "comment_title")
 	private String message;
+	
+	@NotNull
+	@NotEmpty
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDateTime creationDate = LocalDateTime.now();
+	
+	@NotNull
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	private CommentType commentType;
+
+	@NotNull
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	private StatusComment statusComment = StatusComment.NOT_ANSWERED;
+
+	@NotNull
+	@NotEmpty
 	@ManyToOne
+	@Size(min=2)
 	private User author;
+	
+	@NotNull
+	@NotEmpty
 	@ManyToOne
 	private Departament departament;
+	
+	@NotNull
+	@NotEmpty
 	@OneToOne
 	private Answer answer;
+	
 	private File attachment;
 	
 	public Comment() {

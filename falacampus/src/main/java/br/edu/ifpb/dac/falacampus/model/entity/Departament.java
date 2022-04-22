@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,8 +23,14 @@ public class Departament implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="departament_id")
 	private Long id;
+	
+	@NotNull
+	@NotEmpty
+	@Column(name = "departament_name", nullable = false)
 	private String name;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "departament")
 	private List<User> users = new ArrayList<>();

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
+import lombok.*;
 
 public class AnswerDto {
 	

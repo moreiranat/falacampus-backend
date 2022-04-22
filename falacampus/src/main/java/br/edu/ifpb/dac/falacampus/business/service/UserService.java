@@ -37,11 +37,11 @@ public class UserService {
 	}
 	
 	public User update(Long id) {
-		User userSalvo = userRepository.getById(id);
+		User userSave = userRepository.getById(id);
 		if(id == null) {
 			throw new IllegalStateException("Id cannot be null");
 		}		
-		return userRepository.save(userSalvo);
+		return userRepository.save(userSave);
 	}
 	
 	public User findById(Long id) {

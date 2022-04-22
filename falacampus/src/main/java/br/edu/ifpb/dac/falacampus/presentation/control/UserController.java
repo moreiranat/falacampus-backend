@@ -36,6 +36,7 @@ public class UserController {
 	@Autowired
 	private DepartamentService departamentService;
 	
+	//SAVE
 	@PostMapping
 	public ResponseEntity save(@RequestBody UserDto dto) {
 		
@@ -63,6 +64,7 @@ public class UserController {
 		}
 	}
 	
+	//PUT
 	@PutMapping("{id}")
 	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody UserDto dto) {
 		try {
@@ -87,6 +89,7 @@ public class UserController {
 		}
 	}
 	
+	//DELETE
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
@@ -98,6 +101,7 @@ public class UserController {
 		}
 	}
 	
+	//FIND FILTER
 	@GetMapping
 	public ResponseEntity find (
 				@RequestParam(value = "id", required = false) Long id,
@@ -135,6 +139,7 @@ public class UserController {
 		}
 	}
 	
+	//FIND ALL
 	@GetMapping("/all")
 	public List<User> findAll() throws Exception {
 
@@ -148,6 +153,7 @@ public class UserController {
 		}
 	}
 	
+	//FIND BY ID
 	@GetMapping("{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         User user = userService.findById(id);

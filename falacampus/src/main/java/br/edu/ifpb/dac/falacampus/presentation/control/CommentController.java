@@ -3,6 +3,7 @@ package br.edu.ifpb.dac.falacampus.presentation.control;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,22 +38,43 @@ public class CommentController {
 
 	@Autowired
 	private CommentConverterService commentConverterService;
+	
 	@Autowired
 	private CommentService commentService;
+	
 	@Autowired
 	private AnswerService answerService;
+	
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private DepartamentService departamentService;
+	
 	@Autowired
 	private CommentRepository commentRepository;// ver essa injeção para o método detail
 
+	@Autowired
+	private ModelMapper mapper;
+	
+	//SAVE
 	@PostMapping
 	public ResponseEntity save(@RequestBody CommentDto dto) {
-		return null;
+		try {
+			Comment entity = commentConverterService.dtoToComment(dto);
+			entity = commentService.create(entity);
+			dto = commentConverterService.commentToDTO(entity);
 
+			return new ResponseEntity(dto, HttpStatus.CREATED);
+
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+
+		
 	}
+	
+
 
 //	@GetMapping("{id}")
 //	public ResponseEntity<DetailsCommentDto> detail(@PathVariable Long id) {
@@ -103,26 +125,31 @@ public class CommentController {
 	}
 
 	@GetMapping
-	public ResponseEntity find(@RequestParam(value = "id", required = false) Long id,
+	public ResponseEntity findByFilter(@RequestParam(value = "id", required = false) Long id,
 			@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "message", required = false) String message) {
 		return null;
 		// completar
 	}
+	
+	private CommentDto mapToCommentDto(Comment comment) {
+		return mapper.map(comment, CommentDto.class);
+	}
 
+	//FIND ALL
 	@GetMapping("/all")
-	public List<Comment> findAll() throws Exception {
-		List<Comment> result = commentService.findAll();
+	public ResponseEntity<?> findAll() throws Exception {
 
-		if (result.isEmpty()) {
-			throw new Exception("List is empty!");
-
-		} else {
-			return commentService.findAll();
-		}
+		List<CommentDto> dtos = commentService.findAll()
+				.stream()
+				.map(this::mapToCommentDto)
+				.toList();
+		
+		return ResponseEntity.ok(dtos);
 
 	}
 
+	//FIND BY ID
 	@GetMapping("{id}")
 	public ResponseEntity<CommentDto> getCommentById(@PathVariable Long id) {
 		Comment comment = commentService.findById(id);
