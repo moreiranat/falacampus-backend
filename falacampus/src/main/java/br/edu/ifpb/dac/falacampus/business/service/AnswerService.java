@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
+import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.repository.AnswerRepository;
 import br.edu.ifpb.dac.falacampus.presentation.dto.AnswerDto;
 
@@ -23,7 +24,11 @@ public class AnswerService {
 	@Autowired
 	private ModelMapper mapper;
 	
-	public Answer save(AnswerDto answerDto){
+	public Answer save(Answer answer) {
+		return answerRepository.save(answer);
+	}
+	
+	public Answer saveAnswerDto(AnswerDto answerDto){
 		
 		Answer answer = mapper.map(answerDto, Answer.class);		
 		return answerRepository.save(answer);
@@ -40,11 +45,11 @@ public class AnswerService {
 	
 	}
 
-	public Answer updateAnswer(Answer answer) {
+	public Answer update(Answer answer) {
 		return answerRepository.save(answer);
 	}
 	
-	public Answer update(Long id, AnswerDto answerDto) {
+	public Answer updateAnswerDto(Long id, AnswerDto answerDto) {
 		
 		if(id == null) {
 			throw new IllegalStateException("Id cannot be null");
@@ -64,12 +69,12 @@ public class AnswerService {
 		
 	}
 
-	public Iterable<Answer> findAll() {
+	public List<Answer> findAll() {
 		
 		return answerRepository.findAll();
 	}
 	
-	public List<Answer> find(Comment filter) {
+	public List<Answer> find(Answer filter) {
 		
 		Example example = Example.of(filter, ExampleMatcher.matching()
 				.withIgnoreCase()

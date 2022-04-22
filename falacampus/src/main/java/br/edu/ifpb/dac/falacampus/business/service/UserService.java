@@ -64,4 +64,9 @@ public class UserService {
 		return userRepository.findAll(example);
 		
 	}
+
+	public User findByName(String authorName) {
+		
+		return userRepository.findByName(authorName);
+	}
 }

@@ -1,6 +1,7 @@
 package br.edu.ifpb.dac.falacampus.business.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.repository.CommentRepository;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
@@ -22,7 +24,11 @@ public class CommentService {
 	@Autowired
 	private ModelMapper mapper;
 	
-	public Comment save(CommentDto commentDto){
+	public Comment save(Comment comment) {
+		return commentRepository.save(comment);
+	}
+	
+	public Comment saveCommentDto(CommentDto commentDto){
 		
 		Comment comment = mapper.map(commentDto, Comment.class);		
 		return commentRepository.save(comment);
@@ -39,11 +45,11 @@ public class CommentService {
 	
 	}
 
-	public Comment updateAnswer(Comment comment) {
+	public Comment update(Comment comment) {
 		return commentRepository.save(comment);
 	}
 	
-	public Comment update(Long id, CommentDto commentDto) {
+	public Comment updateCommentDto(Long id, CommentDto commentDto) {
 		
 		if(id == null) {
 			throw new IllegalStateException("Id cannot be null");
@@ -75,6 +81,15 @@ public class CommentService {
 				.withStringMatcher(StringMatcher.CONTAINING));
 		
 		return commentRepository.findAll(example);
+	}
+
+	public Comment findByName(String authorName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Optional<Comment> getOpcionalComment(Long id) {
+		return commentRepository.findById(id);
 	}
 
 }

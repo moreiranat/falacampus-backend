@@ -2,6 +2,8 @@ package br.edu.ifpb.dac.falacampus.presentation.control;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +40,7 @@ public class UserController {
 	
 	//SAVE
 	@PostMapping
-	public ResponseEntity save(@RequestBody UserDto dto) {
+	public ResponseEntity save(@RequestBody @Valid UserDto dto) {
 		
 		try {
 			if (dto.getDepartamentId() == null) {
@@ -66,7 +68,7 @@ public class UserController {
 	
 	//PUT
 	@PutMapping("{id}")
-	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody UserDto dto) {
+	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody @Valid UserDto dto) {
 		try {
 			dto.setId(id);
 			
@@ -109,8 +111,7 @@ public class UserController {
 				@RequestParam(value = "email", required = false) String email,
 				@RequestParam(value = "registration", required = false) Long registration,
 				@RequestParam(value = "role", required = false) Role role,
-				@RequestParam(value = "departamentId", required = false) Long departamentId
-			) {
+				@RequestParam(value = "departamentId", required = false) Long departamentId) {
 		
 		try {
 			

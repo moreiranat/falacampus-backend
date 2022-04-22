@@ -54,7 +54,7 @@ public class DepartamentService {
 		return departamentRepository.findById(id).get();
 	}
 
-	public Iterable<Departament> findAll() {
+	public List<Departament> findAll() {
 		return departamentRepository.findAll();
 	}
 	

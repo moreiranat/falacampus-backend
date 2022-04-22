@@ -2,6 +2,8 @@ package br.edu.ifpb.dac.falacampus.presentation.control;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +35,7 @@ public class DepartamentController {
 	private DepartamentService departamentService;
 
 	@PostMapping
-	public ResponseEntity save(@RequestBody DepartamentDto dto) {
+	public ResponseEntity save(@RequestBody @Valid DepartamentDto dto) {
 		try {
 			Departament entity = departamentConvertService.dtoToDepartament(dto);
 
@@ -49,7 +51,7 @@ public class DepartamentController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody DepartamentDto dto) {
+	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody @Valid DepartamentDto dto) {
 		try {
 			dto.setId(id);
 			Departament departament = departamentConvertService.dtoToDepartament(dto);
@@ -88,9 +90,7 @@ public class DepartamentController {
 	@GetMapping
 	public ResponseEntity find (
 		    @RequestParam(value = "id", required = false) Long id,
-			@RequestParam(value = "name", required = false) String name
-			
-		) {
+			@RequestParam(value = "name", required = false) String name) {
 
 		try {
 
