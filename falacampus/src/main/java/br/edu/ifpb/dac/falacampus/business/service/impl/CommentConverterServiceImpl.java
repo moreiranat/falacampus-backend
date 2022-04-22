@@ -3,16 +3,22 @@ package br.edu.ifpb.dac.falacampus.business.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.falacampus.business.service.AnswerService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentConverterService;
+import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
+import br.edu.ifpb.dac.falacampus.presentation.dto.AnswerDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
 
 @Service
 public class CommentConverterServiceImpl implements CommentConverterService {
+	
+	@Autowired
+	private ModelMapper mapper;
 	
 	@Override
 	public List<CommentDto> commentToDTOList(List<Comment> entities) {
@@ -27,24 +33,29 @@ public class CommentConverterServiceImpl implements CommentConverterService {
 
 	@Override
 	public Comment dtoToComment(CommentDto dto) {
-		Comment entity = new Comment();
 		
-		entity.setId(dto.getId());
-		entity.setTitle(dto.getTitle());	
-		entity.setMessage(dto.getMessage());
-		entity.setCreationDate(dto.getCreationDate());
+		Comment entity = mapper.map(dto, Comment.class);
+//		Comment entity = new Comment();
+//		
+//		entity.setId(dto.getId());
+//		entity.setTitle(dto.getTitle());	
+//		entity.setMessage(dto.getMessage());
+//		entity.setCreationDate(dto.getCreationDate());
 				
 		return entity;
 	}
 
 	@Override
 	public CommentDto commentToDTO(Comment entity) {
-		CommentDto dto = new CommentDto();
 		
-		dto.setId(entity.getId());
-		dto.setTitle(entity.getTitle());	
-		dto.setMessage(entity.getMessage());
-		dto.setCreationDate(entity.getCreationDate());
+		CommentDto dto = mapper.map(entity, CommentDto.class);
+		
+//		CommentDto dto = new CommentDto();
+//		
+//		dto.setId(entity.getId());
+//		dto.setTitle(entity.getTitle());	
+//		dto.setMessage(entity.getMessage());
+//		dto.setCreationDate(entity.getCreationDate());
 		
 		return dto;
 	}

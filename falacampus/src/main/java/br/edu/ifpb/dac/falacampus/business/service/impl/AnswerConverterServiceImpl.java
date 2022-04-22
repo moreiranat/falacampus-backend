@@ -14,8 +14,8 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.AnswerDto;
 @Service
 public class AnswerConverterServiceImpl implements AnswerConverterService {
 	
-	//@Autowired
-	//private ModelMapper mapper;
+	@Autowired
+	private ModelMapper mapper;
 
 	@Override
 	public List<AnswerDto> answerToDTOList(List<Answer> entities) {
@@ -30,14 +30,14 @@ public class AnswerConverterServiceImpl implements AnswerConverterService {
 
 	@Override
 	public Answer dtoToAnswer(AnswerDto dto) {
-		Answer entity = new Answer();
 		
-		//AnswerDto answer = mapper.map(entity, AnswerDto.class);
+		Answer entity = mapper.map(dto, Answer.class);
 		
-		entity.setId(dto.getId());
-		entity.setMessage(dto.getMessage());
+		//Answer entity = new Answer();
+		//entity.setId(dto.getId());
+		//entity.setMessage(dto.getMessage());
 		//entity.setComment(dto.getCommentId().longValue());//Problema na conversão
-		entity.setCreationDate(dto.getCreationDate());
+		//entity.setCreationDate(dto.getCreationDate());
 		//entity.setAuthorName(dto.getAuthor().getName()); //Problema na conversão
 		
 		return entity;
@@ -45,13 +45,16 @@ public class AnswerConverterServiceImpl implements AnswerConverterService {
 
 	@Override
 	public AnswerDto answerToDTO(Answer entity) {
-		AnswerDto dto = new AnswerDto();
 		
-		dto.setId(entity.getId());
-		dto.setMessage(entity.getMessage());	
-		dto.setCommentId(entity.getComment().getId());
-		dto.setCreationDate(entity.getCreationDate());
-		dto.setAuthorName(entity.getAuthor().getName());
+		AnswerDto dto = mapper.map(entity, AnswerDto.class);
+		
+		//AnswerDto dto = new AnswerDto();
+		
+		//dto.setId(entity.getId());
+		//dto.setMessage(entity.getMessage());	
+		//dto.setCommentId(entity.getComment().getId());
+		//dto.setCreationDate(entity.getCreationDate());
+		//dto.setAuthorName(entity.getAuthor().getName());
 		
 		return dto;		
 		

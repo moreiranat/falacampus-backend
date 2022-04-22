@@ -29,12 +29,6 @@ public class CommentService {
 		
 	}
 	
-	public Comment create(Comment comment){
-				
-		return commentRepository.save(comment);
-		
-	}
-	
 	public void deleteById(Long id) {
 		Comment comment = findById(id);
 		

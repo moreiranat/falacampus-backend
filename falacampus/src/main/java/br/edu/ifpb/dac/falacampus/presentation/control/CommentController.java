@@ -59,20 +59,20 @@ public class CommentController {
 	
 	//SAVE
 	@PostMapping
-	public ResponseEntity save(@RequestBody CommentDto dto) {
-		try {
-			Comment entity = commentConverterService.dtoToComment(dto);
-			entity = commentService.create(entity);
-			dto = commentConverterService.commentToDTO(entity);
-
-			return new ResponseEntity(dto, HttpStatus.CREATED);
-
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-
-		
-	}
+//	public ResponseEntity save(@RequestBody CommentDto dto) {
+//		try {
+//			Comment entity = commentConverterService.dtoToComment(dto);
+//			entity = commentService.save(entity);
+//			dto = commentConverterService.commentToDTO(entity);
+//
+//			return new ResponseEntity(dto, HttpStatus.CREATED);
+//
+//		} catch (Exception e) {
+//			return ResponseEntity.badRequest().body(e.getMessage());
+//		}
+//
+//		
+//	}
 	
 
 
