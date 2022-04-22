@@ -1,5 +1,7 @@
 package br.edu.ifpb.dac.falacampus.presentation.control;
 
+import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
+import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 import br.edu.ifpb.dac.falacampus.model.repository.CommentRepository;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DetailsCommentDto;
@@ -38,43 +41,42 @@ public class CommentController {
 
 	@Autowired
 	private CommentConverterService commentConverterService;
-	
+
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private AnswerService answerService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private DepartamentService departamentService;
-	
+
 	@Autowired
 	private CommentRepository commentRepository;// ver essa injeção para o método detail
 
 	@Autowired
 	private ModelMapper mapper;
-	
-	//SAVE
-	@PostMapping
-//	public ResponseEntity save(@RequestBody CommentDto dto) {
-//		try {
-//			Comment entity = commentConverterService.dtoToComment(dto);
-//			entity = commentService.save(entity);
-//			dto = commentConverterService.commentToDTO(entity);
-//
-//			return new ResponseEntity(dto, HttpStatus.CREATED);
-//
-//		} catch (Exception e) {
-//			return ResponseEntity.badRequest().body(e.getMessage());
-//		}
-//
-//		
-//	}
-	
 
+	// SAVE
+	@PostMapping
+	public ResponseEntity save(@RequestBody CommentDto dto) {
+		try {
+			Comment entity = commentConverterService.dtoToComment(dto);
+			entity = commentService.save(dto);
+					
+			dto = commentConverterService.commentToDTO(entity);
+
+			return new ResponseEntity(dto, HttpStatus.CREATED);
+
+	} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+
+		
+	}
 
 //	@GetMapping("{id}")
 //	public ResponseEntity<DetailsCommentDto> detail(@PathVariable Long id) {
@@ -87,30 +89,32 @@ public class CommentController {
 //		// Ver esse método
 //	}
 
-	/*
-	 * @PutMapping("{id}") public ResponseEntity update(@PathVariable("id") Long
-	 * id, @RequestBody CommentDto dto) {
-	 * 
-	 * 
-	 * try { dto.setId(id);
-	 * 
-	 * Long answerId = dto.getId();
-	 * 
-	 * Answer answer = answerService.findById(answerId); if (answer == null) { throw
-	 * new
-	 * IllegalStateException(String.format("Cound not find any comment with id=%1",
-	 * id)); }
-	 * 
-	 * Comment entity = commentConverterService.dtoToComment(dto);
-	 * entity.setAnswer(answer); entity = commentService.update(entity);
-	 * dto=commentConverterService.commentToDTO(entity);
-	 * 
-	 * } catch (Exception e) { return
-	 * ResponseEntity.badRequest().body(e.getMessage()); }
-	 * 
-	 * 
-	 * }
-	 */
+	@PutMapping("{id}")
+	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody CommentDto dto) {
+
+		try {
+			dto.setId(id);
+
+			Long answerId = dto.getId();
+
+			Answer answer = answerService.findById(answerId);
+			if (answer == null) {
+				throw new IllegalStateException(String.format("Cound not find any comment with id=%1", id));
+			}
+
+			Comment entity = commentConverterService.dtoToComment(dto);
+			entity.setAnswer(answer);
+			entity = commentService.updateAnswer(entity);
+			
+			dto = commentConverterService.commentToDTO(entity);
+			return ResponseEntity.ok(dto);
+
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		
+
+	}
 
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
@@ -127,29 +131,58 @@ public class CommentController {
 	@GetMapping
 	public ResponseEntity findByFilter(@RequestParam(value = "id", required = false) Long id,
 			@RequestParam(value = "title", required = false) String title,
-			@RequestParam(value = "message", required = false) String message) {
-		return null;
-		// completar
-	}
+			@RequestParam(value = "message", required = false) String message,
+			@RequestParam(value = "creationDate", required = false) LocalDateTime creationDate,
+			@RequestParam(value = "commentType", required = false) String commentType,
+			@RequestParam(value = "statusComment", required = false) StatusComment statusComment,
+			@RequestParam(value = "author", required = false) User author,
+			@RequestParam(value = "departament", required = false) Departament departament,
+			@RequestParam(value = "answer", required = false) Answer answer,
+			@RequestParam(value = "attachment", required = false) File attachment) {
+		
+		try {
+
+			Comment filter = new Comment();
+			filter.setId(id);
+			filter.setTitle(title);
+			filter.setMessage(message);
+			filter.setCreationDate(creationDate);
+			filter.setStatusComment(statusComment);
+			filter.setAuthor(author);
+			filter.setDepartament(departament);
+			filter.setAnswer(answer);
+			filter.setAttachment(attachment);
+			Comment comment = commentService.findById(id);
+			if (comment == null) {
+				throw new IllegalStateException(String.format("Cound not find any departament whit id=%1", id));
+			}
+			filter.setAnswer(answer);
+			List<Comment> entities = commentService.find(filter);
+					
+			List<CommentDto> dtos = commentConverterService.commentToDTOList(entities);
+			return ResponseEntity.ok(dtos);
+
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	
+	}
+
 	private CommentDto mapToCommentDto(Comment comment) {
 		return mapper.map(comment, CommentDto.class);
 	}
 
-	//FIND ALL
+	// FIND ALL
 	@GetMapping("/all")
 	public ResponseEntity<?> findAll() throws Exception {
 
-		List<CommentDto> dtos = commentService.findAll()
-				.stream()
-				.map(this::mapToCommentDto)
-				.toList();
-		
+		List<CommentDto> dtos = commentService.findAll().stream().map(this::mapToCommentDto).toList();
+
 		return ResponseEntity.ok(dtos);
 
 	}
 
-	//FIND BY ID
+	// FIND BY ID
 	@GetMapping("{id}")
 	public ResponseEntity<CommentDto> getCommentById(@PathVariable Long id) {
 		Comment comment = commentService.findById(id);
