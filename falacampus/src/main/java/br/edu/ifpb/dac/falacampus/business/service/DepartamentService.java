@@ -48,7 +48,7 @@ public class DepartamentService {
 	public Departament findById(Long id) {
 		
 		if (id == null) {
-			throw new IllegalStateException("Id cannot be null...departament");
+			throw new IllegalStateException("Id cannot be null");
 		}
 		
 		return departamentRepository.findById(id).get();

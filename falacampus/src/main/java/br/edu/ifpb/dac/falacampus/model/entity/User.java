@@ -24,35 +24,42 @@ public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "comment_id")
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
 	private Long id;
 	
 	@NotNull
 	@NotEmpty
-	@Size(min=2)
-	@Column(name = "user_name")
+	@Size(min=2, max=50)
+	@Column(name = "user_name", nullable = false)
 	private String name;
 	
 	@NotNull
 	@NotEmpty
-	@Column(name = "comment_email")
+	@Column(name = "user_email",  nullable = false)
 	@Pattern(regexp="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message="Digite um email válido, padrão: _@_._")
 	private String email;
 	
 	@NotNull
 	@NotEmpty
+	@Column(name = "user_registration",  nullable = false)
 	private Long registration;
 	
+	@NotNull
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
+	@Column(name = "user_role",  nullable = false)
 	private Role role = Role.STUDENT;
 	
 	@NotNull
 	@NotEmpty
-	@Column(name = "comment_password", nullable = false)
+	@Size(min=8, max=30)
+	@Column(name = "user_password", nullable = false)
 	private String password;
 	
+	@NotNull
+	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "departament_id")
 	private Departament departament;

@@ -63,7 +63,7 @@ public class AnswerService {
 	
 	public Answer findById(Long id) {
 		if(id == null) {
-			throw new IllegalStateException("Id cannot be null...user");
+			throw new IllegalStateException("Id cannot be null");
 		}
 		return answerRepository.findById(id).get();
 		

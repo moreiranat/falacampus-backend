@@ -2,6 +2,12 @@ package br.edu.ifpb.dac.falacampus.presentation.dto;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.enums.CommentType;
@@ -10,13 +16,41 @@ import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 public class DetailsCommentDto {
 	
 	private Long id;
+	
+	@NotNull
+	@NotEmpty
+	@Size(min=5, max=50)
 	private String title;
+	
+	@NotNull
+	@NotEmpty
+	@Size(min = 10, max=255)
 	private String message;
+	
+	@NotNull
+	@NotEmpty
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDateTime creationDate = LocalDateTime.now();
+	
+	@NotNull
+	@NotEmpty
 	private CommentType commentType;
+	
+	@NotNull
+	@NotEmpty
 	private StatusComment statusComment;
+	
+	@NotNull
+	@NotEmpty
+	@Size(min=2, max=50)
 	private String authorName;
+	
+	@NotNull
+	@NotEmpty
 	private Long departamentId;
+	
+	@NotNull
+	@NotEmpty
 	private Answer answer;
 	
 	public DetailsCommentDto() {

@@ -9,10 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,24 +33,31 @@ public class Answer implements Serializable {
 	
 	@NotNull
 	@NotEmpty
+	@Size(min = 10, max=255)
+	@Column(name = "answer_message")
 	private String message;
 	
 	@NotNull
 	@NotEmpty
 	@OneToOne
+	@JoinColumn(name = "comment_id")
 	private Comment comment;
 	
 	@NotNull
 	@NotEmpty
 	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Column(name = "answer_creationDate")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
 	@NotNull
 	@NotEmpty
+	@Size(min=2, max=50)
 	@ManyToOne
+	@JoinColumn(name = "answer_author")
 	private User author;
 	
 	@NotNull
+	@Column(name = "answer_solution")
 	private Boolean solution = false;
 	
 	public Answer() {
@@ -56,7 +65,6 @@ public class Answer implements Serializable {
 	}
 
 	public Answer(Long id, String message, Comment comment, LocalDateTime creationDate, User author, Boolean solution) {
-		super();
 		this.id = id;
 		this.message = message;
 		this.comment = comment;
@@ -64,8 +72,6 @@ public class Answer implements Serializable {
 		this.author = author;
 		this.solution = solution;
 	}
-
-	
 
 	public Long getId() {
 		return id;

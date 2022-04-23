@@ -4,15 +4,36 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import lombok.*;
 
 public class AnswerDto {
 	
 	private Long id;
+	
+	@NotNull
+	@NotEmpty
+	@Size(min = 10, max=255)
 	private String message;
+	
+	@NotNull
+	@NotEmpty
 	private Long commentId;
+	
+	@NotNull
+	@NotEmpty
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDateTime creationDate;
+	
+	@NotNull
+	@NotEmpty
+	@Size(min=2, max=50)
 	private String authorName;
 	
 	public AnswerDto() {

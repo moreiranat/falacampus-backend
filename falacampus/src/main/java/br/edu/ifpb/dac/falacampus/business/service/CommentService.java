@@ -63,7 +63,7 @@ public class CommentService {
 	
 	public Comment findById(Long id) {
 		if(id == null) {
-			throw new IllegalStateException("Id cannot be null...user");
+			throw new IllegalStateException("Id cannot be null");
 		}
 		return commentRepository.findById(id).get();
 		

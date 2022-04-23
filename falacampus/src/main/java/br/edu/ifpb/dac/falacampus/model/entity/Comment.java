@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
@@ -35,45 +36,54 @@ public class Comment implements Serializable {
 	
 	@NotNull
 	@NotEmpty
+	@Size(min=5, max=50)
 	@Column(name = "comment_title")
 	private String title;
 	
 	@NotNull
 	@NotEmpty
-	@Column(name = "comment_title")
+	@Size(min = 10, max=255)
+	@Column(name = "comment_message")
 	private String message;
 	
 	@NotNull
 	@NotEmpty
 	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Column(name = "comment_creationDate")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
 	@NotNull
 	@NotEmpty
 	@Enumerated(EnumType.STRING)
+	@Column(name = "comment_type")
 	private CommentType commentType;
 
 	@NotNull
 	@NotEmpty
 	@Enumerated(EnumType.STRING)
+	@Column(name = "comment_status")
 	private StatusComment statusComment = StatusComment.NOT_ANSWERED;
 
 	@NotNull
 	@NotEmpty
+	@Size(min=2, max=50)
 	@ManyToOne
-	@Size(min=2)
+	@JoinColumn(name = "comment_author")
 	private User author;
 	
 	@NotNull
 	@NotEmpty
 	@ManyToOne
+	@JoinColumn(name = "departament_id")
 	private Departament departament;
 	
 	@NotNull
 	@NotEmpty
 	@OneToOne
+	@JoinColumn(name = "answer_id")
 	private Answer answer;
 	
+	@Column(name = "comment_attachment")
 	private File attachment;
 	
 	public Comment() {
