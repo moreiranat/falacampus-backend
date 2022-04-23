@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
+import br.edu.ifpb.dac.falacampus.model.enums.Role;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
 
 class DepartamentConverterServiceImplTest {
@@ -22,20 +23,12 @@ class DepartamentConverterServiceImplTest {
     private static DepartamentDto dto;
     private static Departament departament;
     private static List<User> userList;
+    private static User user;
 
     @BeforeAll
     static void setUpBeforeClass() throws Exception {
         
-        departamentConvertServiceImpl = new DepartamentConverterServiceImpl();
-        departament = new Departament();
-        dto = new DepartamentDto();
 
-        departament.setId(1L);
-        departament.setName("Biblioteca");
-        departament.setUsers(userList);
-        
-        dto.setId(1L);
-        dto.setName("Biblioteca");
     }
 
     @AfterAll
@@ -44,7 +37,26 @@ class DepartamentConverterServiceImplTest {
 
     @BeforeEach
     void setUp() throws Exception {
+        departamentConvertServiceImpl = new DepartamentConverterServiceImpl();
+        departament = new Departament();
+        dto = new DepartamentDto();
+
+        departament.setId(1L);
+        departament.setName("Biblioteca");
         
+        user.setId(1L);
+        user.setName("Maria");
+        user.setPassword("1234");
+        user.setEmail("maria@email.com");
+        user.setRegistration(123L);
+        user.setRole(Role.STUDENT);
+        user.setDepartament(departament);
+
+        userList.add(user);
+        departament.setUsers(userList);
+
+        dto.setId(1L);
+        dto.setName("Biblioteca");
     }
 
     @AfterEach

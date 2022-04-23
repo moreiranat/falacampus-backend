@@ -36,12 +36,16 @@ public class AnswerController {
 	
 	@Autowired
 	private AnswerConverterService answerConverterService;
+	
 	@Autowired
 	private AnswerService answerService;
+	
 	@Autowired
 	private CommentService commentService;
+	
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private ModelMapper mapper;
 	

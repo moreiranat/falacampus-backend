@@ -25,8 +25,10 @@ import br.edu.ifpb.dac.falacampus.business.service.AnswerService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
+import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.repository.CommentRepository;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
+import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DetailsCommentDto;
 
 @RestController
@@ -98,7 +100,7 @@ public class CommentController {
 
 	//FIND BY FILTER
 	@GetMapping
-	public ResponseEntity find (
+	public ResponseEntity findByFilter (
 			@RequestParam(value = "id", required = false) Long id,
 			@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "message", required = false) String message,
@@ -136,17 +138,18 @@ public class CommentController {
 
 	}
 
-	// FIND BY ID
-	@GetMapping("{id}")
-	public ResponseEntity<CommentDto> getCommentById(@PathVariable Long id) {
-		Comment comment = commentService.findById(id);
-		if (comment != null) {
-			CommentDto commentDto = new CommentDto();
-			BeanUtils.copyProperties(comment, commentDto);
-			return ResponseEntity.ok(commentDto);
-		}
-
-		return ResponseEntity.notFound().build();
-	}
+	// ESSE MÉTODO TORNOU-SE DESNECESSÁRIO, O MÉTODO FINDBYFILTER RESOLVE ESSA PESQUISA
+	
+//	@GetMapping("{id}")
+//	public ResponseEntity<CommentDto> getCommentById(@PathVariable Long id) {
+//		Comment comment = commentService.findById(id);
+//		if (comment != null) {
+//			CommentDto commentDto = new CommentDto();
+//			BeanUtils.copyProperties(comment, commentDto);
+//			return ResponseEntity.ok(commentDto);
+//		}
+//
+//		return ResponseEntity.notFound().build();
+//	}
 
 }

@@ -73,20 +73,20 @@ public class DepartamentController {
 		}
 	}
 
-	@GetMapping("{id}")
-    public ResponseEntity<DepartamentDto> getDepartamentById(@PathVariable Long id) {
-		Departament departament = departamentService.findById(id);
-        if (departament != null) {
-        	DepartamentDto departamentDto = new DepartamentDto();
-            BeanUtils.copyProperties(departament, departamentDto);
-            return ResponseEntity.ok(departamentDto);
-        }
-
-        return ResponseEntity.notFound().build();
-    }
+//	@GetMapping("{id}")
+//    public ResponseEntity<DepartamentDto> getDepartamentById(@PathVariable Long id) {
+//		Departament departament = departamentService.findById(id);
+//        if (departament != null) {
+//        	DepartamentDto departamentDto = new DepartamentDto();
+//            BeanUtils.copyProperties(departament, departamentDto);
+//            return ResponseEntity.ok(departamentDto);
+//        }
+//
+//        return ResponseEntity.notFound().build();
+//    }
 	
 	@GetMapping
-	public ResponseEntity find (
+	public ResponseEntity findByFilter (
 		    @RequestParam(value = "id", required = false) Long id,
 			@RequestParam(value = "name", required = false) String name) {
 
