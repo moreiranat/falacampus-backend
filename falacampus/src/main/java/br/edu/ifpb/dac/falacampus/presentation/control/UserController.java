@@ -32,8 +32,10 @@ public class UserController {
 	
 	@Autowired
 	private UserConverterService userConverterService;
+	
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private DepartamentService departamentService;
 	

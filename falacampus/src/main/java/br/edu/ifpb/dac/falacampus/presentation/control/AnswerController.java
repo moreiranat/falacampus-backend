@@ -28,7 +28,6 @@ import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.AnswerDto;
-import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
 
 @RestController
 @RequestMapping("/api/answer")
