@@ -10,8 +10,6 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
-import br.edu.ifpb.dac.falacampus.model.entity.Comment;
-import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.repository.AnswerRepository;
 import br.edu.ifpb.dac.falacampus.presentation.dto.AnswerDto;
 
