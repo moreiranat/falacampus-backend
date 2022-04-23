@@ -51,7 +51,7 @@ public class DetailsCommentDto {
 	
 	@NotNull
 	@NotEmpty
-	private Answer answer;
+	private Long answerId;
 	
 	public DetailsCommentDto() {
 		
@@ -66,7 +66,7 @@ public class DetailsCommentDto {
 		this.statusComment = comment.getStatusComment();
 		this.authorName = comment.getAuthor().getName();
 		this.departamentId = comment.getDepartament().getId();
-		this.answer = comment.getAnswer();
+		this.answerId = comment.getAnswer().getId();
 	}
 
 	public Long getId() {
@@ -133,12 +133,12 @@ public class DetailsCommentDto {
 		this.departamentId = departamentId;
 	}
 
-	public Answer getAnswer() {
-		return answer;
+	public Long getAnswerId() {
+		return answerId;
 	}
 
-	public void setAnswer(Answer answer) {
-		this.answer = answer;
+	public void setAnswerId(Long answerId) {
+		this.answerId = answerId;
 	}
 	
 }
