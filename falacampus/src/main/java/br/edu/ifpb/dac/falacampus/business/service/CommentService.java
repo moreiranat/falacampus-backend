@@ -1,7 +1,6 @@
 package br.edu.ifpb.dac.falacampus.business.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,15 +79,6 @@ public class CommentService {
 				.withStringMatcher(StringMatcher.CONTAINING));
 		
 		return commentRepository.findAll(example);
-	}
-
-	public Comment findByName(String authorName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Optional<Comment> getOpcionalComment(Long id) {
-		return commentRepository.findById(id);
 	}
 
 }

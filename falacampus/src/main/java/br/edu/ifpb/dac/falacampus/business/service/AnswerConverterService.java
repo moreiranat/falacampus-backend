@@ -10,7 +10,6 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.AnswerDto;
 @Service
 public interface AnswerConverterService {
 	
-	
 	public List<AnswerDto> answerToDTOList(List<Answer> entities);
 	public Answer dtoToAnswer(AnswerDto dto);
 	public AnswerDto answerToDTO(Answer entity);

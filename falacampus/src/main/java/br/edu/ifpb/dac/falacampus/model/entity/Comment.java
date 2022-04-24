@@ -19,8 +19,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import br.edu.ifpb.dac.falacampus.model.enums.CommentType;
 import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 
@@ -46,39 +44,25 @@ public class Comment implements Serializable {
 	@Column(name = "comment_message")
 	private String message;
 	
-	@NotNull
-	@NotEmpty
-	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name = "comment_creationDate")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
-	@NotNull
-	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "comment_type")
 	private CommentType commentType;
 
-	@NotNull
-	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "comment_status")
 	private StatusComment statusComment = StatusComment.NOT_ANSWERED;
 
-	@NotNull
-	@NotEmpty
-	@Size(min=2, max=50)
 	@ManyToOne
 	@JoinColumn(name = "comment_author")
 	private User author;
 	
-	@NotNull
-	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "departament_id")
 	private Departament departament;
 	
-	@NotNull
-	@NotEmpty
 	@OneToOne
 	@JoinColumn(name = "answer_id")
 	private Answer answer;
@@ -90,12 +74,11 @@ public class Comment implements Serializable {
 		
 	}
 
-	public Comment(Long id, String title, String message, LocalDateTime creationDate, CommentType commentType,
+	public Comment(Long id, String title, String message, CommentType commentType,
 			StatusComment statusComment, User author, Departament departament, Answer answer, File attachment) {
 		this.id = id;
 		this.title = title;
 		this.message = message;
-		this.creationDate = creationDate;
 		this.commentType = commentType;
 		this.statusComment = statusComment;
 		this.author = author;

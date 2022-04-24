@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -106,7 +105,7 @@ public class UserController {
 	
 	//FIND FILTER
 	@GetMapping
-	public ResponseEntity find (
+	public ResponseEntity findByFilter (
 				@RequestParam(value = "id", required = false) Long id,
 				@RequestParam(value = "name", required = false) String name,
 				@RequestParam(value = "email", required = false) String email,
@@ -155,17 +154,17 @@ public class UserController {
 		}
 	}
 	
-	//FIND BY ID
-	@GetMapping("{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-        User user = userService.findById(id);
-        if (user != null) {
-        	UserDto userDto = new UserDto();
-            BeanUtils.copyProperties(user, userDto);
-            return ResponseEntity.ok(userDto);
-        }
-
-        return ResponseEntity.notFound().build();
-    }
+//	//FIND BY ID
+//	@GetMapping("{id}")
+//    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+//        User user = userService.findById(id);
+//        if (user != null) {
+//        	UserDto userDto = new UserDto();
+//            BeanUtils.copyProperties(user, userDto);
+//            return ResponseEntity.ok(userDto);
+//        }
+//
+//        return ResponseEntity.notFound().build();
+//    }
 
 }

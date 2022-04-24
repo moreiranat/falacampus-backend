@@ -8,9 +8,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
+import br.edu.ifpb.dac.falacampus.model.enums.CommentType;
 
 public class CommentDto {
 	
@@ -26,10 +25,9 @@ public class CommentDto {
 	@Size(min = 10, max=255)
 	private String message;
 	
-	@NotNull
-	@NotEmpty
-	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private LocalDateTime creationDate;
+	private LocalDateTime creationDate = LocalDateTime.now();
+	
+	private CommentType commentType;
 	
 	public CommentDto() {
 		
@@ -40,6 +38,7 @@ public class CommentDto {
 		this.title = comment.getTitle();
 		this.message = comment.getMessage();
 		this.creationDate = comment.getCreationDate();
+		this.commentType = comment.getCommentType();
 	}
 
 	public Long getId() {
@@ -74,6 +73,14 @@ public class CommentDto {
 		this.creationDate = creationDate;
 	}
 	
+	public CommentType getCommentType() {
+		return commentType;
+	}
+
+	public void setCommentType(CommentType commentType) {
+		this.commentType = commentType;
+	}
+
 	public static List<CommentDto> converter(List<Comment> comments) {
 		return comments.stream().map(CommentDto::new).collect(Collectors.toList());
 	}

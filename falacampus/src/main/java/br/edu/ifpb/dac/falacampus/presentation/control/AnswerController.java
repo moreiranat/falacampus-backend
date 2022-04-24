@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -95,7 +94,6 @@ public class AnswerController {
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		
 	}
 	
 	@DeleteMapping("{id}")
@@ -107,16 +105,15 @@ public class AnswerController {
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		
 	}
 	
 	@GetMapping
-	public ResponseEntity find (
+	public ResponseEntity findByFilter (
 			@RequestParam(value = "id", required = false) Long id,
 			@RequestParam(value = "message", required = false) String message,
 			@RequestParam(value = "commentId", required = false) Long commentId,
 			@RequestParam(value = "creationDate", required = false) LocalDateTime creationDate,
-			@RequestParam(value = "authorName", required = false) String authorName) {
+			@RequestParam(value = "authorId", required = false) Long authorId) {
 		
 			try {
 			
@@ -127,14 +124,14 @@ public class AnswerController {
 			filter.setCreationDate(creationDate); 
 			
 			Comment comment = commentService.findById(commentId);
-			User author = userService.findByName(authorName);
+			User author = userService.findById(authorId);
 			
 			if(comment == null) {
 				throw new IllegalStateException(String.format("Cound not find any comment whit id=%1", commentId));
 			}
 			
 			if (author == null) {
-				throw new IllegalStateException(String.format("Cound not find any author whit name =" + author, authorName));
+				throw new IllegalStateException(String.format("Cound not find any author whit id=%1", authorId));
 			}
 			
 			filter.setComment(comment);
@@ -162,15 +159,15 @@ public class AnswerController {
 		return ResponseEntity.ok(dtos);
 	}
 	
-	@GetMapping("{id}")
-    public ResponseEntity<AnswerDto> getAnswerById(@PathVariable Long id) {
-		Answer answer = answerService.findById(id);
-        if (answer != null) {
-        	AnswerDto answerDto = new AnswerDto();
-            BeanUtils.copyProperties(answer, answerDto);
-            return ResponseEntity.ok(answerDto);
-        }
-        return ResponseEntity.notFound().build();
-    }
+//	@GetMapping("{id}")
+//    public ResponseEntity<AnswerDto> getAnswerById(@PathVariable Long id) {
+//		Answer answer = answerService.findById(id);
+//        if (answer != null) {
+//        	AnswerDto answerDto = new AnswerDto();
+//            BeanUtils.copyProperties(answer, answerDto);
+//            return ResponseEntity.ok(answerDto);
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
        
 }

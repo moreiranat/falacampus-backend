@@ -16,11 +16,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 public class Answer implements Serializable {
 	
@@ -37,26 +32,17 @@ public class Answer implements Serializable {
 	@Column(name = "answer_message")
 	private String message;
 	
-	@NotNull
-	@NotEmpty
 	@OneToOne
 	@JoinColumn(name = "comment_id")
 	private Comment comment;
 	
-	@NotNull
-	@NotEmpty
-	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name = "answer_creationDate")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
-	@NotNull
-	@NotEmpty
-	@Size(min=2, max=50)
 	@ManyToOne
 	@JoinColumn(name = "answer_author")
 	private User author;
 	
-	@NotNull
 	@Column(name = "answer_solution")
 	private Boolean solution = false;
 	
@@ -64,11 +50,10 @@ public class Answer implements Serializable {
 		
 	}
 
-	public Answer(Long id, String message, Comment comment, LocalDateTime creationDate, User author, Boolean solution) {
+	public Answer(Long id, String message, Comment comment, User author, Boolean solution) {
 		this.id = id;
 		this.message = message;
 		this.comment = comment;
-		this.creationDate = creationDate;
 		this.author = author;
 		this.solution = solution;
 	}

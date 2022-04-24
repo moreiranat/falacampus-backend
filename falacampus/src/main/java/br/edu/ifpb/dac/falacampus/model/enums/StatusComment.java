@@ -4,7 +4,6 @@ public enum StatusComment {
 	
 	NOT_ANSWERED,
 	NOT_SOLVED,
-	SOLVED,
-	CONCLUDED;
+	SOLVED;
 
 }

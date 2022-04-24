@@ -28,7 +28,7 @@ public class Departament implements Serializable {
 	
 	@NotNull
 	@NotEmpty
-	@Column(name = "departament_name", nullable = false)
+	@Column(name = "departament_name")
 	private String name;
 	
 	@JsonIgnore

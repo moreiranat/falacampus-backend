@@ -2,7 +2,6 @@ package br.edu.ifpb.dac.falacampus.presentation.control;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifpb.dac.falacampus.business.service.CommentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
+import br.edu.ifpb.dac.falacampus.business.service.DetailsCommentConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DetailsCommentDto;
@@ -35,16 +35,19 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	@Autowired
+	private DetailsCommentConverterService detailsCommentConverterService;
+	@Autowired
 	private ModelMapper mapper;
 
 	// SAVE
 	@PostMapping
-	public ResponseEntity save(@RequestBody @Valid CommentDto dto) {
+	public ResponseEntity save(@RequestBody @Valid DetailsCommentDto dto) {
 		try {
-			Comment entity = commentConverterService.dtoToComment(dto);
+			Comment entity = detailsCommentConverterService.dtoToDetailsComment(dto);
+						
 			entity = commentService.save(entity);
 					
-			dto = commentConverterService.commentToDTO(entity);
+			dto = detailsCommentConverterService.detailsCommentToDTO(entity);
 
 			return new ResponseEntity(dto, HttpStatus.CREATED);
 
@@ -52,17 +55,6 @@ public class CommentController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		
-	}
-
-	// Ver esse método DETAIL
-	@GetMapping("{id}")
-	public ResponseEntity<DetailsCommentDto> detail(@PathVariable Long id) {
-		Optional<Comment> comment = commentService.getOpcionalComment(id);
-		if(comment.isPresent()) {
-			return ResponseEntity.ok(new DetailsCommentDto(comment.get()));
-		}
-		
-		return ResponseEntity.notFound().build();
 	}
 
 	@PutMapping("{id}")
@@ -119,15 +111,15 @@ public class CommentController {
 	
 	}
 
-	private CommentDto mapToCommentDto(Comment comment) {
-		return mapper.map(comment, CommentDto.class);
+	private DetailsCommentDto mapToDetailsCommentDto(Comment comment) {
+		return mapper.map(comment, DetailsCommentDto.class);
 	}
 
 	// FIND ALL
 	@GetMapping("/all")
 	public ResponseEntity<?> findAll() throws Exception {
 
-		List<CommentDto> dtos = commentService.findAll().stream().map(this::mapToCommentDto).toList();
+		List<DetailsCommentDto> dtos = commentService.findAll().stream().map(this::mapToDetailsCommentDto).toList();
 
 		return ResponseEntity.ok(dtos);
 

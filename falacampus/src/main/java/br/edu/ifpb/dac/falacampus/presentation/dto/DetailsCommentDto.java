@@ -1,6 +1,8 @@
 package br.edu.ifpb.dac.falacampus.presentation.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -27,30 +29,16 @@ public class DetailsCommentDto {
 	@Size(min = 10, max=255)
 	private String message;
 	
-	@NotNull
-	@NotEmpty
-	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
-	@NotNull
-	@NotEmpty
 	private CommentType commentType;
 	
-	@NotNull
-	@NotEmpty
-	private StatusComment statusComment;
+	private StatusComment statusComment = StatusComment.NOT_ANSWERED;
 	
-	@NotNull
-	@NotEmpty
-	@Size(min=2, max=50)
-	private String authorName;
+	private Long authorId;
 	
-	@NotNull
-	@NotEmpty
 	private Long departamentId;
 	
-	@NotNull
-	@NotEmpty
 	private Long answerId;
 	
 	public DetailsCommentDto() {
@@ -61,10 +49,9 @@ public class DetailsCommentDto {
 		this.id = comment.getId();
 		this.title = comment.getTitle();
 		this.message = comment.getMessage();
-		this.creationDate = comment.getCreationDate();
 		this.commentType = comment.getCommentType();
 		this.statusComment = comment.getStatusComment();
-		this.authorName = comment.getAuthor().getName();
+		this.authorId = comment.getAuthor().getId();
 		this.departamentId = comment.getDepartament().getId();
 		this.answerId = comment.getAnswer().getId();
 	}
@@ -116,13 +103,13 @@ public class DetailsCommentDto {
 	public void setStatusComment(StatusComment statusComment) {
 		this.statusComment = statusComment;
 	}
-
-	public String getAuthorName() {
-		return authorName;
+	
+	public Long getAuthorId() {
+		return authorId;
 	}
 
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
 	}
 
 	public Long getDepartamentId() {
@@ -139,6 +126,10 @@ public class DetailsCommentDto {
 
 	public void setAnswerId(Long answerId) {
 		this.answerId = answerId;
+	}
+	
+	public static List<DetailsCommentDto> converter(List<Comment> comments) {
+		return comments.stream().map(DetailsCommentDto::new).collect(Collectors.toList());
 	}
 	
 }

@@ -22,19 +22,11 @@ public class AnswerDto {
 	@Size(min = 10, max=255)
 	private String message;
 	
-	@NotNull
-	@NotEmpty
 	private Long commentId;
 	
-	@NotNull
-	@NotEmpty
-	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private LocalDateTime creationDate;
+	private LocalDateTime creationDate = LocalDateTime.now();
 	
-	@NotNull
-	@NotEmpty
-	@Size(min=2, max=50)
-	private String authorName;
+	private Long authorId;
 	
 	public AnswerDto() {
 		
@@ -45,7 +37,7 @@ public class AnswerDto {
 		this.message = answer.getMessage();
 		this.commentId = answer.getComment().getId();
 		this.creationDate = answer.getCreationDate();
-		this.authorName = answer.getAuthor().getName();
+		this.authorId = answer.getAuthor().getId();
 	}
 	
 	public Long getId() {
@@ -79,13 +71,13 @@ public class AnswerDto {
 	public void setCreationDate(LocalDateTime creationDate) {
 		this.creationDate = creationDate;
 	}
-
-	public String getAuthorName() {
-		return authorName;
+	
+	public Long getAuthorId() {
+		return authorId;
 	}
 
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
 	}
 
 	public static List<AnswerDto> converter(List<Answer> answers) {

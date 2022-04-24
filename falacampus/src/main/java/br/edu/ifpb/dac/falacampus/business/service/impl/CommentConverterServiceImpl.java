@@ -7,11 +7,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifpb.dac.falacampus.business.service.AnswerService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentConverterService;
-import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
-import br.edu.ifpb.dac.falacampus.presentation.dto.AnswerDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
 
 @Service

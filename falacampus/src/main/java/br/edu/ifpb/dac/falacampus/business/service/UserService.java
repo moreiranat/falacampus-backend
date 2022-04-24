@@ -65,8 +65,4 @@ public class UserService {
 		
 	}
 
-	public User findByName(String authorName) {
-		
-		return userRepository.findByName(authorName);
-	}
 }
