@@ -33,13 +33,6 @@ public class AnswerConverterServiceImpl implements AnswerConverterService {
 		
 		Answer entity = mapper.map(dto, Answer.class);
 		
-		//Answer entity = new Answer();
-		//entity.setId(dto.getId());
-		//entity.setMessage(dto.getMessage());
-		//entity.setComment(dto.getCommentId().longValue());//Problema na conversão
-		//entity.setCreationDate(dto.getCreationDate());
-		//entity.setAuthorName(dto.getAuthor().getName()); //Problema na conversão
-		
 		return entity;
 	}
 
@@ -47,14 +40,6 @@ public class AnswerConverterServiceImpl implements AnswerConverterService {
 	public AnswerDto answerToDTO(Answer entity) {
 		
 		AnswerDto dto = mapper.map(entity, AnswerDto.class);
-		
-		//AnswerDto dto = new AnswerDto();
-		
-		//dto.setId(entity.getId());
-		//dto.setMessage(entity.getMessage());	
-		//dto.setCommentId(entity.getComment().getId());
-		//dto.setCreationDate(entity.getCreationDate());
-		//dto.setAuthorName(entity.getAuthor().getName());
 		
 		return dto;		
 		

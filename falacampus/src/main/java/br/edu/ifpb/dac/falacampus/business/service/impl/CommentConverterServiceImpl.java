@@ -32,12 +32,6 @@ public class CommentConverterServiceImpl implements CommentConverterService {
 	public Comment dtoToComment(CommentDto dto) {
 		
 		Comment entity = mapper.map(dto, Comment.class);
-//		Comment entity = new Comment();
-//		
-//		entity.setId(dto.getId());
-//		entity.setTitle(dto.getTitle());	
-//		entity.setMessage(dto.getMessage());
-//		entity.setCreationDate(dto.getCreationDate());
 				
 		return entity;
 	}
@@ -46,14 +40,7 @@ public class CommentConverterServiceImpl implements CommentConverterService {
 	public CommentDto commentToDTO(Comment entity) {
 		
 		CommentDto dto = mapper.map(entity, CommentDto.class);
-		
-//		CommentDto dto = new CommentDto();
-//		
-//		dto.setId(entity.getId());
-//		dto.setTitle(entity.getTitle());	
-//		dto.setMessage(entity.getMessage());
-//		dto.setCreationDate(entity.getCreationDate());
-		
+				
 		return dto;
 	}
 
