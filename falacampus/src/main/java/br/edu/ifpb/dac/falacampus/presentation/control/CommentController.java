@@ -58,13 +58,13 @@ public class CommentController {
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody @Valid CommentDto dto) {
+	public ResponseEntity update(@PathVariable("id") Long id, @RequestBody @Valid DetailsCommentDto dto) {
 
 		try {
 			dto.setId(id);
-			Comment entity = commentConverterService.dtoToComment(dto); 
+			Comment entity = detailsCommentConverterService.dtoToDetailsComment(dto); 
 			entity = commentService.update(entity);
-			dto = commentConverterService.commentToDTO(entity); 
+			dto = detailsCommentConverterService.detailsCommentToDTO(entity); 
 
 			return ResponseEntity.ok(dto);
 		} catch (Exception e) {
