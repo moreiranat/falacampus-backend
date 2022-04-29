@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 import br.edu.ifpb.dac.falacampus.model.enums.CommentType;
 import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 
+
 @Entity
 public class Comment implements Serializable {
 	
