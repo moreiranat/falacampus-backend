@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifpb.dac.falacampus.business.service.CommentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.business.service.DetailsCommentConverterService;
+import br.edu.ifpb.dac.falacampus.exceptions.CommentCannotUpdateException;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
@@ -68,7 +69,7 @@ public class CommentController {
 			if (entity.getStatusComment().equals(StatusComment.NOT_SOLVED)){
 				entity = commentService.update(entity);
 			} else {
-				throw new Exception("Comment cannot be updated!");
+				throw new CommentCannotUpdateException();
 			}
 			
 			dto = detailsCommentConverterService.detailsCommentToDTO(entity); 
