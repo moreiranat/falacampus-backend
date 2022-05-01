@@ -12,8 +12,8 @@ public class DepartamentDto {
 	
 	private Long id;
 	
-	@NotNull
-	@NotEmpty
+	@NotNull 
+	@NotEmpty 
 	private String name;
 	
 	public DepartamentDto() {

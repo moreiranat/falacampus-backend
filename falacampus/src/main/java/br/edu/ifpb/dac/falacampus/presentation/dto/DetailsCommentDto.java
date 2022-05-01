@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,8 +22,8 @@ public class DetailsCommentDto {
 	
 	@NotNull
 	@NotEmpty
-	@Size(min=5, max=50)
-	private String title;
+	@Size(min=5, max=50)	
+	private String title; 
 	
 	@NotNull
 	@NotEmpty

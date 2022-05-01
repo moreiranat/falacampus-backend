@@ -154,17 +154,4 @@ public class UserController {
 		}
 	}
 	
-//	//FIND BY ID
-//	@GetMapping("{id}")
-//    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-//        User user = userService.findById(id);
-//        if (user != null) {
-//        	UserDto userDto = new UserDto();
-//            BeanUtils.copyProperties(user, userDto);
-//            return ResponseEntity.ok(userDto);
-//        }
-//
-//        return ResponseEntity.notFound().build();
-//    }
-
 }

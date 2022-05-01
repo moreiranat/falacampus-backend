@@ -92,16 +92,4 @@ public class DepartamentController {
 		}
 	}
 	
-//	@GetMapping("{id}")
-//  public ResponseEntity<DepartamentDto> getDepartamentById(@PathVariable Long id) {
-//		Departament departament = departamentService.findById(id);
-//      if (departament != null) {
-//      	DepartamentDto departamentDto = new DepartamentDto();
-//          BeanUtils.copyProperties(departament, departamentDto);
-//          return ResponseEntity.ok(departamentDto);
-//      }
-//
-//      return ResponseEntity.notFound().build();
-//  }
-
 }
