@@ -23,6 +23,7 @@ import br.edu.ifpb.dac.falacampus.business.service.CommentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.business.service.DetailsCommentConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
+import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.DetailsCommentDto;
 
@@ -63,7 +64,13 @@ public class CommentController {
 		try {
 			dto.setId(id);
 			Comment entity = detailsCommentConverterService.dtoToDetailsComment(dto); 
-			entity = commentService.update(entity);
+			
+			if (entity.getStatusComment().equals(StatusComment.NOT_SOLVED)){
+				entity = commentService.update(entity);
+			} else {
+				throw new Exception("Comment cannot be updated!");
+			}
+			
 			dto = detailsCommentConverterService.detailsCommentToDTO(entity); 
 
 			return ResponseEntity.ok(dto);

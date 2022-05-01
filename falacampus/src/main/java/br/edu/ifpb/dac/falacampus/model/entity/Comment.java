@@ -19,10 +19,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.edu.ifpb.dac.falacampus.exceptions.ExistingResponseException;
 import br.edu.ifpb.dac.falacampus.model.enums.CommentType;
 import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
 public class Comment implements Serializable {
 	
@@ -54,7 +58,7 @@ public class Comment implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "comment_status")
-	private StatusComment statusComment = StatusComment.NOT_ANSWERED;
+	private StatusComment statusComment = StatusComment.NOT_SOLVED;
 
 	@ManyToOne
 	@JoinColumn(name = "comment_author")
@@ -86,6 +90,7 @@ public class Comment implements Serializable {
 		this.departament = departament;
 		this.answer = answer;
 		this.attachment = attachment;
+		
 	}
 
 	public Long getId() {
@@ -193,5 +198,18 @@ public class Comment implements Serializable {
 				&& Objects.equals(id, other.id) && Objects.equals(message, other.message)
 				&& statusComment == other.statusComment && Objects.equals(title, other.title);
 	}
+	
+//	public Boolean changeStateStatusComment () throws ExistingResponseException {
+//		
+//		if (answer==null) {
+//			StatusComment statusComment = StatusComment.SOLVED;
+//			return true;
+//		} else {
+//			throw new ExistingResponseException("There is already an answer to this comment!");
+//		}
+//		
+//	}
+
+	
 	
 }

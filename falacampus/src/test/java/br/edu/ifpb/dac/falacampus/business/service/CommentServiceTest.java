@@ -63,6 +63,7 @@ class CommentServiceTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		MockitoAnnotations.openMocks(this);
+		startComment();
 	}
 
 	@AfterEach

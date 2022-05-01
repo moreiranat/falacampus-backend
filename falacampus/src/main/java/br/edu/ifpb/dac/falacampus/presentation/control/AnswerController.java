@@ -22,11 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifpb.dac.falacampus.business.service.AnswerConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.AnswerService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
+import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
+import br.edu.ifpb.dac.falacampus.business.service.DetailsCommentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
+import br.edu.ifpb.dac.falacampus.exceptions.commentSolvedException;
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
+import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 import br.edu.ifpb.dac.falacampus.presentation.dto.AnswerDto;
+import br.edu.ifpb.dac.falacampus.presentation.dto.DetailsCommentDto;
 
 @RestController
 @RequestMapping("/api/answer")
@@ -54,19 +59,29 @@ public class AnswerController {
 				throw new IllegalStateException("commentId cannot be null");
 			}
 			
-			Long commentId = dto.getCommentId();  
+			Long commentId = dto.getCommentId();
 			Comment comment = commentService.findById(commentId);
-			
+						
 			if(comment == null) {
 				throw new IllegalStateException(String.format("Cound not find any comment with id=%1", commentId));
 			}
 			
 			Answer entity = answerConverterService.dtoToAnswer(dto);
-			entity.setComment(comment);
-			entity = answerService.save(entity); 
-			dto = answerConverterService.answerToDTO(entity);
 			
-			return new ResponseEntity(dto, HttpStatus.CREATED);
+			if (comment.getStatusComment()== StatusComment.SOLVED) {
+				
+				throw new commentSolvedException("Comment is solved.");
+				
+			} else {
+				comment.setStatusComment(StatusComment.SOLVED);
+				comment.setAnswer(entity);
+				
+				entity.setComment(comment);
+				entity = answerService.save(entity);
+				dto = answerConverterService.answerToDTO(entity);
+				
+				return new ResponseEntity(dto, HttpStatus.CREATED);
+			}
 			
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());

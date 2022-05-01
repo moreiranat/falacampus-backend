@@ -33,7 +33,7 @@ public class DetailsCommentDto {
 	
 	private CommentType commentType;
 	
-	private StatusComment statusComment = StatusComment.NOT_ANSWERED;
+	private StatusComment statusComment = StatusComment.NOT_SOLVED;
 	
 	private Long authorId;
 	
