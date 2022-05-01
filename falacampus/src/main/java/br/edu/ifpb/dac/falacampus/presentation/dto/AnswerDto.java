@@ -17,9 +17,7 @@ public class AnswerDto {
 	
 	private Long id;
 	
-	@NotNull
-	@NotEmpty
-	@Size(min = 10, max=255)
+	@NotNull @NotEmpty @Size(min = 10, max=255)
 	private String message;
 	
 	private Long commentId;

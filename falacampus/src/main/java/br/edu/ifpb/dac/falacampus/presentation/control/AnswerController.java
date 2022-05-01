@@ -31,7 +31,7 @@ import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
 import br.edu.ifpb.dac.falacampus.business.service.DetailsCommentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
-import br.edu.ifpb.dac.falacampus.exceptions.commentSolvedException;
+import br.edu.ifpb.dac.falacampus.exceptions.CommentSolvedException;
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
@@ -76,7 +76,7 @@ public class AnswerController {
 			
 			if (comment.getStatusComment()== StatusComment.SOLVED) {
 				
-				throw new commentSolvedException("Comment is solved.");
+				throw new CommentSolvedException("Comment is solved.");
 				
 			} else {
 				comment.setStatusComment(StatusComment.SOLVED);
