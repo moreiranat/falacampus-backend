@@ -43,6 +43,7 @@ class UserTest {
 		assertTrue(constraintViolation.getPropertyPath().toString().contains("email"));
 		assertThat(constraintViolation.getMessageTemplate(), containsString("NotEmpty"));
 	}
+	
 	//test se a senha e valida 
 	@ValueSource(strings = { "eeeee", "efrrrgtrstuvwxyzABCD", "d43b*C3**" })
 	void testPasswordValid(String password) {
