@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.anything;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.ObjectNotFoundException;
@@ -133,7 +134,18 @@ class UserServiceTest {
 		User user1 = userRepository.getById(ID);
 		assertNull(user1);
 	}
-
+	@Test
+	public void whenFindAll() {
+		when(userRepository.findAll()).thenReturn(List.of(user));
+		List<User>respose = userService.findAll();
+		assertNotNull(respose);
+		assertEquals(1, respose.size());
+		assertEquals(User.class, respose.get(0).getClass());
+		assertEquals(ID, respose.get(0).getId());
+		assertEquals(NAME, respose.get(0).getName());
+		assertEquals(PASSWORD, respose.get(0).getPassword());
+		assertEquals(EMAIL, respose.get(0).getEmail());
+	}
 	@Test
 	public void whenFindByIdUser() {
 		Mockito.when(userRepository.findById(Mockito.anyLong())).thenReturn(optionalUser);
