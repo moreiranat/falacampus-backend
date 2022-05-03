@@ -36,7 +36,6 @@ class UserTest {
 	@ValueSource(strings = { "", "    ", " \t " })
 	void testEmailWithoutCharacters(String email) {
 		user.setEmail(email);
-
 		violations = validator.validateProperty(user, "email");
 		assertNotEquals(0, violations.size(), () -> "Valid email");
 
