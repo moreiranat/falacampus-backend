@@ -1,4 +1,4 @@
- package br.edu.ifpb.dac.falacampus.presentation.dto;
+package br.edu.ifpb.dac.falacampus.presentation.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,8 +12,7 @@ public class DepartamentDto {
 	
 	private Long id;
 	
-	@NotNull 
-	@NotEmpty 
+	@NotNull @NotEmpty 
 	private String name;
 	
 	public DepartamentDto() {

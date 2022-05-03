@@ -1,8 +1,8 @@
 package br.edu.ifpb.dac.falacampus.exceptions;
 
-public class commentSolvedException extends Exception {
+public class CommentSolvedException extends Exception {
 	
-	public commentSolvedException(String message){
+	public CommentSolvedException(String message){
         super(message);
     }
 

@@ -29,6 +29,7 @@ import br.edu.ifpb.dac.falacampus.business.service.CommentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.business.service.DetailsCommentConverterService;
 import br.edu.ifpb.dac.falacampus.exceptions.CommentCannotUpdateException;
+import br.edu.ifpb.dac.falacampus.exceptions.NotFoundException;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
@@ -40,12 +41,16 @@ public class CommentController {
 
 	@Autowired
 	private CommentConverterService commentConverterService;
+	
 	@Autowired
 	private CommentService commentService;
+	
 	@Autowired
 	private DetailsCommentConverterService detailsCommentConverterService;
+	
 	@Autowired
 	private ModelMapper mapper;
+
 
 	// SAVE
 	@PostMapping
@@ -91,7 +96,8 @@ public class CommentController {
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
-			commentService.deleteById(id);
+			
+			commentService.deleteById(id); 
 
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {

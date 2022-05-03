@@ -43,19 +43,15 @@ public class Answer implements Serializable {
 	@JoinColumn(name = "answer_author")
 	private User author;
 	
-	@Column(name = "answer_solution")
-	private Boolean solution = false;
-	
 	public Answer() {
 		
 	}
 
-	public Answer(Long id, String message, Comment comment, User author, Boolean solution) {
+	public Answer(Long id, String message, Comment comment, User author) {
 		this.id = id;
 		this.message = message;
 		this.comment = comment;
 		this.author = author;
-		this.solution = solution;
 	}
 
 	public Long getId() {
@@ -98,21 +94,13 @@ public class Answer implements Serializable {
 		this.author = author;
 	}
 
-	public Boolean getSolution() {
-		return solution;
-	}
-
-	public void setSolution(Boolean solution) {
-		this.solution = solution;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, comment, creationDate, id, message, solution);
+		return Objects.hash(author, comment, creationDate, id, message);
 	}
 
 	@Override
@@ -126,7 +114,7 @@ public class Answer implements Serializable {
 		Answer other = (Answer) obj;
 		return Objects.equals(author, other.author) && Objects.equals(comment, other.comment)
 				&& Objects.equals(creationDate, other.creationDate) && Objects.equals(id, other.id)
-				&& Objects.equals(message, other.message) && Objects.equals(solution, other.solution);
+				&& Objects.equals(message, other.message);
 	}
 	
 }

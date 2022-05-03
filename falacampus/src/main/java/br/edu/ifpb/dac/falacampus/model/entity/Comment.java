@@ -199,17 +199,4 @@ public class Comment implements Serializable {
 				&& statusComment == other.statusComment && Objects.equals(title, other.title);
 	}
 	
-//	public Boolean changeStateStatusComment () throws ExistingResponseException {
-//		
-//		if (answer==null) {
-//			StatusComment statusComment = StatusComment.SOLVED;
-//			return true;
-//		} else {
-//			throw new ExistingResponseException("There is already an answer to this comment!");
-//		}
-//		
-//	}
-
-	
-	
 }

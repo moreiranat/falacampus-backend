@@ -20,14 +20,10 @@ public class DetailsCommentDto {
 	
 	private Long id;
 	
-	@NotNull
-	@NotEmpty
-	@Size(min=5, max=50)	
+	@NotNull @NotEmpty @Size(min=5, max=50)	
 	private String title; 
 	
-	@NotNull
-	@NotEmpty
-	@Size(min = 10, max=255)
+	@NotNull @NotEmpty @Size(min = 10, max=255)
 	private String message;
 	
 	private LocalDateTime creationDate = LocalDateTime.now();
