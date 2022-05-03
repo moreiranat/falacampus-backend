@@ -22,9 +22,7 @@ import org.springframework.core.annotation.Order;
 import com.mysql.cj.xdevapi.Schema.Validation;
 
 class UserTest {
-	/*
-	 * @Test void test() { l("Not yet implemented"); }
-	 */
+
 	private Set<ConstraintViolation<User>> violations;
 
 	@Autowired
