@@ -1,30 +1,23 @@
 package br.edu.ifpb.dac.falacampus.business.service;
 
-import static org.hamcrest.CoreMatchers.theInstance;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.anything;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.loader.collection.OneToManyLoader;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.exceptions.verification.WantedButNotInvoked;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.OngoingStubbing;
 import org.modelmapper.ModelMapper;

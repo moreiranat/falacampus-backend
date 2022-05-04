@@ -44,6 +44,11 @@ public class Departament implements Serializable {
 		this.name = name;
 		this.users = users;
 	}
+	
+	public Departament(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;
