@@ -67,7 +67,7 @@ class DepartamentServiceTest {
 	}
 
 	@Test
-	public void cadastroTest() {
+	 void cadastroTest() {
 		departamentService.save(departament);
 
 	    Departament dep = departamentRepository.findAll().stream()
