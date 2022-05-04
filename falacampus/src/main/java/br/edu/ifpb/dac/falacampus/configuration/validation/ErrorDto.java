@@ -1,11 +1,11 @@
 package br.edu.ifpb.dac.falacampus.configuration.validation;
 
-public class FormDtoError {
+public class ErrorDto {
 	
 	private String field;
 	private String error;
 	
-	public FormDtoError(String field, String error) {
+	public ErrorDto(String field, String error) {
 		this.field = field;
 		this.error = error;
 	}
