@@ -134,6 +134,8 @@ class UserServiceTest {
 		User user1 = userRepository.getById(ID);
 		assertNull(user1);
 	}
+	//quando for buscar todos retornar uam list de
+	//usuarios
 	@Test
 	public void whenFindAll() {
 		when(userRepository.findAll()).thenReturn(List.of(user));
