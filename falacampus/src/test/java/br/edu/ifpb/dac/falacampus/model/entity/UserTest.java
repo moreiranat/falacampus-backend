@@ -44,7 +44,7 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 @DisplayName("User")
 @TestClassOrder(org.junit.jupiter.api.ClassOrderer.OrderAnnotation.class)
 class UserTest {
-
+//testes
 	@Autowired
 	private static Validator validator;
 	private User user;
