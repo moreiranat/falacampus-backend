@@ -23,6 +23,7 @@ import org.mockito.stubbing.OngoingStubbing;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.edu.ifpb.dac.falacampus.exceptions.UserIdException;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
@@ -157,6 +158,20 @@ class UserServiceTest {
 		assertEquals(REGISTRATION, (response).getRegistration());
 		assertEquals(DEPARTAMENT, (response).getDepartament());
 
+	}
+	///test unitario
+	@Test
+	void deve_salvar_user_repositorio()throws Exception {
+		userService.save(user);
+		verify(userRepository).save(user);
+		
+	}
+	@Test
+	void nao_deve_salvar_user_com_mesmo_id()throws Exception {
+		when(userRepository.findById(ID)).thenReturn(Optional.of(user));
+		//passando uma user que ja existe
+		userRepository.save(user);
+		
 	}
 
 }
