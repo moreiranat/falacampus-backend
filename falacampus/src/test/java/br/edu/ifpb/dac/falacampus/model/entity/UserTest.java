@@ -35,6 +35,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mysql.cj.xdevapi.Schema.Validation;
 
+import antlr.collections.Stack;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
 import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
@@ -48,7 +49,7 @@ class UserTest {
 	@Autowired
 	private static Validator validator;
 	private User user;
-
+	 
 	// teste de email sem caracter, no caso email invalido
 
 	@ValueSource(strings = { "", "    ", " \t " })
@@ -81,4 +82,6 @@ class UserTest {
 	@DisplayName("😱")
 	void testNameContainingEmoji() {
 	}
+	
+
 }
