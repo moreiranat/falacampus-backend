@@ -151,11 +151,6 @@ public class User implements Serializable {
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password) && Objects.equals(registration, other.registration)
 				&& role == other.role;
-	}
-
-	public void setUserDto() {
-		// TODO Auto-generated method stub
-		
-	}
+	}	
 	
 }
