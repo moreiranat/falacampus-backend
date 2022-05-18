@@ -54,6 +54,11 @@ public class Answer implements Serializable {
 		this.author = author;
 	}
 
+	public Answer(String message, Comment comment) {
+		this.message = message;
+		this.comment = comment;
+	}
+
 	public Long getId() {
 		return id;
 	}

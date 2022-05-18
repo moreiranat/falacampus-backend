@@ -18,7 +18,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.repository.AnswerRepository;
 
-class AnswerServiceTest {
+class AnswerServiceTest2 {
 	
 	@Mock
 	private AnswerRepository answerRepository;
