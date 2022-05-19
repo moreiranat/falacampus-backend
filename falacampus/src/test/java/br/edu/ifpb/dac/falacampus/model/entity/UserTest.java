@@ -48,7 +48,7 @@ class UserTest {
 	@Autowired
 	private static Validator validator;
 	private User user;
-
+	 
 	// teste de email sem caracter, no caso email invalido
 
 	@ValueSource(strings = { "", "    ", " \t " })
@@ -81,4 +81,6 @@ class UserTest {
 	@DisplayName("😱")
 	void testNameContainingEmoji() {
 	}
+	
+
 }
