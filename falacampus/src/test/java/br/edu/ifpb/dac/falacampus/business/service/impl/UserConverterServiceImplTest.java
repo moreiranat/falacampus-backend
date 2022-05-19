@@ -49,6 +49,7 @@ class UserConverterServiceImplTest {
 		user.setPassword("1234");
 		user.setDepartament(dep);
 
+
 		dto.setId(1L);
 		dto.setName("Maria");
 		dto.setEmail("maria@email.com");
@@ -56,6 +57,7 @@ class UserConverterServiceImplTest {
 		dto.setRole(Role.STUDENT);
 		dto.setPassword("1234");
 		dto.setDepartamentId(dep.getId());
+
 	}
 
 	@AfterAll
@@ -95,9 +97,8 @@ class UserConverterServiceImplTest {
 				() -> assertEquals(userDto.getName(), user.getName()),
 				() -> assertEquals(userDto.getEmail(), user.getEmail()),
 				() -> assertEquals(userDto.getRegistration(), user.getRegistration()),
-				() -> assertEquals(userDto.getRole(), user.getRole()),
-				() -> assertEquals(userDto.getPassword(), user.getPassword()),
-				() -> assertEquals(userDto.getDepartamentId().longValue(), user.getDepartament()));
+				() -> assertEquals(userDto.getRole(), user.getRole()));
+				
 	}
 
 	@Test
@@ -107,9 +108,8 @@ class UserConverterServiceImplTest {
 		assertAll("dtoToUser", () -> assertEquals(user.getId(), dto.getId()),
 				() -> assertEquals(user.getName(), dto.getName()), () -> assertEquals(user.getEmail(), dto.getEmail()),
 				() -> assertEquals(user.getRegistration(), dto.getRegistration()),
-				() -> assertEquals(user.getRole(), dto.getRole()),
-				() -> assertEquals(user.getPassword(), dto.getPassword()),
-				() -> assertEquals(user.getDepartament(), dto.getDepartamentId()));
+				() -> assertEquals(user.getRole(), dto.getRole()));
+
 	}
 
 }
