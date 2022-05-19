@@ -113,25 +113,20 @@
 			<version>2.0.6.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest</artifactId>
 			<version>2.2</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.restdocs/spring-restdocs-mockmvc -->
 		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <version>4.0.0</version>
-		    <scope>test</scope>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<version>2.0.6.RELEASE</version>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-junit-jupiter</artifactId>
-		    <version>4.0.0</version>
-		    <scope>test</scope>
-		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -152,3 +147,4 @@
 	</build>
 
 </project>
+
