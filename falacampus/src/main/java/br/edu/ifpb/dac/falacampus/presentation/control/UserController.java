@@ -110,8 +110,8 @@ public class UserController {
 				@RequestParam(value = "name", required = false) String name,
 				@RequestParam(value = "email", required = false) String email,
 				@RequestParam(value = "registration", required = false) Long registration,
-				@RequestParam(value = "role", required = false) Role role) {
-//				@RequestParam(value = "departamentId", required = false) Long departamentId) {
+				@RequestParam(value = "role", required = false) Role role,
+				@RequestParam(value = "departamentId", required = false) Long departamentId) {
 		
 		try {
 			
@@ -122,13 +122,13 @@ public class UserController {
 			filter.setRegistration(registration);
 			filter.setRole(role);
 			
-//			Departament departament = departamentService.findById(departamentId);
-//			
-//			if(departament == null) {
-//				throw new IllegalStateException(String.format("Cound not find any departament whit id=%1", departamentId));
-//			}
-//			
-//			filter.setDepartament(departament);
+			Departament departament = departamentService.findById(departamentId);
+			
+			if(departament == null) {
+				throw new IllegalStateException(String.format("Cound not find any departament whit id=%1", departamentId));
+			}
+			
+			filter.setDepartament(departament);
 			
 			List<User> entities = userService.find(filter);
 			List<UserDto> dtos = userConverterService.userToDTOList(entities);
@@ -151,6 +151,19 @@ public class UserController {
 
 		} else {
 			return userService.findAll();	
+		}
+	}
+	
+	@GetMapping("/{id}")
+	public User findById(@PathVariable("id") Long id) throws Exception {
+
+		User result = userService.findById(id);
+
+		if (result == null){
+			throw new Exception("User not exist!");
+
+		} else {
+			return result;	
 		}
 	}
 	
