@@ -51,7 +51,7 @@ public class UserController {
 			Departament departament = departamentService.findById(departamentId);
 			
 			if(departament == null) {
-				throw new IllegalStateException(String.format("Cound not find any departament with id=%1", departamentId));
+				throw new IllegalStateException(String.format("Could not find any departament with id=%1", departamentId));
 			}
 			
 			User entity = userConverterService.dtoToUser(dto);

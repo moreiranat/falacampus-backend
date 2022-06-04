@@ -97,7 +97,7 @@ public class AnswerController {
 			Comment comment = commentService.findById(commentId);
 			
 			if(comment == null) {
-				throw new IllegalStateException(String.format("Cound not find any comment with id=%1", id));
+				throw new IllegalStateException(String.format("Could not find any comment with id=%1", id));
 			}
 			
 			Answer entity = answerConverterService.dtoToAnswer(dto);
@@ -172,6 +172,19 @@ public class AnswerController {
 		List<AnswerDto> dtos = answerService.findAll().stream().map(this::mapToAnswerDto).toList();
 
 		return ResponseEntity.ok(dtos);
+	}
+	
+	@GetMapping("/{id}")
+	public Answer findById(@PathVariable("id") Long id) throws Exception {
+
+		Answer result = answerService.findById(id);
+
+		if (result == null){
+			throw new Exception("answer not exist!");
+
+		} else {
+			return result;	
+		}
 	}
 	
 }
