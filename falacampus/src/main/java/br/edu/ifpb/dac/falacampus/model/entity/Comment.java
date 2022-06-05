@@ -17,7 +17,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.edu.ifpb.dac.falacampus.exceptions.ExistingResponseException;
 import br.edu.ifpb.dac.falacampus.model.enums.CommentType;

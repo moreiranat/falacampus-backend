@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.enums.CommentType;
@@ -26,6 +28,7 @@ public class DetailsCommentDto {
 	@NotNull @NotEmpty @Size(min = 10, max=255)
 	private String message;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
 	private CommentType commentType;
