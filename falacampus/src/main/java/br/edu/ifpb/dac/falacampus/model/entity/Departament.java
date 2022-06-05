@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,6 +29,7 @@ public class Departament implements Serializable {
 	
 	@NotNull
 	@NotEmpty
+	@Size(min = 2, max=255)
 	@Column(name = "departament_name")
 	private String name;
 	
