@@ -178,14 +178,14 @@ class CommentControllerTestIntegration {
 	public void deleteCommentById() {
 		
 		try {
-			responseEntity = commentController.delete(1L);
+			responseEntity = commentController.delete(1L, detailsCommentDto);
 			
 			assertAll("Not found Entity",
 					() -> assertEquals(HttpStatus.OK, responseEntity.getStatusCode()),
 					() -> assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode()),
 					() -> assertEquals(null, responseEntity.getBody()));
 			
-			Mockito.verify(commentController, Mockito.times(1)).delete(1L);
+			Mockito.verify(commentController, Mockito.times(1)).delete(1L, detailsCommentDto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -125,7 +125,7 @@ public class UserController {
 			Departament departament = departamentService.findById(departamentId);
 			
 			if(departament == null) {
-				throw new IllegalStateException(String.format("Cound not find any departament whit id=%1", departamentId));
+				throw new IllegalStateException(String.format("Could not find any departament whit id=%1", departamentId));
 			}
 			
 			filter.setDepartament(departament);

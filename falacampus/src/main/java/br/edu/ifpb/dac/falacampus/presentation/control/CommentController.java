@@ -95,10 +95,18 @@ public class CommentController {
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity delete(@PathVariable("id") Long id) {
+	public ResponseEntity delete(@PathVariable("id") Long id, @RequestBody @Valid DetailsCommentDto dto) {
 		try {
 			
-			commentService.deleteById(id); 
+			dto.setId(id);
+			Comment entity = detailsCommentConverterService.dtoToDetailsComment(dto);
+			
+			if (entity.getStatusComment().equals(StatusComment.NOT_SOLVED)){
+				commentService.deleteById(id);
+			} else {
+				throw new CommentCannotUpdateException();
+			}
+			 
 
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
