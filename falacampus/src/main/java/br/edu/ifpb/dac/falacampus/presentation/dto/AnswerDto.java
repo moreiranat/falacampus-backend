@@ -22,11 +22,13 @@ public class AnswerDto {
 	@NotNull @NotEmpty @Size(min = 10, max=255)
 	private String message;
 	
+	@NotNull @NotEmpty
 	private Long commentId;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
+	@NotNull @NotEmpty
 	private Long authorId;
 	
 	public AnswerDto() {

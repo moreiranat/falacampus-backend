@@ -57,6 +57,8 @@ public class Comment implements Serializable {
 	@Column(name = "comment_creationDate")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
+	@NotNull
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "comment_type")
 	private CommentType commentType;
@@ -65,10 +67,14 @@ public class Comment implements Serializable {
 	@Column(name = "comment_status")
 	private StatusComment statusComment = StatusComment.NOT_SOLVED;
 
+	@NotNull
+	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "comment_author")
 	private User author;
 	
+	@NotNull
+	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "departament_id")
 	private Departament departament;

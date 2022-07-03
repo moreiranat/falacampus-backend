@@ -31,12 +31,15 @@ public class DetailsCommentDto {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
+	@NotNull @NotEmpty
 	private CommentType commentType;
 	
 	private StatusComment statusComment = StatusComment.NOT_SOLVED;
 	
+	@NotNull @NotEmpty
 	private Long authorId;
 	
+	@NotNull @NotEmpty
 	private Long departamentId;
 	
 	private Long answerId;

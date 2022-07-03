@@ -41,9 +41,13 @@ public class User implements Serializable {
 	@Pattern (regexp="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "Digite um e-mail padrão válido: _@_._")
 	private String email;
 	
+	@NotNull
+	@NotEmpty
 	@Column(name = "user_registration")
 	private Long registration;
 	
+	@NotNull
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "user_role")
 	private Role role = Role.STUDENT;
@@ -54,6 +58,8 @@ public class User implements Serializable {
 	@Column(name = "user_password")
 	private String password;
 	
+	@NotNull
+	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "departament_id")
 	private Departament departament;

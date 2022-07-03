@@ -41,6 +41,8 @@ public class Answer implements Serializable {
 	@Column(name = "answer_creationDate")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
+	@NotNull
+	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "answer_author")
 	private User author;
