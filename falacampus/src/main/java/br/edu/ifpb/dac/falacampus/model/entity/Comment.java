@@ -49,7 +49,6 @@ public class Comment implements Serializable {
 	private String title;
 	
 	@NotNull
-	@NotEmpty
 	@Size(min = 10, max=255)
 	@Column(name = "comment_message")
 	private String message;
@@ -58,7 +57,6 @@ public class Comment implements Serializable {
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
 	@NotNull
-	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	@Column(name = "comment_type")
 	private CommentType commentType;
@@ -68,13 +66,11 @@ public class Comment implements Serializable {
 	private StatusComment statusComment = StatusComment.NOT_SOLVED;
 
 	@NotNull
-	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "comment_author")
 	private User author;
 	
 	@NotNull
-	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "departament_id")
 	private Departament departament;

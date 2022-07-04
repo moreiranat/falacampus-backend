@@ -31,6 +31,7 @@ import br.edu.ifpb.dac.falacampus.business.service.DetailsCommentConverterServic
 import br.edu.ifpb.dac.falacampus.exceptions.CommentCannotUpdateException;
 import br.edu.ifpb.dac.falacampus.exceptions.NotFoundException;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
+import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.enums.StatusComment;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
@@ -154,6 +155,7 @@ public class CommentController {
 		return ResponseEntity.ok(dtos);
 
 	}
+	
 	
 	@GetMapping("/{id}")
 	public Comment findById(@PathVariable("id") Long id) throws Exception {

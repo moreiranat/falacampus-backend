@@ -29,7 +29,7 @@ public class CommentDto {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime creationDate = LocalDateTime.now();
 	
-	@NotNull @NotEmpty
+	@NotNull
 	private CommentType commentType;
 	
 	public CommentDto() {

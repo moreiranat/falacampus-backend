@@ -174,6 +174,7 @@ public class AnswerController {
 		return ResponseEntity.ok(dtos);
 	}
 	
+	
 	@GetMapping("/{id}")
 	public Answer findById(@PathVariable("id") Long id) throws Exception {
 
