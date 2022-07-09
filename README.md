@@ -20,5 +20,19 @@ Com o Git instalado em seu computador, abre um terminal de linha de comando (no 
 
 Cole o comando descrito abaixo:
 
-git clone 
+git clone https://github.com/moreiranat/falacampus-backend.git
+
+## Configurando e executando:
+
+Na linha de comando, entre no diretório do projeto:
+
+cd /{caminho}/{até}/{repositório}/falacampus-back
+
+## Dependências da aplicação:
+
+mvn dependency:resolve
+
+## Para a execução da aplicação, digite:
+
+mvn spring-boot:run
 
