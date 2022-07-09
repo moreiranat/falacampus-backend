@@ -26,7 +26,7 @@ git clone https://github.com/moreiranat/falacampus-backend.git
 
 Na linha de comando, entre no diretório do projeto:
 
-cd /{caminho}/{até}/{repositório}/falacampus-back
+cd /{caminho}/{até}/{repositório}/falacampus-backend
 
 ## Dependências da aplicação:
 
