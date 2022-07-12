@@ -1,17 +1,24 @@
 package br.edu.ifpb.dac.falacampus.business.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
 import br.edu.ifpb.dac.falacampus.model.repository.CommentRepository;
 import br.edu.ifpb.dac.falacampus.presentation.dto.CommentDto;
+import br.edu.ifpb.dac.falacampus.presentation.dto.DetailsCommentDto;
 
 @Service
 public class CommentService {
@@ -80,5 +87,34 @@ public class CommentService {
 		
 		return commentRepository.findAll(example);
 	}
+	
+	@Transactional(readOnly = true)
+	public Page<DetailsCommentDto> findByPage(PageRequest pageRequest){
+
+		Page<Comment> page = commentRepository.findAll(pageRequest);
+		commentRepository.findCommentsDatas(page.stream().collect(Collectors.toList()));
+
+		return page.map(x -> new DetailsCommentDto(x));
+
+	}
+	
+//	public List<Comment> findAll(Sort by) {
+//		
+//		return commentRepository.findAll();
+//	}
+	
+//	public List<Comment> findAll(PageRequest pageRequest) {
+//		
+//		return commentRepository.findAll();
+//	}
+
+//	public List<Comment> findOrderByName(String name) {
+//		
+//		List<Comment> result = commentRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+//		
+//		return result;
+//
+//		
+//	}
 
 }

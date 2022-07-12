@@ -2,12 +2,19 @@ package br.edu.ifpb.dac.falacampus.business.service;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+//import br.edu.ifpb.dac.falacampus.configuration.UserMapper;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
 
@@ -16,6 +23,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+//	@Autowired
+//    private UserMapper userMapper;
 	
 	public User save(User user) {
 		return userRepository.save(user);
@@ -64,5 +74,16 @@ public class UserService {
 		return userRepository.findAll(example);
 		
 	}
+	
+//	public List<User> findByName(String name, int offset, int limit) {
+//        return userRepository.findByName(name, new PageRequest(offset, limit));
+//    }
+	
+	
+//	public ResponseEntity execute(Pageable page){
+//        return userMapper.mapper(
+//                userRepository.findAll(page).getContent()
+//        );
+//    }
 
 }
