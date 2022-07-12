@@ -29,7 +29,7 @@ public class Departament implements Serializable {
 	
 	@NotNull
 	@NotEmpty
-	@Size(min = 2, max=255)
+	@Size(min = 2, max=100)
 	@Column(name = "departament_name")
 	private String name;
 	
