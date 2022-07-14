@@ -103,10 +103,10 @@ public class CommentService {
 //		return commentRepository.findAll();
 //	}
 	
-//	public List<Comment> findAll(PageRequest pageRequest) {
-//		
-//		return commentRepository.findAll();
-//	}
+	public List<Comment> findAll(PageRequest pageRequest) {
+		
+		return commentRepository.findAll();
+	}
 
 //	public List<Comment> findOrderByName(String name) {
 //		

@@ -209,11 +209,11 @@ public class CommentController {
 
 	}
 	
-//	@GetMapping
-//	private ConfigPagination readAll(@PageableDefault(sort="id", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable pageable){
-//
-//	    Page<Comment> commentPage = commentRepository.findAll(pageable);
-//	    return new ConfigPagination(commentPage);
-//	}
+	@GetMapping("/pagesAll")
+	private ConfigPagination readAll(@PageableDefault(sort="id", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable pageable){
+
+	    Page<Comment> commentPage = commentRepository.findAll(pageable);
+	    return new ConfigPagination(commentPage);
+	}
 	
 }
