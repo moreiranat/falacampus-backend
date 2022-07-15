@@ -8,8 +8,10 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
+
+import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+import br.edu.ifpb.dac.falacampus.model.interfaces.TokenService;
 import io.jsonwebtoken.Claims;
-import br.edu.ifpb.dac.falacampus.business.security.TokenService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.ExpiredJwtException;

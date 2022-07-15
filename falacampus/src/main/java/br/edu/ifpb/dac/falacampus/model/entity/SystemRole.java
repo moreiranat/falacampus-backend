@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.business.security.impl;
+package br.edu.ifpb.dac.falacampus.model.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

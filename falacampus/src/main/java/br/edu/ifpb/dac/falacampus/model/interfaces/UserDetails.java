@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.business.security;
+package br.edu.ifpb.dac.falacampus.model.interfaces;
 
 import java.io.Serializable;
 import java.util.Collection;

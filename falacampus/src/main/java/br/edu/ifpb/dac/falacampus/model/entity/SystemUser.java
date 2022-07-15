@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.business.security.impl;
+package br.edu.ifpb.dac.falacampus.model.entity;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import br.edu.ifpb.dac.falacampus.business.security.UserDetails;
+import br.edu.ifpb.dac.falacampus.model.interfaces.UserDetails;
 
 public class SystemUser implements UserDetails {
 

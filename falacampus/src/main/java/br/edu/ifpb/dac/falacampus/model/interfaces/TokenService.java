@@ -1,8 +1,8 @@
-package br.edu.ifpb.dac.falacampus.business.security;
+package br.edu.ifpb.dac.falacampus.model.interfaces;
 
 import javax.servlet.http.HttpServletRequest;
 
-import br.edu.ifpb.dac.falacampus.business.security.impl.SystemUser;
+import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 
