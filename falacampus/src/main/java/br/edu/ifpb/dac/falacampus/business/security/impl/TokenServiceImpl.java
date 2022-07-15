@@ -6,21 +6,19 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import io.jsonwebtoken.Claims;
-import br.edu.ifpb.dac.falacampus.business.security.ExpiredJwtException;
-import br.edu.ifpb.dac.falacampus.business.security.HttpServletRequest;
-import br.edu.ifpb.dac.falacampus.business.security.SystemUser;
 import br.edu.ifpb.dac.falacampus.business.security.TokenService;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.ExpiredJwtException;
 
 public class TokenServiceImpl implements TokenService{
 	
 	public static final String CLAIM_USERID = "userid";
 	public static final String CLAIM_USERNAME = "username";
-	public static final String CLAIM_EXPIRATION = "userid";
+	public static final String CLAIM_EXPIRATION = "expirationTime";
 	
 	@Value("${jwt.expiration}")
 	private String expiration;
@@ -82,7 +80,7 @@ public class TokenServiceImpl implements TokenService{
 	public String getUsername(String token) {
 		Claims claims = getClaims(token);
 		
-		return (String) claims.getSubject(CLAIM_USERNAME);
+		return (String) claims.get(CLAIM_USERNAME);
 	}
 
 	@Override
@@ -101,5 +99,7 @@ public class TokenServiceImpl implements TokenService{
 		}
 		return authorization.split(" ")[1];
 	}
+
+
 
 }
