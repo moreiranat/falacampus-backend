@@ -20,26 +20,26 @@ public class TokenFilter extends OncePerRequestFilter {
 	private SystemUserService systemUserService;
 	
 	
-	public TokenFilter(TokenService tokenService, SystemUserService service) {
+	public TokenFilter(TokenService tokenService, SystemUserService systemUserService) {
 		super();
-		this.tokenService=tokenService;
+		this.tokenService = tokenService;
 		this.systemUserService = systemUserService;
 	}
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		
-		//String token = tokenService.get(request);
-		//boolean valid = tokenService.isValid(token);
+		String token = tokenService.get(request);
+		boolean valid = tokenService.isValid(token);
 		
 		if(valid) {
-			autheticate(token);
+			authenticate(token);
 		}
 		filterChain.doFilter(request, response);
 		
 	}
 	private void authenticate(String token) {
-		Long userid =tokenService.getUserId(token);
+		Long userid = tokenService.getUserId(token);
 		SystemUser user = systemUserService.findById(userid);
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
