@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.token.TokenService;
+
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.edu.ifpb.dac.falacampus.business.service.SystemUserService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+import br.edu.ifpb.dac.falacampus.model.interfaces.TokenService;
 
 public class TokenFilter extends OncePerRequestFilter {
 	private TokenService tokenService;
