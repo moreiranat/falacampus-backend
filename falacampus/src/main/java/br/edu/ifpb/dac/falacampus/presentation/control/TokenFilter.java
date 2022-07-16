@@ -19,7 +19,7 @@ public class TokenFilter extends OncePerRequestFilter {
 	private TokenService tokenService;
 	private SystemUserService systemUserService;
 	
-	///teste
+	
 	public TokenFilter(TokenService tokenService, SystemUserService service) {
 		super();
 		this.tokenService=tokenService;
