@@ -40,5 +40,6 @@ public class SystemRole implements GrantedAuthority {
 		return "SystemRole [id=" + id + ", name=" + name + "]";
 	}
 	
+	
 
 }
