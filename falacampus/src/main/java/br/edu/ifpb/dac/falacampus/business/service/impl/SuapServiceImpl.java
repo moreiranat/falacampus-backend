@@ -97,9 +97,9 @@ public class SuapServiceImpl implements SuapService {
 
 	private String sendRequest(HttpRequest httpRequest) throws IOException, InterruptedException {
 		HttpClient httpClient = HttpClient.newHttpClient();
-		String response;
+		String response="";
 		try {
-			response = HttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()).body();
+			response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()).body();
 
 		} catch (IOException | InterruptedException e) {
 
@@ -113,7 +113,7 @@ public class SuapServiceImpl implements SuapService {
 		for (Map.Entry<String, String> header : DEFAULT_HEADERS.entrySet()) {
 			((java.net.http.HttpRequest.Builder) builder).setHeader(header.getKey(), header.getValue());
 		}
-		for (Map.Entry<String, String> header : header.entrySet()) {
+		for (Map.Entry<String, String> header : headers.entrySet()) {
 			((java.net.http.HttpRequest.Builder) builder).setHeader(header.getKey(), header.getValue());
 		}
 		HttpRequest request = ((java.net.http.HttpRequest.Builder) builder).GET().build();
