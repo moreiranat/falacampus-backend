@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.model.interfaces;
+package br.edu.ifpb.dac.falacampus.business.service;
 
 import javax.servlet.http.HttpServletRequest;
 

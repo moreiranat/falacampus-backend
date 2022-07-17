@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.configuration.validation;
+package br.edu.ifpb.dac.falacampus.presentation.control;
 
 import java.util.ArrayList;
 import java.util.HashMap;

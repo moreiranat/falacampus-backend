@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.business.security.impl;
+package br.edu.ifpb.dac.falacampus.business.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;

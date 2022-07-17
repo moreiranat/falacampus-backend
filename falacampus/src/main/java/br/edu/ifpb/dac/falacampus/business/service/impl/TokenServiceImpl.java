@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.business.security.impl;
+package br.edu.ifpb.dac.falacampus.business.service.impl;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -9,8 +9,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 
+import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
-import br.edu.ifpb.dac.falacampus.model.interfaces.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
