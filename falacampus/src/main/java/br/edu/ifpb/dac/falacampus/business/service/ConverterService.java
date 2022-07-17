@@ -9,7 +9,7 @@ import com.google.gson.JsonParser;
 
 import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
 
-public class ConverterService {
+public class ConverterService extends CommentService {
 	
 	
 	public String mapToJson(Map<String,String>map) {

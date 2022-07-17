@@ -7,6 +7,10 @@ public class TokenDto {
 	private String token;
 	private SystemUserDto user;
 	
+	public TokenDto(String token, SystemUserDto user) {
+		this.token =token;
+		this.user =user;
+	}
 	public String getToken() {
 		return token;
 	}
