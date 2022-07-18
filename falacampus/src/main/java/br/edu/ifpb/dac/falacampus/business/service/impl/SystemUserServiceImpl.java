@@ -8,9 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import br.edu.ifpb.dac.falacampus.business.service.PasswordEnconderService;
-import br.edu.ifpb.dac.falacampus.business.service.SystemUserService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
+import br.edu.ifpb.dac.falacampus.model.interfaces.SystemUserService;
 import br.edu.ifpb.dac.falacampus.model.repository.SystemUserRepository;
 
 public class SystemUserServiceImpl implements SystemUserService {

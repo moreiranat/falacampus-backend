@@ -11,9 +11,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import br.edu.ifpb.dac.falacampus.business.service.AuthenticationService;
 import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
-import br.edu.ifpb.dac.falacampus.business.service.SystemUserService;
+import br.edu.ifpb.dac.falacampus.business.service.SystemUserConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+import br.edu.ifpb.dac.falacampus.model.interfaces.SystemUserService;
 import br.edu.ifpb.dac.falacampus.presentation.dto.LoginDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.SystemUserDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.TokenDto;
@@ -25,7 +26,7 @@ public class AuthenticationController {
 	@Autowired
 	private AuthenticationService authenticationService;
 	@Autowired
-	private ConverterService converterService; //private ConverterSystemUser converterSystemUser;
+	private SystemUserConverterService systemUserConverterService; //private ConverterSystemUser converterSystemUser;
 	@Autowired
 	private SystemUserService systemUserService;
 	@Autowired
@@ -36,7 +37,7 @@ public class AuthenticationController {
 		try {
 			String token = authenticationService.login(dto.getUsername(), dto.getPassword()); 
 			SystemUser entity = systemUserService.findByUserName(dto.getUsername());
-			SystemUserDto systemUserDto = converterService.systemUserToDTO(entity); 
+			SystemUserDto systemUserDto = systemUserConverterService.systemUserToDTO(entity); 
 			
 			TokenDto tokenDto = new TokenDto(token, systemUserDto);
 			

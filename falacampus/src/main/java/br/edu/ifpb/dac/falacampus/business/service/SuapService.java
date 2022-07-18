@@ -5,7 +5,7 @@ import java.util.Map;
 public interface SuapService {
 	public static final String OBTAIN_TOKEN_URL ="https://suap.ifpb.edu.br/api/jwt/obtain_token/";
 	public static final String EMPLOYEES_URL = "https://suap.ifpb.edu.br/api/recursos-humanos/servidores/v1/";
-	public static final String STUDENS_URL ="https://suap.ifpb.edu.br/apiensino/alunos/v1/";
+	public static final String STUDENS_URL ="https://suap.ifpb.edu.br/api/ensino/alunos/v1/";
 	
 	public static final String USERNAME_JSON_FIELD ="username";
 	public static final String PASSWORD_JSON_FIELD = "password";
@@ -27,11 +27,5 @@ public interface SuapService {
 	public String findStudent (String token);
 	
 	public String findUser (String token,String username);
-	
-	
-	
-	
-	
-	
 
 }

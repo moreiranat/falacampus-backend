@@ -12,9 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.edu.ifpb.dac.falacampus.business.service.SystemUserService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+import br.edu.ifpb.dac.falacampus.model.interfaces.SystemUserService;
 
 public class TokenFilter extends OncePerRequestFilter {
 	private TokenService tokenService;

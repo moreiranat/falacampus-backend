@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifpb.dac.falacampus.business.service.CommentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.business.service.DetailsCommentConverterService;
-import br.edu.ifpb.dac.falacampus.configuration.ConfigPagination;
+import br.edu.ifpb.dac.falacampus.config.ConfigPagination;
 import br.edu.ifpb.dac.falacampus.exceptions.CommentCannotUpdateException;
 import br.edu.ifpb.dac.falacampus.exceptions.NotFoundException;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;

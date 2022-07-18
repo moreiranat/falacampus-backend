@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.configuration;
+package br.edu.ifpb.dac.falacampus.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

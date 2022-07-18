@@ -11,5 +11,5 @@ public interface SystemUserConverterService {
 	
 	public List<SystemUserDto> systemUserToDTOList(List<SystemUserDto> entities);
 	public SystemUser dtoToSystemUser(SystemUserDto entity);
-	public SystemUserDto userToDTO(SystemUser entity);
+	public SystemUserDto systemUserToDTO(SystemUser entity);
 }

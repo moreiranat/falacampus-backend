@@ -10,9 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import br.edu.ifpb.dac.falacampus.business.service.AuthenticationService;
 import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.SuapService;
-import br.edu.ifpb.dac.falacampus.business.service.SystemUserService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+import br.edu.ifpb.dac.falacampus.model.interfaces.SystemUserService;
 
 
 public class AuthenticationServiceImpl implements AuthenticationService{

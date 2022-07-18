@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.falacampus.configuration;
+package br.edu.ifpb.dac.falacampus.config;
 
 import java.util.List;
 import java.util.Objects;

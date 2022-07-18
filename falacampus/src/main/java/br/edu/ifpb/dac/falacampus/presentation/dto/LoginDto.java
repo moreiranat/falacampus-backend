@@ -43,10 +43,6 @@ public class LoginDto {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	public static List<LoginDto> converter(List<Login> logins) {
 		return logins.stream().map(LoginDto::new).collect(Collectors.toList());
 	}
