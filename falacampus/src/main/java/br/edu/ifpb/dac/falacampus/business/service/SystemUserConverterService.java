@@ -9,7 +9,7 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 public interface SystemUserConverterService {
 	
-	public List<SystemUserDto> systemUserToDTOList(List<SystemUserDto> entities);
-	public SystemUser dtoToSystemUser(SystemUserDto entity);
+	public List<SystemUserDto> systemUserToDTOList(List<SystemUser> entities);
+	public SystemUser dtoToSystemUser(SystemUserDto dto);
 	public SystemUserDto systemUserToDTO(SystemUser entity);
 }
