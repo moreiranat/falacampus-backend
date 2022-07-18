@@ -16,7 +16,7 @@ public interface SystemUserService extends UserDetailsService {
 	  public SystemUser save(SystemUser systemUser); 
 	  public SystemUser update(SystemUser systemUser);
 	  
-	  public SystemUser delete(SystemUser systemUser); 
+	  public SystemUser delete(Long id); 
 	  public SystemUser findById(Long id); 
 	  public SystemUser findByEmail(String email);
 	  

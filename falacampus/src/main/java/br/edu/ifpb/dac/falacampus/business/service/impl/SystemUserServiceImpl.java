@@ -49,6 +49,10 @@ public class SystemUserServiceImpl implements SystemUserService {
 
 	@Override
 	public SystemUser update(SystemUser systemUser) {
+		if(systemUser.getId()==null) {
+			throw new IllegalStateException("Id null");
+		}
+		passwordEnconderService.encryptPassword(systemUser);
 	
 		return null;
 	}
