@@ -14,6 +14,7 @@ import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.SystemUserService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+import br.edu.ifpb.dac.falacampus.presentation.dto.LoginDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.SystemUserDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.TokenDto;
 
@@ -31,11 +32,11 @@ public class AuthenticationController {
 	private TokenService tokenService;
 	
 	@PostMapping("/login")
-	public ResponseEntity login(@RequestBody LoginDto dto) { //usar SystemUserDto userDto
+	public ResponseEntity login(@RequestBody LoginDto dto) { 
 		try {
-			String token = authenticationService.login(dto.getUsername(), dto.getPassword()); //usar loginLocal
+			String token = authenticationService.login(dto.getUsername(), dto.getPassword()); 
 			SystemUser entity = systemUserService.findByUserName(dto.getUsername());
-			SystemUserDto systemUserDto = converterService.systemUserToDTO(entity); //SystemUserDto systemUserDto = converterSystemUser.userToDTO(entity);
+			SystemUserDto systemUserDto = converterService.systemUserToDTO(entity); 
 			
 			TokenDto tokenDto = new TokenDto(token, systemUserDto);
 			
