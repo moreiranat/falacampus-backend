@@ -1,14 +1,13 @@
 package br.edu.ifpb.dac.falacampus.business.service;
 
 import javax.servlet.http.HttpServletRequest;
-
-import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+import br.edu.ifpb.dac.falacampus.model.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 
 public interface TokenService {
 	
-	public String generate(SystemUser user); 
+	public String generate(User user); 
 	
 	public Claims getClaims(String token) throws ExpiredJwtException;
 	

@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+import br.edu.ifpb.dac.falacampus.model.entity.User;
 
 public class ConverterService {
 	
@@ -24,7 +24,7 @@ public class ConverterService {
 		return token;
 	}
 	
-	public SystemUser jsonToUser(String json) {
+	public User jsonToUser(String json) {
 		JsonElement jsonElement = JsonParser.parseString(json);
 		JsonObject results = jsonElement.
 		getAsJsonObject()
@@ -33,9 +33,10 @@ public class ConverterService {
 		.get(0).getAsJsonObject();
 		String name = results.get("nome").getAsString();
 		String username = results.get("matricula").getAsString();
-		SystemUser user = new SystemUser();
+		User user = new User();
 		user.setName(name);
-		user.setUserName(username);
+		
+		//user.setUserName(username);
 		
 		return user;
 	}

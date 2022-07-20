@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
-import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
+
+import br.edu.ifpb.dac.falacampus.model.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -29,7 +30,7 @@ public class TokenServiceImpl implements TokenService{
 	private String secret;
 
 	@Override
-	public String generate(SystemUser user) {
+	public String generate(User user) {
 		long expiration = Long.valueOf(this.expiration);
 		
 		LocalDateTime expirationLocalDateTime = LocalDateTime.now().plusMinutes(expiration);
@@ -44,7 +45,7 @@ public class TokenServiceImpl implements TokenService{
 				.setExpiration(expirationDate)
 				.setSubject(user.getId().toString())
 				.claim(CLAIM_USERID, user.getId())
-				.claim(CLAIM_USERNAME, user.getUsername())
+				.claim(CLAIM_USERNAME, user.getName())
 				.claim(CLAIM_EXPIRATION, tokenExpiration)
 				.signWith(SignatureAlgorithm.HS512, secret)
 				.compact();
