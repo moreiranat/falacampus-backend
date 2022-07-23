@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService  {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -54,6 +57,10 @@ public class UserService {
 		}
 		return userRepository.findById(id).get();
 	}
+	public User findByName(String name) {
+		return null;
+		
+	}
 
 	public List<User> findAll() {
 		return userRepository.findAll();
@@ -67,7 +74,8 @@ public class UserService {
 		return userRepository.findAll(example);
 		
 	}
-	
+
+
 //	public List<User> findByName(String name, int offset, int limit) {
 //        return userRepository.findByName(name, new PageRequest(offset, limit));
 //    }

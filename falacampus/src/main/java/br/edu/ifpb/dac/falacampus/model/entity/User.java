@@ -1,6 +1,9 @@
 package br.edu.ifpb.dac.falacampus.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -18,12 +21,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
 
 @Entity
-public class User implements Serializable {
+public class User implements UserDetails {
 	
-	private static final long serialVersionUID = 1L;
+
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,6 +82,65 @@ public class User implements Serializable {
 		this.role = role;
 		this.password = password;
 		this.departament = departament;
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(departament, email, id, name, password, registration, role);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(departament, other.departament) && Objects.equals(email, other.email)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && Objects.equals(registration, other.registration)
+				&& role == other.role;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority>  getAuthorities() {
+		// TODO Auto-generated method stub
+		return new ArrayList<>();
+	}
+	
+	
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 	public Long getId() {
@@ -134,28 +199,8 @@ public class User implements Serializable {
 		this.departament = departament;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(departament, email, id, name, password, registration, role);
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return Objects.equals(departament, other.departament) && Objects.equals(email, other.email)
-				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(password, other.password) && Objects.equals(registration, other.registration)
-				&& role == other.role;
-	}
+	
 	
 }

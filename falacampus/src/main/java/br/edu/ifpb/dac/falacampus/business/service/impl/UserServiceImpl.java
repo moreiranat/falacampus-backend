@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
@@ -12,7 +15,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @Service
-public class UserConverterServiceImpl implements UserConverterService {
+public class UserServiceImpl implements UserConverterService {
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -62,5 +65,7 @@ public class UserConverterServiceImpl implements UserConverterService {
 		
 		return dto;
 	}
+
+
 
 }

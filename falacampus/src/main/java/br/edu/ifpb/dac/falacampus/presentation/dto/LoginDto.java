@@ -7,9 +7,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.Login;
 
 public class LoginDto {
 
-	private Long id;
-
-	private String username;
+	private Long matricula;
 
 	private String password;
 
@@ -18,26 +16,18 @@ public class LoginDto {
 	}
 
 	public LoginDto(Login login) {
-		this.id = login.getId();
-		this.username = login.getUsername();
+		this.matricula = login.getMatricula();
 		this.password = login.getPassword();
 	}
 
-	public Long getId() {
-		return id;
+	public Long getMatricula() {
+		return matricula;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setMatricula(Long matricula) {
+		this.matricula= matricula;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getPassword() {
 		return password;

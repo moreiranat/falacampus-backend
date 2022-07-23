@@ -5,9 +5,9 @@ import java.util.Objects;
 public class TokenDto {
 	
 	private String token;
-	private SystemUserDto user;
+	private UserDto user;
 	
-	public TokenDto(String token, SystemUserDto user) {
+	public TokenDto(String token, UserDto user) {
 		this.token =token;
 		this.user =user;
 	}
@@ -17,10 +17,10 @@ public class TokenDto {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public SystemUserDto getUser() {
+	public UserDto getUser() {
 		return user;
 	}
-	public void setUser(SystemUserDto user) {
+	public void setUser(UserDto user) {
 		this.user = user;
 	}
 	
