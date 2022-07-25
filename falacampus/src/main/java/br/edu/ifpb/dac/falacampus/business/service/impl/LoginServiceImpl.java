@@ -26,13 +26,19 @@ public class LoginServiceImpl implements LoginService {
 	private String suapToken;
 
 	@Override
-	public User login(Long matricula, String password) {
+	public  User login(Long matricula, String password) {
 		String jsonToken = suapService.login(password, password);
 		this.suapToken = converterService.jsonToToken(jsonToken);
 		if (this.suapToken == null) {
 			throw new IllegalArgumentException("Incorret Matricula or Password");
 		}
 		User user = userService.findById(matricula);
+		
+		if(user == null) {
+			String json = suapService.findUser(suapToken, password);
+			user =converterService.jsonToUser(json);
+			user = userService.save(user);
+		}
 		return user;
 	}
 	

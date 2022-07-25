@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserConverterService {
 		return dto;
 	}
 
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }
