@@ -47,7 +47,7 @@ public class TokenFilter extends OncePerRequestFilter {
 	
 	  private String recuperarToken(HttpServletRequest httpServletRequest) {
 		  
-//		   Pelo request eu consigo pegar os dados da requisição inclusive os dados do header
+//		   com o request consigo pegar os dados da requisição inclusive os dados do header
 //	          eu chamo o método getHeader(Passando o nome do que eu quero no header) eu consigo
 //	          buscar os valores
 		  String token = httpServletRequest.getHeader("Authorization");
