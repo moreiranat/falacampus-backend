@@ -7,7 +7,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.Login;
 
 public class LoginDto {
 
-	private Long matricula;
+	private Long registration;
 
 	private String password;
 
@@ -16,16 +16,16 @@ public class LoginDto {
 	}
 
 	public LoginDto(Login login) {
-		this.matricula = login.getMatricula();
+		this.registration= login.getRegistration();
 		this.password = login.getPassword();
 	}
 
-	public Long getMatricula() {
-		return matricula;
+	public Long getRregistration() {
+		return registration;
 	}
 
-	public void setMatricula(Long matricula) {
-		this.matricula= matricula;
+	public void setRegistration(Long registration) {
+		this.registration= registration;
 	}
 
 

@@ -4,6 +4,6 @@ import br.edu.ifpb.dac.falacampus.model.entity.User;
 
 public interface LoginService {
 
-	User login(Long matricula, String password);
+	User login(Long registration, String password);
 
 }

@@ -13,64 +13,58 @@ import br.edu.ifpb.dac.falacampus.model.repository.LoginRepository;
 import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
 
 public class LoginConverterService {
-	
-	
+
 	@Autowired
 	private LoginRepository loginRepository;
 //	@Autowired
 //    private UserMapper userMapper;
-	
+
 	public Login save(Login login) {
 		return loginRepository.save(login);
 	}
 
-	public void deleteById(Long matricula) {
-		
-		Login  login = findById(matricula);
-		
-		if(login == null) {
-			throw new IllegalStateException(String.format("Could not find a entity with id=%1", matricula));
+	public void deleteByRegistration(Long registration) {
+
+		Login login = findByRegistration(registration);
+
+		if (login == null) {
+			throw new IllegalStateException(String.format("Could not find a entity with id=%1", registration));
 		}
-		
-		loginRepository.deleteById(matricula);
+
+		loginRepository.deleteById(registration);
+	}
+
+	private Login findByRegistration(Long registration) {
+		if (registration == null) {
+			throw new IllegalStateException("registration cannot be null");
+		}
+
+		return loginRepository.findById(registration).get();
+
 	}
 
 	public Login update(Login login) {
 		return loginRepository.save(login);
 	}
-	
-	public Login update(Long matricula) {
-		Login login= loginRepository.getById(matricula);
-		if(matricula == null) {
-			throw new IllegalStateException("Matricula cannot be null");
-		}		
-		return loginRepository.save(login);
-	}
-	
-	public Login findById(Long matricula) {
-		
-		if(matricula == null) {
-			throw new IllegalStateException("Matricula cannot be null");
+
+	public Login update(Long registration) {
+		Login login = loginRepository.getById(registration);
+		if (registration == null) {
+			throw new IllegalStateException("registration cannot be null");
 		}
-		return loginRepository.findById(matricula).get();
-	}
-	public Login findByName(String name) {
-		return null;
-		
+		return loginRepository.save(login);
 	}
 
 	public List<Login> findAll() {
 		return loginRepository.findAll();
 	}
-	
-	public List<Login> find(Login filter) {
-		Example example = Example.of(filter, ExampleMatcher.matching()
-				.withIgnoreCase()
-				.withStringMatcher(StringMatcher.CONTAINING));
-		
-		return loginRepository.findAll(example);
-		
-	}
 
+	public List<Login> find(Login filter) {
+		Example example = Example.of(filter,
+				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
+
+		return loginRepository.findAll(example);
+
+	}
 
 }

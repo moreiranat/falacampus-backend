@@ -13,7 +13,7 @@ public class Login implements Serializable {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long matricula;
+	private Long registration;
 	
 	private String username;
 	
@@ -23,8 +23,8 @@ public class Login implements Serializable {
 		
 	}
 
-	public Login(Long matricul, String username, String password) {
-		this.matricula = matricula;
+	public Login(Long registration, String username, String password) {
+		this.registration =registration;
 		this.username = username;
 		this.password = password;
 	}
@@ -33,21 +33,18 @@ public class Login implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Long getMatricula() {
-		return matricula;
+	public Long getRegistration() {
+		return registration;
 	}
 
-	public void setId(Long matricula) {
-		this.matricula = matricula;
+	public void setId(Long registration) {
+		this.registration = registration;
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getPassword() {
 		return password;
@@ -59,7 +56,7 @@ public class Login implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(matricula, password, username);
+		return Objects.hash(registration, password);
 	}
 
 	@Override
@@ -71,8 +68,8 @@ public class Login implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Login other = (Login) obj;
-		return Objects.equals(matricula, other.matricula) && Objects.equals(password, other.password)
-				&& Objects.equals(username, other.username);
+		return Objects.equals(registration, other.registration) && Objects.equals(password, other.password)
+				;
 	}
 
 }
