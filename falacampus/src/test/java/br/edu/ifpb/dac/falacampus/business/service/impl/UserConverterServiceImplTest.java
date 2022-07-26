@@ -32,11 +32,11 @@ class UserConverterServiceImplTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 
-		userConverterServiceImpl = new UserConverterServiceImpl();
-		user = new User();
-		dto = new UserDto();
-		dep = new Departament();
-		userConverterService = new UserConverterServiceImpl();
+//		userConverterServiceImpl = new UserConverterServiceImpl();
+//		user = new User();
+//		dto = new UserDto();
+//		dep = new Departament();
+//		userConverterService = new UserConverterServiceImpl();
 
 		dep.setId(1L);
 		dep.setName("Biblioteca");

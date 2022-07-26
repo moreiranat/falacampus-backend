@@ -20,7 +20,7 @@ public class LoginDto {
 		this.password = login.getPassword();
 	}
 
-	public Long getRregistration() {
+	public Long getRegistration() {
 		return registration;
 	}
 

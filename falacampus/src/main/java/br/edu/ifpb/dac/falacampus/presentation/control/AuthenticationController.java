@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import br.edu.ifpb.dac.falacampus.business.service.AuthenticationService;
-import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
-import br.edu.ifpb.dac.falacampus.business.service.SystemUserConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
-import br.edu.ifpb.dac.falacampus.model.entity.SystemUser;
-import br.edu.ifpb.dac.falacampus.model.interfaces.SystemUserService;
+import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
+import br.edu.ifpb.dac.falacampus.business.service.UserService;
+import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.LoginDto;
-import br.edu.ifpb.dac.falacampus.presentation.dto.SystemUserDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.TokenDto;
+import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @RequestMapping("/api")
 @Scope(value = WebApplicationContext.SCOPE_SESSION)
@@ -26,20 +25,20 @@ public class AuthenticationController {
 	@Autowired
 	private AuthenticationService authenticationService;
 	@Autowired
-	private SystemUserConverterService systemUserConverterService; //private ConverterSystemUser converterSystemUser;
+	private UserConverterService userConverterService; //private ConverterSystemUser converterSystemUser;
 	@Autowired
-	private SystemUserService systemUserService;
+	private UserService userService;
 	@Autowired
 	private TokenService tokenService;
 	
 	@PostMapping("/login")
 	public ResponseEntity login(@RequestBody LoginDto dto) { 
 		try {
-			String token = authenticationService.login(dto.getUsername(), dto.getPassword()); 
-			SystemUser entity = systemUserService.findByUserName(dto.getUsername());
-			SystemUserDto systemUserDto = systemUserConverterService.systemUserToDTO(entity); 
+			String token = authenticationService.login(dto.getRegistration(), dto.getPassword()); 
+			User entity = userService.findByRegistration(dto.getRegistration());
+			UserDto userDto = userConverterService.userToDTO(entity); 
 			
-			TokenDto tokenDto = new TokenDto(token, systemUserDto);
+			TokenDto tokenDto = new TokenDto(token, userDto);
 			
 			return new ResponseEntity(tokenDto, HttpStatus.OK);
 			

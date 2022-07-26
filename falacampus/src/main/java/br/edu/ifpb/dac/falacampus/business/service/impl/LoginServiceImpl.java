@@ -27,7 +27,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public  User login(Long registration, String password) {
-		String jsonToken = suapService.login(password, password);
+		String jsonToken = suapService.login(registration, password);
 		this.suapToken = converterService.jsonToToken(jsonToken);
 		if (this.suapToken == null) {
 			throw new IllegalArgumentException("Incorret Matricula or Password");

@@ -16,7 +16,7 @@ public interface SuapService {
 	
 	public static final Map<String ,String> DEFAULT_HEADERS =Map.of("Content-Type","application/json");
 	
-	public String login (String matricula ,String password);
+	public String login (Long registration ,String password);
 	
 	public String findEmployee (String token,String username);
 	
@@ -26,6 +26,8 @@ public interface SuapService {
 	
 	public String findStudent (String token);
 	
-	public String findUser (String token,String username);
+	public String findUser (String token,Long registration);
+
+	public String findUser(String suapToken, String password);
 
 }

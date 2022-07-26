@@ -6,7 +6,7 @@ public interface AuthenticationService {
 	
 	//public String login(String username,String password);
 	
-	public String login(String email,String password);
+	public String login(Long registration,String password);
 	public User getLoggedUser();
 
 }

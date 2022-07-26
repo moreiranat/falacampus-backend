@@ -20,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
@@ -30,7 +31,7 @@ import org.springframework.web.filter.CorsFilter;
 import br.edu.ifpb.dac.falacampus.business.service.PasswordEnconderService;
 import br.edu.ifpb.dac.falacampus.business.service.SystemRoleService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
-import br.edu.ifpb.dac.falacampus.model.interfaces.SystemUserService;
+import br.edu.ifpb.dac.falacampus.business.service.UserService;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -38,9 +39,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private TokenService tokenService;
 	@Autowired
-	private SystemUserService systemUserService;
+	private UserService userService;
 	@Autowired
 	private PasswordEnconderService passwordEnconderService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 	
 	@Override
 	@Bean
@@ -50,12 +53,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public TokenFilter jwtTokenFilter() {
-		return new TokenFilter(tokenService, systemUserService);
+		return new TokenFilter(tokenService, userService);
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(systemUserService).passwordEncoder(passwordEnconderService);
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEnconderService);
 	}
 	
 	@Bean

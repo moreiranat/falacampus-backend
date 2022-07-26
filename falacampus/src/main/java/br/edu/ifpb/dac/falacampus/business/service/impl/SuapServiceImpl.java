@@ -20,9 +20,8 @@ import br.edu.ifpb.dac.falacampus.business.service.SuapService;
 public class SuapServiceImpl implements SuapService {
 	private ConverterService converterService;
 
-	@Override
-	public String login(String username, String password) {
-		Map body = Map.of(USERNAME_JSON_FIELD, username, PASSWORD_JSON_FIELD, password);
+	public String login(String registration, String password) {
+		Map body = Map.of(USERNAME_JSON_FIELD, registration, PASSWORD_JSON_FIELD, password);
 		String json = converterService.mapToJson(body);
 		// mapTOJson(body);
 		try {
@@ -64,7 +63,6 @@ public class SuapServiceImpl implements SuapService {
 		return null;
 	}
 
-	@Override
 	public String findUser(String token, String username) {
 		String result = findEmployee(token, username);
 		if (result == null) {
@@ -133,6 +131,18 @@ public class SuapServiceImpl implements SuapService {
 		} catch (InterruptedException e3) {
 			e3.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public String login(Long registration, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String findUser(String token, Long registration) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
