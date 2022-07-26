@@ -56,7 +56,7 @@ public class User implements UserDetails {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "user_role")
-	private Role role = Role.STUDENT;
+	private Role role = Role.STUDENTS;
 	
 	//@NotNull
 	@NotBlank

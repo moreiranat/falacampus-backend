@@ -20,8 +20,8 @@ import br.edu.ifpb.dac.falacampus.business.service.SuapService;
 public class SuapServiceImpl implements SuapService {
 	private ConverterService converterService;
 
-	public String login(String registration, String password) {
-		Map body = Map.of(USERNAME_JSON_FIELD, registration, PASSWORD_JSON_FIELD, password);
+	public String login(Long registration, String password) {
+		Map body = Map.of(REGISTRATION_JSON_FIELD, registration, PASSWORD_JSON_FIELD, password);
 		String json = converterService.mapToJson(body);
 		// mapTOJson(body);
 		try {
@@ -40,8 +40,8 @@ public class SuapServiceImpl implements SuapService {
 	}
 
 	@Override
-	public String findEmployee(String token, String username) {
-		String url = String.format("%s?search=%s", EMPLOYEES_URL, username);
+	public String findEmployee(String token, Long registration) {
+		String url = String.format("%s?search=%s", EMPLOYEES_URL, registration);
 		return find(token, url);
 	}
 
@@ -52,8 +52,8 @@ public class SuapServiceImpl implements SuapService {
 	}
 
 	@Override
-	public String findStudent(String token, String username) {
-		String url = String.format("%s?search=%s", STUDENS_URL, username);
+	public String findStudent(String token, Long registration) {
+		String url = String.format("%s?search=%s", STUDENS_URL,registration);
 		return find(token, url);
 	}
 
@@ -63,10 +63,10 @@ public class SuapServiceImpl implements SuapService {
 		return null;
 	}
 
-	public String findUser(String token, String username) {
-		String result = findEmployee(token, username);
+	public String findUser(String token, Long registration) {
+		String result = findEmployee(token, registration);
 		if (result == null) {
-			result = findStudent(token, username);
+			result = findStudent(token, registration);
 		}
 		return result;
 	}
@@ -135,14 +135,11 @@ public class SuapServiceImpl implements SuapService {
 	}
 
 	@Override
-	public String login(Long registration, String password) {
-		// TODO Auto-generated method stub
+	public String findUser(String suapToken, String password) {
+	
 		return null;
 	}
 
-	@Override
-	public String findUser(String token, Long registration) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
 }

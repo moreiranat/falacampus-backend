@@ -7,7 +7,7 @@ public interface SuapService {
 	public static final String EMPLOYEES_URL = "https://suap.ifpb.edu.br/api/recursos-humanos/servidores/v1/";
 	public static final String STUDENS_URL ="https://suap.ifpb.edu.br/api/ensino/alunos/v1/";
 	
-	public static final String USERNAME_JSON_FIELD ="username";
+	public static final String REGISTRATION_JSON_FIELD ="registration";
 	public static final String PASSWORD_JSON_FIELD = "password";
 	
 
@@ -18,11 +18,11 @@ public interface SuapService {
 	
 	public String login (Long registration ,String password);
 	
-	public String findEmployee (String token,String username);
+	public String findEmployee (String token,Long registration);
 	
 	public String findEmployee (String token);
 	
-	public String findStudent (String token,String username);
+	public String findStudent (String token,Long registration);
 	
 	public String findStudent (String token);
 	

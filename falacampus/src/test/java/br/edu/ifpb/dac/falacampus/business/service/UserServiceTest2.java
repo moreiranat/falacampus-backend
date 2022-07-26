@@ -60,11 +60,11 @@ public class UserServiceTest2 {
 	
 	@Test
 	void testUpate() {
-		when(users.get(0)).thenReturn(new User(1l, "teste", "email@teste",2l ,Role.ADMINISTRATOR, "password123", new Departament()));
+		when(users.get(0)).thenReturn(new User(1l, "teste", "email@teste",2l ,Role.OBTAIN, "password123", new Departament()));
 		//Mockando a chamada para o método save
 		//Quando tentar salvar qualquer usuário (any), vai ser retornado esse usuário
 		//instanciado como parâmetro
-		when(userRepository.save(any(User.class))).thenReturn(new User(1l, "teste", "emailupdate@teste",2l ,Role.ADMINISTRATOR, "password123", new Departament()));
+		when(userRepository.save(any(User.class))).thenReturn(new User(1l, "teste", "emailupdate@teste",2l ,Role.OBTAIN, "password123", new Departament()));
 		
 		String UpdateEmail ="emailupdate@teste";
 		

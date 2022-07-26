@@ -51,7 +51,7 @@ class DepartamentServiceTest {
 		user.setEmail("maria@email.com");
 		user.setRegistration(12345L);
 		user.setPassword("12345678");
-		user.setRole(Role.STUDENT);
+		user.setRole(Role.STUDENTS);
 		user.setDepartament(departament);
 		
 		users.add(user);
@@ -80,7 +80,7 @@ class DepartamentServiceTest {
 	    assertEquals("maria@email.com",user.getEmail());
 	    assertEquals(12345L,user.getRegistration());
 	    assertEquals("12345678",user.getPassword());
-	    assertEquals(Role.STUDENT,user.getRole());
+	    assertEquals(Role.STUDENTS,user.getRole());
 	    assertEquals(departament,user.getDepartament());
 	    
 	    

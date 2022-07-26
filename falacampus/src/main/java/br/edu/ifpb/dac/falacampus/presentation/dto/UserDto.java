@@ -28,7 +28,7 @@ public class UserDto {
 	private Long registration;
 	
 	@NotNull
-	private Role role = Role.STUDENT;
+	private Role role = Role.STUDENTS;
 	
 	@NotBlank
 	@Size(min=8, max=30)

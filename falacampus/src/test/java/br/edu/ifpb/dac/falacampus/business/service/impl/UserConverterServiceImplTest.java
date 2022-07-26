@@ -45,7 +45,7 @@ class UserConverterServiceImplTest {
 		user.setName("Maria");
 		user.setEmail("maria@email.com");
 		user.setRegistration(1234L);
-		user.setRole(Role.STUDENT);
+		user.setRole(Role.STUDENTS);
 		user.setPassword("1234");
 		user.setDepartament(dep);
 
@@ -54,7 +54,7 @@ class UserConverterServiceImplTest {
 		dto.setName("Maria");
 		dto.setEmail("maria@email.com");
 		dto.setRegistration(1234L);
-		dto.setRole(Role.STUDENT);
+		dto.setRole(Role.STUDENTS);
 		dto.setPassword("1234");
 		dto.setDepartamentId(dep.getId());
 
