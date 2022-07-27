@@ -23,8 +23,10 @@ import br.edu.ifpb.dac.falacampus.business.service.AnswerConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.AnswerService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
+
 import br.edu.ifpb.dac.falacampus.business.service.impl.AnswerConverterServiceImpl;
 import br.edu.ifpb.dac.falacampus.business.service.impl.DetailsCommentConverterServiceImpl;
+import br.edu.ifpb.dac.falacampus.business.service.impl.UserServiceImpl;
 import br.edu.ifpb.dac.falacampus.exceptions.CommentCannotUpdateException;
 import br.edu.ifpb.dac.falacampus.model.entity.Answer;
 import br.edu.ifpb.dac.falacampus.model.entity.Comment;
@@ -54,7 +56,7 @@ class AnswerControllerTestIntegration {
 	@Mock
 	private static UserRepository userRepository;
 	@Mock
-	private static UserService userService; 
+	private static UserService userCrudService; 
 	@Mock
 	private static CommentService commentService;
 	@Captor
@@ -81,13 +83,12 @@ class AnswerControllerTestIntegration {
 		answerConverter = new AnswerConverterServiceImpl();
 		comment = new Comment();
 		commentService = new CommentService();
-		userService = new UserService();
-
+		//userCrudService = new UserCrudServiceImpl()
 		ReflectionTestUtils.setField(answerService, "answerRepository", answerRepository);
 		ReflectionTestUtils.setField(answerController, "ans werService", answerService);
 		ReflectionTestUtils.setField(answerController, "answerConverter", answerConverter);
-		ReflectionTestUtils.setField(userService, "userRepository", userRepository);
-		ReflectionTestUtils.setField(answerController, "userService", userService);
+		ReflectionTestUtils.setField(userCrudService, "userRepository", userRepository);
+		ReflectionTestUtils.setField(answerController, "userService", userCrudService);
 		ReflectionTestUtils.setField(commentService, "commentRepository", commentRepository);
 		ReflectionTestUtils.setField(answerController, "commentService", commentService);
 		

@@ -21,7 +21,7 @@ import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
 import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
-import br.edu.ifpb.dac.falacampus.business.service.UserService;
+
 import br.edu.ifpb.dac.falacampus.exceptions.CommentCannotUpdateException;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;

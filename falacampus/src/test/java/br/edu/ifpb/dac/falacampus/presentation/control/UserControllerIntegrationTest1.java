@@ -76,6 +76,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
+
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 
@@ -110,8 +111,7 @@ class UserControllerIntegrationTest1 {
 	@Mock
 	private UserController userController;
 	@Mock
-	private UserService userService;
-	
+	private UserService userCrudService;
 	@BeforeEach
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
@@ -162,7 +162,7 @@ class UserControllerIntegrationTest1 {
 	  JpaRepository<User, Long> userRepository = null;
 	  userRepository.findAll(); // List<User>userList =
 	  IntPredicate userController = null;
-	  UserService  userService= new UserService();
+	  //UserService  userService= new UserService();
 	
 	  Assertions.assertThat(userController).isNotNull();
 	  }

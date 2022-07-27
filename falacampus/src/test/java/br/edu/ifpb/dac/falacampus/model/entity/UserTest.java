@@ -34,8 +34,6 @@ import org.junit.platform.commons.annotation.Testable;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mysql.cj.xdevapi.Schema.Validation;
-
-import br.edu.ifpb.dac.falacampus.business.service.UserService;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
 import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;

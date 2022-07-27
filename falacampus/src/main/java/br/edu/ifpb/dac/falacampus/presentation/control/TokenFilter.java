@@ -11,12 +11,15 @@ import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextChangedEvent;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
-import br.edu.ifpb.dac.falacampus.model.entity.User;
 
+import br.edu.ifpb.dac.falacampus.model.entity.User;
+@RestController
 public class TokenFilter extends OncePerRequestFilter {
 	private TokenService tokenService;
 	private UserService userService;

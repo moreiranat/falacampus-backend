@@ -8,7 +8,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @Service
-public interface UserConverterService extends UserDetailsService{
+public interface UserConverterService {
 	
 	public List<UserDto> userToDTOList(List<User> entities);
 	public User dtoToUser(UserDto dto);

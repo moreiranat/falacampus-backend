@@ -10,6 +10,7 @@ import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.LoginService;
 import br.edu.ifpb.dac.falacampus.business.service.SuapService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
+
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 
 @Service
@@ -35,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
 		User user = userService.findById(registration);
 		
 		if(user == null) {
-			String json = suapService.findUser(suapToken, password);
+			String json = suapService.findUser(suapToken,login);
 			user =converterService.jsonToUser(json);
 			user = userService.save(user);
 		}

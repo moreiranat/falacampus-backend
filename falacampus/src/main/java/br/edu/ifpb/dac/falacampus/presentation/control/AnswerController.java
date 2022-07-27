@@ -23,6 +23,7 @@ import br.edu.ifpb.dac.falacampus.business.service.AnswerConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.AnswerService;
 import br.edu.ifpb.dac.falacampus.business.service.CommentService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
+
 import br.edu.ifpb.dac.falacampus.exceptions.BadArgumentsException;
 import br.edu.ifpb.dac.falacampus.exceptions.CommentSolvedException;
 import br.edu.ifpb.dac.falacampus.exceptions.InternalException;
@@ -47,7 +48,7 @@ public class AnswerController {
 	private CommentService commentService;
 	
 	@Autowired
-	private UserService userService;
+	private UserService userCrudService;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -139,7 +140,7 @@ public class AnswerController {
 			filter.setCreationDate(creationDate); 
 			
 			Comment comment = commentService.findById(commentId);
-			User author = userService.findById(authorId);
+			User author = userCrudService.findById(authorId);
 			
 			if(comment == null) {
 				throw new IllegalStateException(String.format("Cound not find any comment whit id=%1", commentId));

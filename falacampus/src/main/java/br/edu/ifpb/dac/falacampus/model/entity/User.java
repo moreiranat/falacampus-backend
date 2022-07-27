@@ -179,7 +179,7 @@ public class User implements UserDetails {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(List<SystemRole> role2) {
 		this.role = role;
 	}
 
@@ -197,6 +197,11 @@ public class User implements UserDetails {
 
 	public void setDepartament(Departament departament) {
 		this.departament = departament;
+	}
+
+	public void setRole(Role students) {
+		
+		
 	}
 
 

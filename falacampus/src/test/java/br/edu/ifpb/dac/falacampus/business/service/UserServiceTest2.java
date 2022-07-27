@@ -12,6 +12,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
@@ -24,8 +27,7 @@ public class UserServiceTest2 {
 	private UserRepository userRepository;
 	
 	@Mock
-	private UserService userService = new UserService();
-	
+	private UserService userCrudService ;;
 	@Mock
 	private List<User> users;
 	
@@ -49,13 +51,13 @@ public class UserServiceTest2 {
 	void testFindById () { 
 		
 		assertThrows(IllegalStateException.class,
-				() -> userService.findById(null));
+				() -> userCrudService.findById(null));
 	}
 	
 	@Test
 	void testDeleteById() {		
 		assertThrows(IllegalStateException.class, 
-				() -> userService.deleteById(null));
+				() -> ((CrudRepository<User, Long>) userCrudService).deleteById(null));
 	}
 	
 	@Test

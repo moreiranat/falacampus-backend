@@ -17,13 +17,13 @@ import br.edu.ifpb.dac.falacampus.business.service.UserService;
 
 public class TokenFilter extends OncePerRequestFilter {
 	private TokenService tokenService;
-	private UserService userService;
+	private UserService userCrudService;
 	
 	
-	public TokenFilter(TokenService tokenService,UserService userService) {
+	public TokenFilter(TokenService tokenService,UserService userCrudService) {
 		super();
 		this.tokenService = tokenService;
-		this.userService = userService;
+		this.userCrudService= userCrudService;
 	}
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
