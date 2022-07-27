@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private TokenService tokenService;
 	@Autowired
-	private UserService userCrudService;
+	private UserService userService;
 	@Autowired
 	private PasswordEnconderService passwordEnconderService;
 	@Autowired
@@ -56,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public TokenFilter jwtTokenFilter() {
-		return new TokenFilter(tokenService, userCrudService);
+		return new TokenFilter(tokenService, userService);
 	}
 
 	@Override

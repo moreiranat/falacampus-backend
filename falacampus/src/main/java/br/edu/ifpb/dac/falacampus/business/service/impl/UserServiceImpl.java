@@ -18,7 +18,7 @@ import br.edu.ifpb.dac.falacampus.business.service.UserService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemRole;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
-@Service
+
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 	private PasswordEnconderService passwordEnconderService;
 
 	@Override
-	@Bean
+	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = findByUserName(username);
 		if (user == null) {
