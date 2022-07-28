@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import br.edu.ifpb.dac.falacampus.model.entity.SystemRole;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
 
@@ -87,9 +88,7 @@ public class UserDto {
 		this.registration = registration;
 	}
 	
-	public Role getRole() {
-		return role;
-	}
+	
 
 	public void setRole(Role role) {
 		this.role = role;
@@ -111,4 +110,9 @@ public class UserDto {
 		this.departamentId = departamentId;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	
 }

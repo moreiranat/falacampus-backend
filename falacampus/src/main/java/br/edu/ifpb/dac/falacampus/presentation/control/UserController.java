@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
 import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
+
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.enums.Role;
@@ -38,8 +39,7 @@ public class UserController {
 	private UserConverterService userConverterService;
 	
 	@Autowired
-	private UserService userService;
-	
+	private UserService userCrudService;
 	@Autowired
 	private DepartamentService departamentService;
 	
@@ -61,7 +61,8 @@ public class UserController {
 			
 			User entity = userConverterService.dtoToUser(dto);
 			entity.setDepartament(departament);
-			entity = userService.save(entity);
+			entity = userCrudService.save(entity);
+					
 			dto = userConverterService.userToDTO(entity);
 			
 			return new ResponseEntity(dto, HttpStatus.CREATED);
@@ -87,7 +88,7 @@ public class UserController {
 			User entity = userConverterService.dtoToUser(dto);
 			entity.setDepartament(departament);
 			
-			entity = userService.update(entity);
+			entity = userCrudService.update(entity);
 			dto = userConverterService.userToDTO(entity);
 			
 			return ResponseEntity.ok(dto);
@@ -100,7 +101,8 @@ public class UserController {
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
-			userService.deleteById(id);
+			userCrudService.delete(id);
+			//.deleteById(id);
 			
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		} catch(Exception e) {
@@ -126,6 +128,7 @@ public class UserController {
 			filter.setEmail(email);
 			filter.setRegistration(registration);
 			filter.setRole(role);
+			//.setRole(role);
 			
 			Departament departament = departamentService.findById(departamentId);
 			
@@ -135,7 +138,8 @@ public class UserController {
 			
 			filter.setDepartament(departament);
 			
-			List<User> entities = userService.find(filter);
+			List<User> entities = (List<User>) userCrudService.find(filter);
+					//.find(filter);
 			List<UserDto> dtos = userConverterService.userToDTOList(entities);
 			
 			return ResponseEntity.ok(dtos);
@@ -149,13 +153,13 @@ public class UserController {
 	@GetMapping("/all")
 	public List<User> findAll() throws Exception {
 
-		List<User> result = userService.findAll();
+		List<User> result = (List<User>) userCrudService.findAll();
 
 		if (result.isEmpty()){
 			throw new Exception("List is empty!");
 
 		} else {
-			return userService.findAll();	
+			return (List<User>) userCrudService.findAll();	
 		}
 	}
 	
@@ -173,7 +177,7 @@ public class UserController {
 	@GetMapping("/{id}")
 	public User findById(@PathVariable("id") Long id) throws Exception {
 
-		User result = userService.findById(id);
+		User result = userCrudService.findById(id);
 
 		if (result == null){
 			throw new Exception("User not exist!");

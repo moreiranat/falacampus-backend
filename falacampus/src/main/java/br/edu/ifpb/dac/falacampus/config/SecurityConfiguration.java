@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,9 +34,11 @@ import br.edu.ifpb.dac.falacampus.business.service.SystemRoleService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
 
+@Configuration
 @EnableWebSecurity
+
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	private TokenService tokenService;
 	@Autowired
@@ -44,69 +47,67 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private PasswordEnconderService passwordEnconderService;
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+
 	@Override
 	@Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
-		return super.authenticationManager()
-;	}
-	
+		return super.authenticationManager();
+	}
+
 	@Bean
 	public TokenFilter jwtTokenFilter() {
 		return new TokenFilter(tokenService, userService);
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEnconderService);
+		//auth.inMemoryAuthentication().wit
 	}
-	
+
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		
+
 		List<String> all = Arrays.asList("*");
-		
+
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowedMethods(all);
 		corsConfiguration.setAllowedOriginPatterns(all);
 		corsConfiguration.setAllowedHeaders(all);
 		corsConfiguration.setAllowCredentials(true);
-		
+
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfiguration);
-		
+
 		CorsFilter corFilter = new CorsFilter(source);
-		
+
 		FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<CorsFilter>(corFilter);
 		filter.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		
+
 		return filter;
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-		.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-		.antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
-		.antMatchers(HttpMethod.POST, "/api/login").permitAll()
-		.antMatchers(HttpMethod.POST, "/api/isTokenValid").permitAll()
-		.antMatchers(HttpMethod.POST, "/api/user").permitAll()
-		.antMatchers(HttpMethod.DELETE, "/api/user").hasRole(SystemRoleService.AVAILABLE_ROLES.ADMIN.name())
-		.anyRequest().authenticated()
-		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-		
-		http.logout(logout ->
-						logout.clearAuthentication(true).invalidateHttpSession(true).logoutUrl("/api/logout").logoutSuccessHandler(new LogoutSuccessHandler() {
-							
-							@Override
-							public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-									throws IOException, ServletException {
-								// TODO Auto-generated method stub
-								
-							}
-						}) 
-			       );			
+
+		http.csrf().disable().authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll().antMatchers(HttpMethod.POST, "/api/login")
+				.permitAll().antMatchers(HttpMethod.POST, "/api/isTokenValid").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/user").permitAll().antMatchers(HttpMethod.DELETE, "/api/user")
+				.hasRole(SystemRoleService.AVAILABLE_ROLES.ADMIN.name()).anyRequest().authenticated().and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+		http.logout(logout -> logout.clearAuthentication(true).invalidateHttpSession(true).logoutUrl("/api/login")
+				.logoutSuccessHandler(new LogoutSuccessHandler() {
+
+					@Override
+					public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
+							Authentication authentication) throws IOException, ServletException {
+						// TODO Auto-generated method stub
+
+					}
+				}));
 	}
 
 }

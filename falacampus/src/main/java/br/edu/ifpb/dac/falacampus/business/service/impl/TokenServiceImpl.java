@@ -1,6 +1,7 @@
 package br.edu.ifpb.dac.falacampus.business.service.impl;
 
 import java.time.Instant;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +9,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 
@@ -16,7 +18,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.ExpiredJwtException;
-
+@Service
 public class TokenServiceImpl implements TokenService{
 	
 	public static final String CLAIM_USERID = "userid";

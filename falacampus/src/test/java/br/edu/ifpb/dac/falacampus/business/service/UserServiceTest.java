@@ -44,7 +44,7 @@ class UserServiceTest {
 	private static final Departament DEPARTAMENT = new Departament();
 
 	@InjectMocks
-	private UserService userService;
+	private UserService userCrudService;
 
 	@Mock
 	@Autowired
@@ -95,7 +95,7 @@ class UserServiceTest {
 		user.setPassword(PASSWORD);
 		user.setRegistration(REGISTRATION);
 		user.setRole(ROLE);
-		userService.save(user);
+		userCrudService.save(user);
 		verify(userRepository, times(0)).save(null);
 
 	}
@@ -107,7 +107,7 @@ class UserServiceTest {
 	@Test
 	public void testCamposObrigatorio() {
 		 user=new  User();
-		 userService.save(user);
+		userCrudService.save(user);
 	}
 
 	@Test
@@ -115,7 +115,7 @@ class UserServiceTest {
 		User user = new User();
 		user.setId(19L);
 		user.setName("paty");
-		userService.update(user); // service.update(user);
+		userCrudService.update(user); // service.update(user);
 		Mockito.verify(userRepository, Mockito.times(1)).save(user);
 	}
 
@@ -133,7 +133,7 @@ class UserServiceTest {
 	@Test
 	public void whenFindAll() {
 		when(userRepository.findAll()).thenReturn(List.of(user));
-		List<User>respose = userService.findAll();
+		List<User>respose = (List<User>) userCrudService.findAll();
 		assertNotNull(respose);
 		assertEquals(1, respose.size());
 		assertEquals(User.class, respose.get(0).getClass());
@@ -146,7 +146,7 @@ class UserServiceTest {
 	public void whenFindByIdUser() {
 		Mockito.when(userRepository.findById(Mockito.anyLong())).thenReturn(optionalUser);
 
-		User response = (User) userService.findById(ID);
+		User response = (User) userCrudService.findById(ID);
 		// .findById(ID);
 		assertNotNull(response);
 		assertEquals(User.class, response.getClass());
@@ -162,7 +162,7 @@ class UserServiceTest {
 	///test unitario
 	@Test
 	void deve_salvar_user_repositorio()throws Exception {
-		userService.save(user);
+		userCrudService.save(user);
 		verify(userRepository).save(user);
 		
 	}

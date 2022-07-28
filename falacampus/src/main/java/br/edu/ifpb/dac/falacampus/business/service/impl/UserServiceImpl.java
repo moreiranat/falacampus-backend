@@ -3,75 +3,114 @@ package br.edu.ifpb.dac.falacampus.business.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
+import br.edu.ifpb.dac.falacampus.business.service.PasswordEnconderService;
+import br.edu.ifpb.dac.falacampus.business.service.SystemRoleService;
+import br.edu.ifpb.dac.falacampus.business.service.UserService;
+import br.edu.ifpb.dac.falacampus.model.entity.SystemRole;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
-import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
+import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
 
-@Service
-public class UserServiceImpl implements UserConverterService {
-
+public class UserServiceImpl implements UserService {
 	@Autowired
-	private ModelMapper modelMapper;
-	
-	@Override
-	public List<UserDto> userToDTOList(List<User> entities) {
-		List<UserDto> dtos = new ArrayList<>();
-		
-		for (User dto : entities) {
-			UserDto entity = userToDTO(dto);
-			dtos.add(entity);
-		}
-		return dtos;
-	}
-	
-	@Override
-	public User dtoToUser(UserDto dto) {
-		
-		//User entity = modelMapper.map(dto, User.class);
-		User entity = new User();
-		
-		entity.setId(dto.getId());
-		entity.setName(dto.getName());
-		entity.setEmail(dto.getEmail());
-		entity.setRegistration(dto.getRegistration());
-		entity.setPassword(dto.getPassword());
-		entity.setRole(dto.getRole());
-		//entity.setDepartament(dto.getDepartamentId());
-		//entity.setDepartament(departamentService.findById(dto.getDepartamentId()));
-		
-		return entity;
-	}
+	private UserRepository userRepository;
+	@Autowired
+	private SystemRoleService roleService;
+	@Autowired
+	private PasswordEnconderService passwordEnconderService;
 
 	@Override
-	public UserDto userToDTO(User entity) {
-		
-		//UserDto dto = modelMapper.map(entity, UserDto.class);
-		
-		UserDto dto = new UserDto();
-		
-		dto.setId(entity.getId());
-		dto.setName(entity.getName());
-		dto.setEmail(entity.getEmail());
-		dto.setRegistration(entity.getRegistration());
-		dto.setRole(entity.getRole());
-		dto.setDepartamentId(entity.getDepartament().getId());
-		
-		return dto;
-	}
-
-	@Override
+	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = findByUserName(username);
+		if (user == null) {
+			throw new UsernameNotFoundException(String.format("Could not find any user", username));
+		}
+		return user;
+	}
+
+	@Override
+	public User save(User user) {
+		if (user.getId() != null) {
+			throw new IllegalStateException("User is already in the database");
+		}
+		passwordEnconderService.encryptPassword(user);
+		List<SystemRole> roles = new ArrayList<>();
+		roles.add(roleService.findDefault());
+	
+		user.setRole(roles);
+		return userRepository.save(user);
+
+	}
+
+	@Override
+	public User update(User user) {
+		if (user.getId() != null) {
+			throw new IllegalStateException("User is already in the database");
+		}
+		passwordEnconderService.encryptPassword(user);
+		List<SystemRole> roles = new ArrayList<>();
+		roles.add(roleService.findDefault());
+		user.setRole(roles);
+		return userRepository.save(user);
+	}
+
+	@Override
+	public void delete(Long id) {
+		User user = findById(id);
+
+		if (user == null) {
+			throw new IllegalStateException(String.format("Could not find a entity with id=%1", id));
+		}
+
+		userRepository.deleteById(id);
+	}
+
+	@Override
+	public User findById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 
+	@Override
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User findByUserName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public Iterable<User> find(User filter) {
+		Example example = Example.of(filter,
+				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
+
+		return userRepository.findAll(example);
+
+	}
+
+	@Override
+	public User findByRegistration(Long registration) {
+		return userRepository.findByRegistration(registration);
+	}
 
 }
