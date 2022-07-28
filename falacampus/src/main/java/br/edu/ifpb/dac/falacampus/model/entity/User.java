@@ -1,6 +1,5 @@
 package br.edu.ifpb.dac.falacampus.model.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,13 +9,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -29,6 +29,8 @@ import br.edu.ifpb.dac.falacampus.model.enums.Role;
 @Entity
 public class User implements UserDetails {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
@@ -67,6 +69,9 @@ public class User implements UserDetails {
 	@JoinColumn(name = "departament_id")
 	private Departament departament;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private List<SystemRole> roles = new ArrayList<>();
+	
 	public User() {
 		
 	}
@@ -80,65 +85,6 @@ public class User implements UserDetails {
 		this.role = role;
 		this.password = password;
 		this.departament = departament;
-	}
-	
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(departament, email, id, name, password, registration, role);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return Objects.equals(departament, other.departament) && Objects.equals(email, other.email)
-				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(password, other.password) && Objects.equals(registration, other.registration)
-				&& role == other.role;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority>  getAuthorities() {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
-	}
-	
-	
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
 	}
 	
 	public Long getId() {
@@ -177,8 +123,16 @@ public class User implements UserDetails {
 		return role;
 	}
 
-	public void setRole(List<SystemRole> role2) {
+	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	public List<SystemRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SystemRole> roles) {
+		this.roles = roles;
 	}
 
 	public String getPassword() {
@@ -197,13 +151,55 @@ public class User implements UserDetails {
 		this.departament = departament;
 	}
 
-	public void setRole(Role students) {
-		
-		
+	@Override
+	public int hashCode() {
+		return Objects.hash(departament, email, id, name, password, registration, role);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(departament, other.departament) && Objects.equals(email, other.email)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && Objects.equals(registration, other.registration)
+				&& role == other.role;
+	}
 
-
+	@Override
+	public Collection<? extends GrantedAuthority>  getAuthorities() {
+		//return new ArrayList<>();
+		return this.roles;
+	}
 	
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 	
 }

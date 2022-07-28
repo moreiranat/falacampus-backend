@@ -1,5 +1,7 @@
 package br.edu.ifpb.dac.falacampus.business.service;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ public interface UserService extends UserDetailsService {
 	public void delete(Long id);
 	public User findById(Long id);
 	public User findByRegistration(Long registration);
-	public User findByEmail(String email);
+	public Optional<User> findByEmail(String email);
 	public Iterable<User>findAll();
 	public Iterable<User>find(User filter);
 

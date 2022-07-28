@@ -93,11 +93,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		//Liberando acesso aos endpoints publicos
 		http.csrf().disable().authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll().antMatchers(HttpMethod.POST, "/api/login")
-				.permitAll().antMatchers(HttpMethod.POST, "/api/isTokenValid").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/user").permitAll().antMatchers(HttpMethod.DELETE, "/api/user")
-				.hasRole(SystemRoleService.AVAILABLE_ROLES.ADMIN.name()).anyRequest().authenticated().and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/login").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/isTokenValid").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/user").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/api/user")
+				.hasRole(SystemRoleService.AVAILABLE_ROLES.ADMIN.name())
+				.anyRequest().authenticated() //Essa configuração evita que uma URL que não foi configurada seja pública
+				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		http.logout(logout -> logout.clearAuthentication(true).invalidateHttpSession(true).logoutUrl("/api/login")

@@ -2,6 +2,7 @@ package br.edu.ifpb.dac.falacampus.business.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,9 @@ import br.edu.ifpb.dac.falacampus.model.entity.SystemRole;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
 
+//Classe service que executa a lógica de autenticação 
+//(contém a lógica para validar as credenciais de um usuário que está se autenticando)
+@Service
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
@@ -27,14 +31,13 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEnconderService passwordEnconderService;
 
-	//Trocar esse metodo por loadUserByName?? --> VER ISSO!
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = findByUserName(username);
+		Optional<User> user = userRepository.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(String.format("Could not find any user with username %s", username));
 		}
-		return user;
+		return user.get();
 	}
 	
 	@Override
@@ -46,7 +49,7 @@ public class UserServiceImpl implements UserService {
 		List<SystemRole> roles = new ArrayList<>();
 		roles.add(roleService.findDefault());
 	
-		user.setRole(roles);
+		user.setRoles(roles);
 		return userRepository.save(user);
 
 	}
@@ -59,7 +62,7 @@ public class UserServiceImpl implements UserService {
 		passwordEnconderService.encryptPassword(user);
 		List<SystemRole> roles = new ArrayList<>();
 		roles.add(roleService.findDefault());
-		user.setRole(roles);
+		user.setRoles(roles);
 		return userRepository.save(user);
 	}
 
@@ -83,7 +86,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByEmail(String email) {
+	public Optional<User> findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
 
