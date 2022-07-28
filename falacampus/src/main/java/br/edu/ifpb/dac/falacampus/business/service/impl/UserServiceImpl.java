@@ -27,16 +27,16 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEnconderService passwordEnconderService;
 
+	//Trocar esse metodo por loadUserByName?? --> VER ISSO!
 	@Override
-	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = findByUserName(username);
 		if (user == null) {
-			throw new UsernameNotFoundException(String.format("Could not find any user", username));
+			throw new UsernameNotFoundException(String.format("Could not find any user with username %s", username));
 		}
 		return user;
 	}
-
+	
 	@Override
 	public User save(User user) {
 		if (user.getId() != null) {
@@ -76,22 +76,30 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		if(id == null) {
+			throw new IllegalStateException("Id cannot be null");
+		}
+		return userRepository.findById(id).get();
 	}
-
-	
 
 	@Override
 	public User findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findByEmail(email);
 	}
 
 	@Override
+	public User findByName(String name) {
+		return userRepository.findByName(name);
+	}
+	
+	@Override
 	public User findByUserName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findByName(name);
+	}
+	
+	@Override
+	public User findByRegistration(Long registration) {
+		return userRepository.findByRegistration(registration);
 	}
 
 	@Override
@@ -106,11 +114,6 @@ public class UserServiceImpl implements UserService {
 
 		return userRepository.findAll(example);
 
-	}
-
-	@Override
-	public User findByRegistration(Long registration) {
-		return userRepository.findByRegistration(registration);
 	}
 
 }

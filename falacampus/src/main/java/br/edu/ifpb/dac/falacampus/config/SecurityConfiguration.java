@@ -59,10 +59,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return new TokenFilter(tokenService, userService);
 	}
 
+	//Configuracoes de Autenticacao (login, acesso)
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEnconderService);
-		//auth.inMemoryAuthentication().wit
+		auth.userDetailsService(userService).passwordEncoder(passwordEnconderService);
 	}
 
 	@Bean
@@ -87,9 +87,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return filter;
 	}
 
+	//Confuguracoes de Autorizacao (URL, quem pode acessar cada URL, perfil de acesso)
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
+		//Liberando acesso aos endpoints publicos
 		http.csrf().disable().authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll().antMatchers(HttpMethod.POST, "/api/login")
 				.permitAll().antMatchers(HttpMethod.POST, "/api/isTokenValid").permitAll()
@@ -102,9 +104,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutSuccessHandler(new LogoutSuccessHandler() {
 
 					@Override
-					public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-							Authentication authentication) throws IOException, ServletException {
-						// TODO Auto-generated method stub
+					public void onLogoutSuccess(HttpServletRequest request, 
+							HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
 					}
 				}));

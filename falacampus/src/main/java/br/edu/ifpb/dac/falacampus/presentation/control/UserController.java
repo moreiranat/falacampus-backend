@@ -39,7 +39,7 @@ public class UserController {
 	private UserConverterService userConverterService;
 	
 	@Autowired
-	private UserService userCrudService;
+	private UserService userService;
 	@Autowired
 	private DepartamentService departamentService;
 	
@@ -61,7 +61,7 @@ public class UserController {
 			
 			User entity = userConverterService.dtoToUser(dto);
 			entity.setDepartament(departament);
-			entity = userCrudService.save(entity);
+			entity = userService.save(entity);
 					
 			dto = userConverterService.userToDTO(entity);
 			
@@ -88,7 +88,7 @@ public class UserController {
 			User entity = userConverterService.dtoToUser(dto);
 			entity.setDepartament(departament);
 			
-			entity = userCrudService.update(entity);
+			entity = userService.update(entity);
 			dto = userConverterService.userToDTO(entity);
 			
 			return ResponseEntity.ok(dto);
@@ -101,7 +101,7 @@ public class UserController {
 	@DeleteMapping("{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
-			userCrudService.delete(id);
+			userService.delete(id);
 			//.deleteById(id);
 			
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -138,7 +138,7 @@ public class UserController {
 			
 			filter.setDepartament(departament);
 			
-			List<User> entities = (List<User>) userCrudService.find(filter);
+			List<User> entities = (List<User>) userService.find(filter);
 					//.find(filter);
 			List<UserDto> dtos = userConverterService.userToDTOList(entities);
 			
@@ -153,13 +153,13 @@ public class UserController {
 	@GetMapping("/all")
 	public List<User> findAll() throws Exception {
 
-		List<User> result = (List<User>) userCrudService.findAll();
+		List<User> result = (List<User>) userService.findAll();
 
 		if (result.isEmpty()){
 			throw new Exception("List is empty!");
 
 		} else {
-			return (List<User>) userCrudService.findAll();	
+			return (List<User>) userService.findAll();	
 		}
 	}
 	
@@ -177,7 +177,7 @@ public class UserController {
 	@GetMapping("/{id}")
 	public User findById(@PathVariable("id") Long id) throws Exception {
 
-		User result = userCrudService.findById(id);
+		User result = userService.findById(id);
 
 		if (result == null){
 			throw new Exception("User not exist!");

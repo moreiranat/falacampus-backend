@@ -14,6 +14,8 @@ import br.edu.ifpb.dac.falacampus.model.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	//@Query("SELECT e FROM user e WHERE e.name LIKE :name ORDER BY e.id")
     public List<User> findByName(@Param("name") String name, Pageable pageable);
- 
+    
+    public User findByName(String name);
 	public User findByRegistration(Long registration);
+	public User findByEmail(String email);
 }

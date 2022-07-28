@@ -32,7 +32,7 @@ public class ConverterService {
 		.getAsJsonArray()
 		.get(0).getAsJsonObject();
 		String name = results.get("nome").getAsString();
-		String username = results.get("matricula").getAsString();
+		String registration = results.get("matricula").getAsString();
 		User user = new User();
 		user.setName(name);
 		

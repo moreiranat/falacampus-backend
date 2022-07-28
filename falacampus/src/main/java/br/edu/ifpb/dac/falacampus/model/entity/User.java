@@ -29,8 +29,6 @@ import br.edu.ifpb.dac.falacampus.model.enums.Role;
 @Entity
 public class User implements UserDetails {
 	
-
-	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
