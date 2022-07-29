@@ -16,6 +16,7 @@ import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -34,8 +35,12 @@ import br.edu.ifpb.dac.falacampus.business.service.SystemRoleService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
 
+//@Configuration
+//@EnableWebSecurity
 @Configuration
 @EnableWebSecurity
+
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 

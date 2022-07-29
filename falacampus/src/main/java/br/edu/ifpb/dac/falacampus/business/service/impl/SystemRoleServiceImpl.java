@@ -9,6 +9,7 @@ import br.edu.ifpb.dac.falacampus.business.service.SystemRoleService;
 import br.edu.ifpb.dac.falacampus.model.entity.SystemRole;
 import br.edu.ifpb.dac.falacampus.model.repository.SystemRoleRepository;
 
+@Service
 public class SystemRoleServiceImpl implements SystemRoleService{
 	
 	@Autowired

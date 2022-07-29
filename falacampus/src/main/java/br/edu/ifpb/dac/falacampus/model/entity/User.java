@@ -69,7 +69,7 @@ public class User implements UserDetails {
 	@JoinColumn(name = "departament_id")
 	private Departament departament;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<SystemRole> roles = new ArrayList<>();
 	
 	public User() {

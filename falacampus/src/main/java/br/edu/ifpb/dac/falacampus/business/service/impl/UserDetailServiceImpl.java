@@ -13,13 +13,13 @@ import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
 //	private UserRepository userRepository;
 //	@Override
 //	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-////		Optional<User>user =userRepository.findByLogin(username);
-////		if(user.isEmpty()) {
-////			throw new UsernameNotFoundException("user" + username +"not user")
-////		}
-////		
-////		return new UserDetails();
-////	}
+//			Optional<User>user =userRepository.findByLogin(username);
+//			if(user.isEmpty()) {
+//				throw new UsernameNotFoundException("user" + username +"not user")
+//			}
+//			
+//			return new UserDetails();
+//		}
 //
 //}
 //}

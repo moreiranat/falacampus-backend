@@ -2,10 +2,13 @@ package br.edu.ifpb.dac.falacampus.business.service;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+@Service
+
 public interface SuapService {
 	public static final String OBTAIN_TOKEN_URL ="https://suap.ifpb.edu.br/api/jwt/obtain_token/";
 	public static final String EMPLOYEES_URL = "https://suap.ifpb.edu.br/api/recursos-humanos/servidores/v1/";
-	public static final String STUDENS_URL ="https://suap.ifpb.edu.br/api/ensino/alunos/v1/";
+	public static final String STUDENTS_URL ="https://suap.ifpb.edu.br/api/ensino/alunos/v1/";
 	
 	public static final String REGISTRATION_JSON_FIELD ="registration";
 	public static final String PASSWORD_JSON_FIELD = "password";

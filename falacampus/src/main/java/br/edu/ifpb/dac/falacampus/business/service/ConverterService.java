@@ -2,12 +2,16 @@ package br.edu.ifpb.dac.falacampus.business.service;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+
 import br.edu.ifpb.dac.falacampus.model.entity.User;
+@Service
 
 public class ConverterService {
 	

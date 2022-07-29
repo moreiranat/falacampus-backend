@@ -11,12 +11,13 @@ import java.net.http.HttpResponse;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.json.JsonMapper.Builder;
 
 import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.SuapService;
-
+@Service
 public class SuapServiceImpl implements SuapService {
 	private ConverterService converterService;
 
@@ -53,7 +54,7 @@ public class SuapServiceImpl implements SuapService {
 
 	@Override
 	public String findStudent(String token, Long registration) {
-		String url = String.format("%s?search=%s", STUDENS_URL,registration);
+		String url = String.format("%s?search=%s", STUDENTS_URL,registration);
 		return find(token, url);
 	}
 
