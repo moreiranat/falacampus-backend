@@ -44,7 +44,7 @@ public class SystemRoleServiceImpl implements SystemRoleService{
 	@Override
 	public SystemRole findDefault() {
 					
-		return findByName(AVAILABLE_ROLES.USER.name());
+		return findByName(AVAILABLE_ROLES.EMPLOYEES.name());
 	}
 	
 	

@@ -7,7 +7,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.SystemRole;
 
 public interface SystemRoleService {
 	
-	public enum AVAILABLE_ROLES { ADMIN, USER }
+	public enum AVAILABLE_ROLES { ADMIN,USER,EMPLOYEES,STUDENTS}
 	
 	public void createDefaultValues();
 	

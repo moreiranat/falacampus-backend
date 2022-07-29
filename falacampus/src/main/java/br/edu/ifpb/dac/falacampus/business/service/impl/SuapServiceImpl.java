@@ -17,12 +17,16 @@ import com.fasterxml.jackson.databind.json.JsonMapper.Builder;
 
 import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.SuapService;
+
 @Service
 public class SuapServiceImpl implements SuapService {
+	@Autowired
 	private ConverterService converterService;
 
-	public String login(Long registration, String password) {
-		Map body = Map.of(REGISTRATION_JSON_FIELD, registration, PASSWORD_JSON_FIELD, password);
+	@Override
+
+	public String login(String username, String password) {
+		Map body = Map.of(USERNAME_JSON_FIELD, username, PASSWORD_JSON_FIELD, password);
 		String json = converterService.mapToJson(body);
 		// mapTOJson(body);
 		try {
@@ -41,8 +45,8 @@ public class SuapServiceImpl implements SuapService {
 	}
 
 	@Override
-	public String findEmployee(String token, Long registration) {
-		String url = String.format("%s?search=%s", EMPLOYEES_URL, registration);
+	public String findEmployee(String token, String username) {
+		String url = String.format("%s?search=%s", EMPLOYEES_URL, username);
 		return find(token, url);
 	}
 
@@ -53,8 +57,8 @@ public class SuapServiceImpl implements SuapService {
 	}
 
 	@Override
-	public String findStudent(String token, Long registration) {
-		String url = String.format("%s?search=%s", STUDENTS_URL,registration);
+	public String findStudent(String token, String username) {
+		String url = String.format("%s?search=%s", STUDENTS_URL, username);
 		return find(token, url);
 	}
 
@@ -64,10 +68,10 @@ public class SuapServiceImpl implements SuapService {
 		return null;
 	}
 
-	public String findUser(String token, Long registration) {
-		String result = findEmployee(token, registration);
+	public String findUser(String token, String username) {
+		String result = findEmployee(token, username);
 		if (result == null) {
-			result = findStudent(token, registration);
+			result = findStudent(token, username);
 		}
 		return result;
 	}
@@ -91,12 +95,12 @@ public class SuapServiceImpl implements SuapService {
 		}
 		HttpRequest request = ((java.net.http.HttpRequest.Builder) builder).POST(BodyPublishers.ofString(body)).build();
 		return request;
-		
+
 	}
 
 	private String sendRequest(HttpRequest httpRequest) throws IOException, InterruptedException {
 		HttpClient httpClient = HttpClient.newHttpClient();
-		String response="";
+		String response = "";
 		try {
 			response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()).body();
 
@@ -135,12 +139,16 @@ public class SuapServiceImpl implements SuapService {
 		return null;
 	}
 
-	@Override
-	public String findUser(String suapToken, String password) {
-	
-		return null;
-	}
+//	@Override
+//	public String login(String username, String password) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-
+//	@Override
+//	public String findUser(String suapToken, String password) {
+//	
+//		return null;
+//	}
 
 }

@@ -35,9 +35,9 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 	private String suapToken;
 	
 	
-	public String login(Long registration, String password) {
+	public String login(String username, String password) {
 		
-		return suapLogin(registration, password);
+		return suapLogin(username, password);
 		
 //		switch (logintype) {
 //		case "suap": 
@@ -58,18 +58,18 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 //		return tokenService.generate(user);
 //	}
 	
-	private String suapLogin(Long registration, String password) {
-		String jsonToken = suapService.login(registration, password);
+	private String suapLogin(String username, String password) {
+		String jsonToken = suapService.login(username, password);
 		this.suapToken = converterService.jsonToToken(jsonToken);
 		
 		if(this.suapToken == null) {
 			throw new IllegalArgumentException("Incorrect E-mail or Password");
 		}
 		
-		User user = userService.findByRegistration(registration);
+		User user = userService.findByUserName(username);
 		
 		if(user == null) {
-			String json = suapService.findUser(suapToken, registration);
+			String json = suapService.findUser(suapToken, username);
 			user = converterService.jsonToUser(json);
 			
 			user = userService.save(user);
@@ -82,6 +82,12 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 	public User getLoggedUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return (User) authentication.getPrincipal();
+	}
+
+	@Override
+	public String login(Long registration, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -103,7 +103,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, "/api/isTokenValid").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/user").permitAll()
 				.antMatchers(HttpMethod.DELETE, "/api/user")
-				.hasRole(SystemRoleService.AVAILABLE_ROLES.ADMIN.name())
+				.hasRole(SystemRoleService.AVAILABLE_ROLES.EMPLOYEES.name())
 				.anyRequest().authenticated() //Essa configuração evita que uma URL que não foi configurada seja pública
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

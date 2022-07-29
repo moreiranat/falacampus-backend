@@ -8,6 +8,15 @@ import br.edu.ifpb.dac.falacampus.model.entity.Login;
 public class LoginDto {
 
 	private Long registration;
+	private String username;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	private String password;
 
