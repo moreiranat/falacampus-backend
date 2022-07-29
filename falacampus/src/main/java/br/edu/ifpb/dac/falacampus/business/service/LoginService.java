@@ -7,6 +7,8 @@ import br.edu.ifpb.dac.falacampus.model.entity.User;
 
 public interface LoginService {
 
-	User login(String username, String password);
+	//User login(String username, String password);
+
+	User suapLogin(String username, String password) throws NumberFormatException, Exception;
 
 }

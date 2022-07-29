@@ -71,7 +71,8 @@ public class User implements UserDetails {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<SystemRole> roles = new ArrayList<>();
-	
+	@Column(name = "USER_TOKEN", nullable = true)
+	private String token;
 	public User() {
 		
 	}
@@ -119,7 +120,15 @@ public class User implements UserDetails {
 	public void setRegistration(Long registration) {
 		this.registration = registration;
 	}
+	
+	
+	public String getToken() {
+		return token;
+	}
 
+	public void setToken(String token) {
+		this.token = token;
+	}
 //	public Role getRole() {
 //		return role;
 //	}
@@ -205,6 +214,11 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public User get() {
+		
+		return null;
 	}
 	
 

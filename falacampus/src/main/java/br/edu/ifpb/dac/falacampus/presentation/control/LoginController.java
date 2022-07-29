@@ -33,7 +33,7 @@ public class LoginController {
 	public ResponseEntity login(@RequestBody LoginDto dto) {
 		
 		try {
-			User  entity = loginService.login(dto.getUsername(),dto.getPassword());
+			User  entity = loginService.suapLogin(dto.getUsername(),dto.getPassword());
 			UserDto userDTO = userConverterService.userToDTO(entity);
 			return new ResponseEntity(userDTO,HttpStatus.OK);
 		} catch (Exception e) {
