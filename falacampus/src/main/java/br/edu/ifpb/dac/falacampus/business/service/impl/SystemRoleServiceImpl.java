@@ -3,6 +3,7 @@ package br.edu.ifpb.dac.falacampus.business.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.falacampus.business.service.SystemRoleService;
@@ -12,10 +13,11 @@ import br.edu.ifpb.dac.falacampus.model.repository.SystemRoleRepository;
 @Service
 public class SystemRoleServiceImpl implements SystemRoleService{
 	
-	@Autowired
+	@Autowired(required = true)
 	private SystemRoleRepository systemRoleRepository;
 
 	@Override
+	
 	public void createDefaultValues() {
 		for (AVAILABLE_ROLES availableRole : AVAILABLE_ROLES.values()) {
 			SystemRole role = findByName(availableRole.name());

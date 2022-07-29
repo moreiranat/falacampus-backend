@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.ifpb.dac.falacampus.exceptions.UserIdException;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
-import br.edu.ifpb.dac.falacampus.model.enums.Role;
+
 import br.edu.ifpb.dac.falacampus.model.repository.UserRepository;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
@@ -38,7 +38,7 @@ class UserServiceTest {
 	private static final String NAME = "patrícia";
 	private static final String EMAIL = "@patricia";
 	private static final Long REGISTRATION = 223L;
-	private static final Role ROLE = Role.STUDENTS;
+	//private static final Role ROLE = Role.STUDENTS;
 	private static final String PASSWORD = "111";
 
 	private static final Departament DEPARTAMENT = new Departament();
@@ -79,11 +79,11 @@ class UserServiceTest {
 
 	private void startComment() {
 
-		user = new User(ID, NAME, EMAIL, REGISTRATION, ROLE, PASSWORD, DEPARTAMENT);
+		user = new User(ID, NAME, EMAIL, REGISTRATION, PASSWORD, DEPARTAMENT);
 
 		userDto = new UserDto();
 
-		optionalUser = Optional.of(new User(ID, NAME, EMAIL, REGISTRATION, ROLE, PASSWORD, DEPARTAMENT));
+		optionalUser = Optional.of(new User(ID, NAME, EMAIL, REGISTRATION, PASSWORD, DEPARTAMENT));
 	}
 
 	@Test
@@ -94,7 +94,7 @@ class UserServiceTest {
 		user.setEmail(EMAIL);
 		user.setPassword(PASSWORD);
 		user.setRegistration(REGISTRATION);
-		user.setRole(ROLE);
+		
 		userCrudService.save(user);
 		verify(userRepository, times(0)).save(null);
 
@@ -121,7 +121,7 @@ class UserServiceTest {
 
 	@Test
 	public void checkUserServicedReturnNull() {
-		user = new User(ID, NAME, EMAIL, REGISTRATION, ROLE, PASSWORD, DEPARTAMENT);
+		user = new User(ID, NAME, EMAIL, REGISTRATION,  PASSWORD, DEPARTAMENT);
 		userRepository.save(user);
 		Integer countUser = userRepository.findAll().size();
 		// assertEquals(1,countUser);
@@ -153,7 +153,7 @@ class UserServiceTest {
 		assertEquals(ID, (response).getId());
 		assertEquals(EMAIL, (response).getEmail());
 		assertEquals(NAME, response.getName());
-		assertEquals(ROLE, (response).getRole());
+		//assertEquals(ROLE, (response).getRole());
 		assertEquals(PASSWORD, response.getPassword());
 		assertEquals(REGISTRATION, (response).getRegistration());
 		assertEquals(DEPARTAMENT, (response).getDepartament());

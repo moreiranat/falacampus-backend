@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
-import br.edu.ifpb.dac.falacampus.model.enums.Role;
+
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 class UserConverterServiceImplTest {
@@ -45,7 +45,7 @@ class UserConverterServiceImplTest {
 		user.setName("Maria");
 		user.setEmail("maria@email.com");
 		user.setRegistration(1234L);
-		user.setRole(Role.STUDENTS);
+	
 		user.setPassword("1234");
 		user.setDepartament(dep);
 
@@ -54,7 +54,7 @@ class UserConverterServiceImplTest {
 		dto.setName("Maria");
 		dto.setEmail("maria@email.com");
 		dto.setRegistration(1234L);
-		dto.setRole(Role.STUDENTS);
+		//dto.setRole(Role.STUDENTS);
 		dto.setPassword("1234");
 		dto.setDepartamentId(dep.getId());
 
@@ -96,8 +96,8 @@ class UserConverterServiceImplTest {
 		assertAll("userToDto", () -> assertEquals(userDto.getId(), user.getId()),
 				() -> assertEquals(userDto.getName(), user.getName()),
 				() -> assertEquals(userDto.getEmail(), user.getEmail()),
-				() -> assertEquals(userDto.getRegistration(), user.getRegistration()),
-				() -> assertEquals(userDto.getRole(), user.getRole()));
+				() -> assertEquals(userDto.getRegistration(), user.getRegistration()));
+				//() -> assertEquals(userDto.getRole(), user.getRole()));
 				
 	}
 
@@ -107,8 +107,8 @@ class UserConverterServiceImplTest {
 
 		assertAll("dtoToUser", () -> assertEquals(user.getId(), dto.getId()),
 				() -> assertEquals(user.getName(), dto.getName()), () -> assertEquals(user.getEmail(), dto.getEmail()),
-				() -> assertEquals(user.getRegistration(), dto.getRegistration()),
-				() -> assertEquals(user.getRole(), dto.getRole()));
+				() -> assertEquals(user.getRegistration(), dto.getRegistration()));
+				//() -> assertEquals(user.getRole(), dto.getRole()));
 
 	}
 

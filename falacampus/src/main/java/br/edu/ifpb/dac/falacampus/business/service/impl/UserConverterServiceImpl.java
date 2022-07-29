@@ -42,7 +42,7 @@ public class UserConverterServiceImpl implements UserConverterService {
 		entity.setEmail(dto.getEmail());
 		entity.setRegistration(dto.getRegistration());
 		entity.setPassword(dto.getPassword());
-		entity.setRole(dto.getRole());
+		//entity.setRole(dto.getRole());
 	
 		//entity.setDepartament(dto.getDepartamentId());
 		//entity.setDepartament(departamentService.findById(dto.getDepartamentId()));
@@ -61,7 +61,7 @@ public class UserConverterServiceImpl implements UserConverterService {
 		dto.setName(entity.getName());
 		dto.setEmail(entity.getEmail());
 		dto.setRegistration(entity.getRegistration());
-		dto.setRole(entity.getRole());
+		//dto.setRole(entity.getRole());
 		dto.setDepartamentId(entity.getDepartament().getId());
 		
 		return dto;

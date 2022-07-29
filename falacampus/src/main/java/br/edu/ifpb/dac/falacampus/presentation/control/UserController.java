@@ -28,7 +28,7 @@ import br.edu.ifpb.dac.falacampus.business.service.UserService;
 
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
-import br.edu.ifpb.dac.falacampus.model.enums.Role;
+
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @RestController
@@ -117,7 +117,7 @@ public class UserController {
 				@RequestParam(value = "name", required = false) String name,
 				@RequestParam(value = "email", required = false) String email,
 				@RequestParam(value = "registration", required = false) Long registration,
-				@RequestParam(value = "role", required = false) Role role,
+				//@RequestParam(value = "role", required = false) Role role,
 				@RequestParam(value = "departamentId", required = false) Long departamentId) {
 		
 		try {
@@ -127,7 +127,7 @@ public class UserController {
 			filter.setName(name);
 			filter.setEmail(email);
 			filter.setRegistration(registration);
-			filter.setRole(role);
+			//filter.setRole(role);
 			//.setRole(role);
 			
 			Departament departament = departamentService.findById(departamentId);

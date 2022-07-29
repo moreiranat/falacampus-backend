@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.ifpb.dac.falacampus.business.service.DepartamentConverterService;
 import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
-import br.edu.ifpb.dac.falacampus.model.enums.Role;
+
 import br.edu.ifpb.dac.falacampus.presentation.dto.DepartamentDto;
 
 class DepartamentConverterServiceImplTest {

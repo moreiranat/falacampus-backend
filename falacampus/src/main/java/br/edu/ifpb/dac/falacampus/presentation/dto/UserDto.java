@@ -1,5 +1,6 @@
 package br.edu.ifpb.dac.falacampus.presentation.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,6 @@ import javax.validation.constraints.Size;
 
 import br.edu.ifpb.dac.falacampus.model.entity.SystemRole;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
-import br.edu.ifpb.dac.falacampus.model.enums.Role;
 
 public class UserDto {
 	
@@ -28,15 +28,17 @@ public class UserDto {
 	@NotNull
 	private Long registration;
 	
-	@NotNull
-	private Role role = Role.STUDENTS;
-	
+//	@NotNull
+//	private Role role = Role.STUDENTS;
+//	
 	@NotBlank
 	@Size(min=8, max=30)
 	private String password;
 	
 	@NotNull
 	private Long departamentId;
+	private List<SystemRole> roles = new ArrayList<>();
+	
 	
 	public UserDto() {
 		
@@ -47,7 +49,7 @@ public class UserDto {
 		this.name = user.getName();
 		this.email = user.getEmail();
 		this.registration = user.getRegistration();
-		this.role = user.getRole();
+		//this.role = user.getRole();
 		this.password = user.getPassword();
 		this.departamentId = user.getDepartament().getId();
 	}
@@ -90,10 +92,18 @@ public class UserDto {
 	
 	
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 	
+	public List<SystemRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SystemRole> roles) {
+		this.roles = roles;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -110,9 +120,9 @@ public class UserDto {
 		this.departamentId = departamentId;
 	}
 
-	public Role getRole() {
-		return role;
-	}
+	/*
+	 * public Role getRole() { return role; }
+	 */
 
 	
 }

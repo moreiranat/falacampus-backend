@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.edu.ifpb.dac.falacampus.model.enums.Role;
+
 
 @Entity
 public class User implements UserDetails {
@@ -52,11 +52,11 @@ public class User implements UserDetails {
 	//@NotBlank
 	@Column(name = "user_registration")
 	private Long registration;
-	
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "user_role")
-	private Role role = Role.STUDENTS;
+//	
+//	@NotNull
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "user_role")
+//	private Role role = Role.STUDENTS;
 	
 	//@NotNull
 	@NotBlank
@@ -76,16 +76,17 @@ public class User implements UserDetails {
 		
 	}
 	
-	public User(Long id, String name, String email, Long registration, Role role, String password,
+	public User(Long id, String name, String email, Long registration,  String password,
 			Departament departament) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.registration = registration;
-		this.role = role;
+	
 		this.password = password;
 		this.departament = departament;
 	}
+	
 	
 	public Long getId() {
 		return id;
@@ -119,13 +120,13 @@ public class User implements UserDetails {
 		this.registration = registration;
 	}
 
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
+//	public Role getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 	
 	public List<SystemRole> getRoles() {
 		return roles;
@@ -151,9 +152,13 @@ public class User implements UserDetails {
 		this.departament = departament;
 	}
 
+
+
+	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(departament, email, id, name, password, registration, role);
+		return Objects.hash(departament, email, id, name, password, registration, roles);
 	}
 
 	@Override
@@ -168,7 +173,7 @@ public class User implements UserDetails {
 		return Objects.equals(departament, other.departament) && Objects.equals(email, other.email)
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password) && Objects.equals(registration, other.registration)
-				&& role == other.role;
+				&& Objects.equals(roles, other.roles);
 	}
 
 	@Override
@@ -202,4 +207,5 @@ public class User implements UserDetails {
 		return true;
 	}
 	
+
 }

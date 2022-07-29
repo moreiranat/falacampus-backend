@@ -15,6 +15,7 @@ import br.edu.ifpb.dac.falacampus.model.entity.User;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION)
+
 public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private UserService userService;
