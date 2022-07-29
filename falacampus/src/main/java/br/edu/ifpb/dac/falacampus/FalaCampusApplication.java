@@ -13,7 +13,7 @@ import br.edu.ifpb.dac.falacampus.business.service.SystemRoleService;
 
 @SpringBootApplication
 @EnableWebMvc
-@EnableJpaRepositories(basePackages = {"br.edu.ifpb.dac.ssp.repository"})
+@EnableJpaRepositories(basePackages = {"br.edu.ifpb.dac.falacampus.model.repository"})
 public class FalaCampusApplication implements WebMvcConfigurer, CommandLineRunner {
 	@Autowired
 	private SystemRoleService systemRoleService;
