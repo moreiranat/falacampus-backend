@@ -29,8 +29,8 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	@Value("${app.logintype}")
-	private String logintype;
+//	@Value("${app.logintype}")
+//	private String logintype;
 	
 	private String suapToken;
 	
@@ -84,10 +84,4 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 		return (User) authentication.getPrincipal();
 	}
 
-	@Override
-	public String login(Long registration, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

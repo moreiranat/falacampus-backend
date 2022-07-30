@@ -18,11 +18,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.ExpiredJwtException;
+
 @Service
 public class TokenServiceImpl implements TokenService{
 	
 	public static final String CLAIM_USERID = "userid";
-	public static final String CLAIM_REGISTRATION = "registration";
+	public static final String CLAIM_USERNAME = "username";
 	public static final String CLAIM_EXPIRATION = "expirationTime";
 	
 	@Value("${jwt.expiration}")
@@ -47,7 +48,7 @@ public class TokenServiceImpl implements TokenService{
 				.setExpiration(expirationDate)
 				.setSubject(user.getId().toString())
 				.claim(CLAIM_USERID, user.getId())
-				.claim(CLAIM_REGISTRATION, user.getRegistration())
+				.claim(CLAIM_USERNAME, user.getUsername())
 				.claim(CLAIM_EXPIRATION, tokenExpiration)
 				.signWith(SignatureAlgorithm.HS512, secret)
 				.compact();
@@ -85,7 +86,7 @@ public class TokenServiceImpl implements TokenService{
 	public String getUsername(String token) {
 		Claims claims = getClaims(token);
 		
-		return (String) claims.get(CLAIM_REGISTRATION);
+		return (String) claims.get(CLAIM_USERNAME);
 	}
 
 	@Override
@@ -104,7 +105,5 @@ public class TokenServiceImpl implements TokenService{
 		}
 		return authorization.split(" ")[1];
 	}
-
-
 
 }

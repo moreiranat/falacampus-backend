@@ -7,8 +7,6 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +21,6 @@ import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-
 
 @Entity
 public class User implements UserDetails {
@@ -121,7 +117,6 @@ public class User implements UserDetails {
 		this.registration = registration;
 	}
 	
-	
 	public String getToken() {
 		return token;
 	}
@@ -129,13 +124,6 @@ public class User implements UserDetails {
 	public void setToken(String token) {
 		this.token = token;
 	}
-//	public Role getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
 	
 	public List<SystemRole> getRoles() {
 		return roles;
@@ -160,10 +148,6 @@ public class User implements UserDetails {
 	public void setDepartament(Departament departament) {
 		this.departament = departament;
 	}
-
-
-
-	
 
 	@Override
 	public int hashCode() {

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<User> user = userRepository.findByEmail(username);
+		User user = userRepository.findByRegistration(Long.parseLong(username)).get();
 		if (user == null) {
 			throw new UsernameNotFoundException(String.format("Could not find any user with username %s", username));
 		}
@@ -45,11 +44,12 @@ public class UserServiceImpl implements UserService {
 		if (user.getId() != null) {
 			throw new IllegalStateException("User is already in the database");
 		}
+		
 		passwordEnconderService.encryptPassword(user);
 		List<SystemRole> roles = new ArrayList<>();
 		roles.add(roleService.findDefault());
-	
 		user.setRoles(roles);
+		
 		return userRepository.save(user);
 
 	}
@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
 		if (user.getId() != null) {
 			throw new IllegalStateException("User is already in the database");
 		}
+		
 		passwordEnconderService.encryptPassword(user);
 		List<SystemRole> roles = new ArrayList<>();
 		roles.add(roleService.findDefault());
@@ -96,8 +97,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User findByUserName(String name) {
-		return userRepository.findByName(name);
+	public User findByUserName(String username) {
+		return userRepository.findByName(username);
 	}
 	
 	@Override

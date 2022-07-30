@@ -20,7 +20,7 @@ public interface UserService extends UserDetailsService {
 	public Iterable<User>find(User filter);
 
 	public User findByName(String name);
-	public User findByUserName(String name);
+	public User findByUserName(String username);
 	public User findByToken(String token);
 	
 }

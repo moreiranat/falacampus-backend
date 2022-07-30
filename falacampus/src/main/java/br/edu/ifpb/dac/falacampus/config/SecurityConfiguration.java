@@ -35,13 +35,9 @@ import br.edu.ifpb.dac.falacampus.business.service.SystemRoleService;
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
 
-//@Configuration
-//@EnableWebSecurity
 @Configuration
 @EnableWebSecurity
-
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -50,8 +46,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private UserService userService;
 	@Autowired
 	private PasswordEnconderService passwordEnconderService;
-	@Autowired
-	private UserDetailsService userDetailsService;
 
 	@Override
 	@Bean
@@ -103,7 +97,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, "/api/isTokenValid").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/user").permitAll()
 				.antMatchers(HttpMethod.DELETE, "/api/user")
-				.hasRole(SystemRoleService.AVAILABLE_ROLES.EMPLOYEES.name())
+				.hasRole(SystemRoleService.AVAILABLE_ROLES.ADMIN.name())
 				.anyRequest().authenticated() //Essa configuração evita que uma URL que não foi configurada seja pública
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -111,7 +105,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.logout(logout -> 
 			logout
 			.clearAuthentication(true)
-			.invalidateHttpSession(true).logoutUrl("/api/login")
+			.invalidateHttpSession(true)
+			.logoutUrl("/api/login")
 			.logoutSuccessHandler(new LogoutSuccessHandler() {
 
 					@Override
@@ -122,7 +117,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					
 				})
 			);
-		
 			
 	}
 

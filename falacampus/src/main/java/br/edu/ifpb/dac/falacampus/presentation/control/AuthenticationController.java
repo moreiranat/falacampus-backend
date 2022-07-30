@@ -35,8 +35,10 @@ public class AuthenticationController {
 	@PostMapping("/login")
 	public ResponseEntity login(@RequestBody LoginDto dto) { 
 		try {
-			String token = authenticationService.login(dto.getRegistration(), dto.getPassword()); 
+			String token = authenticationService.login(dto.getUsername(), dto.getPassword()); 
 			User entity = userService.findByRegistration(dto.getRegistration());
+			
+//			User entity = userService.findByUserName(dto.getUsername());
 					
 			UserDto userDto = userConverterService.userToDTO(entity); 
 			
