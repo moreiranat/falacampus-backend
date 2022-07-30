@@ -18,7 +18,7 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.LoginDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @RestController
-@RequestMapping("/api/login")
+@RequestMapping("/api")
 @Scope(value = WebApplicationContext.SCOPE_SESSION)
 
 public class LoginController {

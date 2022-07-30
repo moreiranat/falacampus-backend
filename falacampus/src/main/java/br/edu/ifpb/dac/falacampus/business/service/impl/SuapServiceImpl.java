@@ -99,7 +99,7 @@ public class SuapServiceImpl implements SuapService {
 
 	private String sendRequest(HttpRequest httpRequest) throws IOException, InterruptedException {
 		HttpClient httpClient = HttpClient.newHttpClient();
-		String response = "";
+		String response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString()).body();
 		try {
 			response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()).body();
 

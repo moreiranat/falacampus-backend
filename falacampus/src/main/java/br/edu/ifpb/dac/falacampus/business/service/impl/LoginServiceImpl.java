@@ -30,6 +30,7 @@ public class LoginServiceImpl implements LoginService {
 	private ConverterService converterService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
 	@Value("${app.logintype}")
 	private String logintype;
 	private String suapToken;
@@ -51,7 +52,7 @@ public class LoginServiceImpl implements LoginService {
 			if(this.suapToken == null) {
 				throw new IllegalArgumentException("User or passowd invalido");
 			}
-			User user = new User();
+			User user = userService.findByUserName(username);
 			try {
 				user= userService.findByRegistration(Long.parseLong(username)).get();
 				
