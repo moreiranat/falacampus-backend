@@ -21,5 +21,6 @@ public interface UserService extends UserDetailsService {
 
 	public User findByName(String name);
 	public User findByUserName(String name);
+	public User findByToken(String token);
 	
 }

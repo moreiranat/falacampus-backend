@@ -13,7 +13,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.json.JsonMapper.Builder;
+import java.net.http.HttpRequest.Builder;
 
 import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.SuapService;
@@ -70,7 +70,7 @@ public class SuapServiceImpl implements SuapService {
 
 	public String findUser(String token, String username) {
 		String result = findEmployee(token, username);
-		if (result == null) {
+		if(result.contains("\"count\":0")) {
 			result = findStudent(token, username);
 		}
 		return result;
@@ -78,24 +78,23 @@ public class SuapServiceImpl implements SuapService {
 
 	private HttpRequest generatePostUrl(String url, Map<String, String> headers, String body)
 			throws URISyntaxException {
-		// Builder builder = (Builder) HttpRequest.newBuilder().uri(new URI(url));
-
-		java.net.http.HttpRequest.Builder builder = HttpRequest.newBuilder().uri(new URI(body));
+		Builder builder = HttpRequest.newBuilder().uri(new URI(url));
 
 		if (DEFAULT_HEADERS != null) {
 			for (Map.Entry<String, String> header : DEFAULT_HEADERS.entrySet()) {
-				((java.net.http.HttpRequest.Builder) builder).setHeader(header.getKey(), header.getValue());
+				builder.setHeader(header.getKey(), header.getValue());
 			}
 		}
+
 		if (headers != null) {
 			for (Map.Entry<String, String> header : headers.entrySet()) {
-				((java.net.http.HttpRequest.Builder) builder).setHeader(header.getKey(), header.getValue());
+				builder.setHeader(header.getKey(), header.getValue());
 			}
-
 		}
-		HttpRequest request = ((java.net.http.HttpRequest.Builder) builder).POST(BodyPublishers.ofString(body)).build();
-		return request;
 
+		HttpRequest request = builder.POST(BodyPublishers.ofString(body)).build();
+
+		return request;
 	}
 
 	private String sendRequest(HttpRequest httpRequest) throws IOException, InterruptedException {
@@ -112,14 +111,18 @@ public class SuapServiceImpl implements SuapService {
 	}
 
 	private HttpRequest generateGetUrl(String url, Map<String, String> headers) throws URISyntaxException {
-		Builder builder = (Builder) HttpRequest.newBuilder().uri(new URI(url));
+		Builder builder = HttpRequest.newBuilder().uri(new URI(url));
+
 		for (Map.Entry<String, String> header : DEFAULT_HEADERS.entrySet()) {
-			((java.net.http.HttpRequest.Builder) builder).setHeader(header.getKey(), header.getValue());
+			builder.setHeader(header.getKey(), header.getValue());
 		}
+
 		for (Map.Entry<String, String> header : headers.entrySet()) {
-			((java.net.http.HttpRequest.Builder) builder).setHeader(header.getKey(), header.getValue());
+			builder.setHeader(header.getKey(), header.getValue());
 		}
-		HttpRequest request = ((java.net.http.HttpRequest.Builder) builder).GET().build();
+
+		HttpRequest request = builder.GET().build();
+
 		return request;
 	}
 
@@ -137,6 +140,30 @@ public class SuapServiceImpl implements SuapService {
 			e3.printStackTrace();
 		}
 		return null;
+	}
+	
+	public boolean isValidToken(String token) {
+		Map body = Map.of(TOKEN_JSON_FIELD, token);
+
+		String json = converterService.mapToJson(body);
+
+		try {
+			HttpRequest url = generatePostUrl(VERIFY_TOKEN_URL, null, json);
+			String result = sendRequest(url);
+			
+			if(result.equals(token)) {
+				return true;
+			}
+
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		} catch (InterruptedException e3) {
+			e3.printStackTrace();
+		}
+
+		return false;
 	}
 
 //	@Override

@@ -108,15 +108,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
-		http.logout(logout -> logout.clearAuthentication(true).invalidateHttpSession(true).logoutUrl("/api/login")
-				.logoutSuccessHandler(new LogoutSuccessHandler() {
+		http.logout(logout -> 
+			logout
+			.clearAuthentication(true)
+			.invalidateHttpSession(true).logoutUrl("/api/login")
+			.logoutSuccessHandler(new LogoutSuccessHandler() {
 
 					@Override
 					public void onLogoutSuccess(HttpServletRequest request, 
 							HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
 					}
-				}));
+					
+				})
+			);
+		
+			
 	}
 
 }

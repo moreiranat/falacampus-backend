@@ -40,7 +40,7 @@ public class ConverterService {
 		User user = new User();
 		user.setName(name);
 		
-		//user.setUserName(username);
+		
 		
 		return user;
 	}

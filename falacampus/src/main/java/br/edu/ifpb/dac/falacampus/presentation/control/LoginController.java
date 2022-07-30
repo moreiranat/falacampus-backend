@@ -18,7 +18,7 @@ import br.edu.ifpb.dac.falacampus.presentation.dto.LoginDto;
 import br.edu.ifpb.dac.falacampus.presentation.dto.UserDto;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/login")
 @Scope(value = WebApplicationContext.SCOPE_SESSION)
 
 public class LoginController {
@@ -28,19 +28,18 @@ public class LoginController {
 	private UserConverterService userConverterService;
 	@Autowired
 	private ConverterService converterService;
+
 	@PostMapping("/login")
-	
 	public ResponseEntity login(@RequestBody LoginDto dto) {
-		
+
 		try {
-			User  entity = loginService.suapLogin(dto.getUsername(),dto.getPassword());
+			User entity = loginService.suapLogin(dto.getUsername(), dto.getPassword());
 			UserDto userDTO = userConverterService.userToDTO(entity);
-			return new ResponseEntity(userDTO,HttpStatus.OK);
+			return new ResponseEntity(userDTO, HttpStatus.OK);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
-			
+
 		}
-		
-		
+
 	}
 }

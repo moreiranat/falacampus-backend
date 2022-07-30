@@ -14,16 +14,17 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
+import br.edu.ifpb.dac.falacampus.model.entity.User;
 
 public class TokenFilter extends OncePerRequestFilter {
 	private TokenService tokenService;
-	private UserService userCrudService;
+	private UserService userService;
 	
 	
-	public TokenFilter(TokenService tokenService,UserService userCrudService) {
+	public TokenFilter(TokenService tokenService,UserService userService) {
 		super();
 		this.tokenService = tokenService;
-		this.userCrudService= userCrudService;
+		this.userService= userService;
 	}
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -40,10 +41,28 @@ public class TokenFilter extends OncePerRequestFilter {
 	}
 	private void authenticate(String token) {
 		Long userid = tokenService.getUserId(token);
-		//Service userService.findById(userid);
-		//ernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
-		//curityContextHolder.getContext().setAuthentication(authentication);
+		User user = userService.findByToken(token);
+		
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 	}
+	
+	public TokenService getTokenService() {
+		return tokenService;
+	}
+
+	public void setTokenService(TokenService tokenService) {
+		this.tokenService = tokenService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 
 }

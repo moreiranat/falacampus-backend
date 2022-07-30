@@ -31,14 +31,14 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Value("${app.logintype}")
-	private String login;
+	private String logintype;
 	private String suapToken;
 
 	
 
 	public User getLoggedUser() {
 	Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-				//SecurityContextHolder.getContext().getAuthentication();
+				
 		return (User) authentication.getPrincipal();
 		
 	}
