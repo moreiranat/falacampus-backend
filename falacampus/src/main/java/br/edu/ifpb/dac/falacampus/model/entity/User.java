@@ -68,7 +68,9 @@ public class User implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<SystemRole> roles = new ArrayList<>();
 	@Column(name = "USER_TOKEN", nullable = true)
+	
 	private String token;
+	
 	public User() {
 		
 	}

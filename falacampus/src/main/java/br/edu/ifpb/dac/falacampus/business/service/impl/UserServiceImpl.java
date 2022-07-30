@@ -102,9 +102,17 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User findByRegistration(Long registration) {
+	public User findByRegistration(Long registration) throws IllegalStateException{
+	
+		if(registration == null) {
+		
+			throw new IllegalStateException("Registration cannot be null");
+		}
+	
+		
 		return userRepository.findByRegistration(registration);
 	}
+	
 
 	@Override
 	public Iterable<User> findAll() {

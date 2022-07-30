@@ -106,7 +106,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			logout
 			.clearAuthentication(true)
 			.invalidateHttpSession(true)
-			.logoutUrl("/api/login")
+			.logoutUrl("/api/logout")
 			.logoutSuccessHandler(new LogoutSuccessHandler() {
 
 					@Override

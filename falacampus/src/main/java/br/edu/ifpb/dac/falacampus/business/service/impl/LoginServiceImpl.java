@@ -52,7 +52,7 @@ public class LoginServiceImpl implements LoginService {
 			if(this.suapToken == null) {
 				throw new IllegalArgumentException("User or passowd invalido");
 			}
-			User user = userService.findByUserName(username);
+			User user = new User();
 			try {
 				user= userService.findByRegistration(Long.parseLong(username)).get();
 				
