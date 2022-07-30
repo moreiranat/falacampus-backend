@@ -45,14 +45,14 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	
-		public User suapLogin(String username, String password) throws NumberFormatException,Exception {
+		public String suapLogin(String username, String password) throws NumberFormatException,Exception {
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 			String jsonToken = suapService.login(username, password);
 			this.suapToken= converterService.jsonToToken(jsonToken);
 			if(this.suapToken == null) {
 				throw new IllegalArgumentException("User or passowd invalido");
 			}
-			User user = userService.findByUserName(username);
+			User user = new User();
 			try {
 				user= userService.findByRegistration(Long.parseLong(username)).get();
 				
@@ -63,7 +63,7 @@ public class LoginServiceImpl implements LoginService {
 				user =userService.save(user);
 				
 			}
-			return user;
+			return suapToken;
 			
 		}
 		

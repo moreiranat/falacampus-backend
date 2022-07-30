@@ -9,16 +9,9 @@ public class LoginDto {
 
 	private Long registration;
 	private String username;
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	private String password;
+	
+
 
 	public LoginDto() {
 
@@ -29,6 +22,14 @@ public class LoginDto {
 		this.password = login.getPassword();
 	}
 
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public Long getRegistration() {
 		return registration;
 	}

@@ -9,6 +9,6 @@ public interface LoginService {
 
 	//User login(String username, String password);
 
-	User suapLogin(String username, String password) throws NumberFormatException, Exception;
+	String suapLogin(String username, String password) throws NumberFormatException, Exception;
 
 }
