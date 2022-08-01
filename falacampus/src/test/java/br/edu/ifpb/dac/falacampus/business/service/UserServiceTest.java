@@ -37,7 +37,7 @@ class UserServiceTest {
 	private static final Long ID = 1L;
 	private static final String NAME = "patrícia";
 	private static final String EMAIL = "@patricia";
-	private static final Long REGISTRATION = 223L;
+	private static final String REGISTRATION = "223L";
 	//private static final Role ROLE = Role.STUDENTS;
 	private static final String PASSWORD = "111";
 

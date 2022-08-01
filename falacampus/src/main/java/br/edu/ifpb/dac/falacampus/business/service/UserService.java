@@ -14,7 +14,7 @@ public interface UserService extends UserDetailsService {
 	public User update(User user);
 	public void delete(Long id);
 	public User findById(Long id);
-	public User findByRegistration(Long registration);
+	//public User findByRegistration(Long registration);
 	public Optional<User> findByEmail(String email);
 	public Iterable<User>findAll();
 	public Iterable<User>find(User filter);

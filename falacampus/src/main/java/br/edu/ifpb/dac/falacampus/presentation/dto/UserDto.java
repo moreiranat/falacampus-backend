@@ -26,19 +26,19 @@ public class UserDto {
 	private String email;
 	
 	@NotNull
-	private Long registration;
+	private String registration;
 	
 //	@NotNull
 //	private Role role = Role.STUDENTS;
 //	
 	@NotBlank
-	@Size(min=8, max=30)
+	//@Size(min=8, max=30)
 	private String password;
 	
 	@NotNull
 	private Long departamentId;
-	private List<SystemRole> roles = new ArrayList<>();
 	
+	private List<SystemRole> roles = new ArrayList<>();
 	
 	public UserDto() {
 		
@@ -49,7 +49,6 @@ public class UserDto {
 		this.name = user.getName();
 		this.email = user.getEmail();
 		this.registration = user.getRegistration();
-		//this.role = user.getRole();
 		this.password = user.getPassword();
 		this.departamentId = user.getDepartament().getId();
 	}
@@ -82,19 +81,13 @@ public class UserDto {
 		this.email = email;
 	}
 
-	public Long getRegistration() {
+	public String getRegistration() {
 		return registration;
 	}
 
-	public void setRegistration(Long registration) {
+	public void setRegistration(String registration) {
 		this.registration = registration;
 	}
-	
-	
-
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
 	
 	public List<SystemRole> getRoles() {
 		return roles;
@@ -120,9 +113,4 @@ public class UserDto {
 		this.departamentId = departamentId;
 	}
 
-	/*
-	 * public Role getRole() { return role; }
-	 */
-
-	
 }

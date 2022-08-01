@@ -34,24 +34,29 @@ public class AuthenticationController {
 	
 
 	@PostMapping("/loginAuth")
-
-
 	public ResponseEntity login(@RequestBody LoginDto dto) { 
-		try {
-			String token = authenticationService.login(dto.getUsername(), dto.getPassword()); 
-			User entity = userService.findByRegistration(dto.getRegistration());
-			
+		
+		//System.out.println(dto.getRegistration());
+		System.out.println(dto.getUsername());
+		System.out.println(dto.getPassword());
+		
+		return ResponseEntity.ok().build();
+		
+//		try {
+//			String token = authenticationService.login(dto.getUsername(), dto.getPassword()); 
+//			//User entity = userService.findByRegistration(dto.getRegistration());
+//			
 //			User entity = userService.findByUserName(dto.getUsername());
-					
-			UserDto userDto = userConverterService.userToDTO(entity); 
-			
-			TokenDto tokenDto = new TokenDto(token, userDto);
-			
-			return new ResponseEntity(tokenDto, HttpStatus.OK);
-			
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
+//					
+//			UserDto userDto = userConverterService.userToDTO(entity); 
+//			
+//			TokenDto tokenDto = new TokenDto(token, userDto);
+//			
+//			return new ResponseEntity(tokenDto, HttpStatus.OK);
+//			
+//		} catch (Exception e) {
+//			return ResponseEntity.badRequest().body(e.getMessage());
+//		}
 	}
 	
 	@PostMapping("/isTokenValid")

@@ -49,7 +49,7 @@ class DepartamentServiceTest {
 		user.setId(1L);
 		user.setName("Maria");
 		user.setEmail("maria@email.com");
-		user.setRegistration(12345L);
+		user.setRegistration("12345L");
 		user.setPassword("12345678");
 		//user.setRole(Role.STUDENTS);
 		user.setDepartament(departament);

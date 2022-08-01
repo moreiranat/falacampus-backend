@@ -9,7 +9,7 @@ import br.edu.ifpb.dac.falacampus.exceptions.InternalException;
 import br.edu.ifpb.dac.falacampus.exceptions.ResourceNotFoundException;
 
 //criação de um serviço no Controller para lançar as exceções personalizadas
-@RestController
+//@RestController
 public class ExceptionController {
 
 	// Esse metodo espera 3 string possiveis, not_found, bad_arguments e qualquer

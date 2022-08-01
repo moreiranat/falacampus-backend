@@ -30,9 +30,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEnconderService passwordEnconderService;
 
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByRegistration(Long.parseLong(username)).get();
+		//User user = userRepository.findByRegistration(Long.parseLong(username)).get();
+		User user = userRepository.findByRegistration(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(String.format("Could not find any user with username %s", username));
 		}
@@ -101,6 +103,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByName(username);
 	}
 	
+	/*
 	@Override
 	public User findByRegistration(Long registration) throws IllegalStateException{
 	
@@ -111,7 +114,7 @@ public class UserServiceImpl implements UserService {
 	
 		
 		return userRepository.findByRegistration(registration);
-	}
+	}*/
 	
 
 	@Override
@@ -132,5 +135,9 @@ public class UserServiceImpl implements UserService {
 	public User findByToken(String token) {
 		return userRepository.findByToken(token);
 	}
+
+	
+
+	
 
 }

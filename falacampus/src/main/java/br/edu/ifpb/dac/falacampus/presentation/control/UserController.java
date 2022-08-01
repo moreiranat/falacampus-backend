@@ -116,7 +116,7 @@ public class UserController {
 				@RequestParam(value = "id", required = false) Long id,
 				@RequestParam(value = "name", required = false) String name,
 				@RequestParam(value = "email", required = false) String email,
-				@RequestParam(value = "registration", required = false) Long registration,
+				@RequestParam(value = "registration", required = false) String registration,
 				//@RequestParam(value = "role", required = false) Role role,
 				@RequestParam(value = "departamentId", required = false) Long departamentId) {
 		

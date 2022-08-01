@@ -7,21 +7,19 @@ import br.edu.ifpb.dac.falacampus.model.entity.Login;
 
 public class LoginDto {
 
-	private Long registration;
+//	private Long id;
+//	private Long registration;
 	private String username;
 	private String password;
 	
-
-
 	public LoginDto() {
 
 	}
 
 	public LoginDto(Login login) {
-		this.registration= login.getRegistration();
+		this.username= login.getUsername();
 		this.password = login.getPassword();
 	}
-
 	
 	public String getUsername() {
 		return username;
@@ -30,17 +28,13 @@ public class LoginDto {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public Long getRegistration() {
-		return registration;
-	}
-
-	public void setRegistration(Long registration) {
-		this.registration= registration;
-	}
-
-
+	
 	public String getPassword() {
 		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public static List<LoginDto> converter(List<Login> logins) {

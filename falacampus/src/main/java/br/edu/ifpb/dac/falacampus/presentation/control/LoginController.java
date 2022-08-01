@@ -1,5 +1,7 @@
 package br.edu.ifpb.dac.falacampus.presentation.control;
 
+
+import org.apache.ibatis.javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -34,26 +36,38 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	
-	
+	@SuppressWarnings("unchecked")
 	@PostMapping("/login")
 	public ResponseEntity login(@RequestBody LoginDto dto) {
+		
+		System.out.println(dto.getUsername());
+		System.out.println(dto.getPassword());
+		
 		try {
-			String token = loginService.suapLogin(dto.getUsername(), dto.getPassword());
-					
-					//suapLogin(dto.getUsername(), dto.getPassword());
 			
-			User entity  =  userService.findByRegistration(Long.parseLong(dto.getUsername())).get();
-			UserDto userDto = userConverterService.userToDTO(entity);
+			//Login no Suap
+			User usuarioAutenticado = loginService.suapLogin(dto.getUsername(), dto.getPassword());
+							
+			//Token
+			if(usuarioAutenticado!=null) {
+				String token = usuarioAutenticado.getToken();			
+				System.out.println("Token:"+token);
+				System.out.println("#3");
+				UserDto userDto = userConverterService.userToDTO(usuarioAutenticado);
+							
+				TokenDto tokenDto = new TokenDto(token, userDto);
+				
+				return new ResponseEntity(tokenDto, HttpStatus.OK);
+			}else {
+				return ResponseEntity.badRequest().body("Pedido foi limitado pelo SUAP. Aguarde...");
+			}
 			
-			TokenDto tokenDto = new TokenDto(token, userDto);
-			
-			return new ResponseEntity(tokenDto, HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-}
 	}
+}
 	
 	
 	

@@ -20,7 +20,7 @@ public class SystemRole implements GrantedAuthority {
 
 	@Override
 	public String getAuthority() {
-		return getName();
+		return name;
 	}
 
 	public Long getId() {

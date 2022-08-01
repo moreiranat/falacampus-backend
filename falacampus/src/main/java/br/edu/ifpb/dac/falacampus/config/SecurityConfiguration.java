@@ -23,6 +23,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
@@ -94,13 +95,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/login").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/auth").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/isTokenValid").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/user").permitAll()
 				.antMatchers(HttpMethod.DELETE, "/api/user")
 				.hasRole(SystemRoleService.AVAILABLE_ROLES.ADMIN.name())
-				.anyRequest().authenticated() //Essa configuração evita que uma URL que não foi configurada seja pública
-				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+				.anyRequest().authenticated() //Essa configuração serve para indicar que outras URLs que não foram configuradas devem ter acesso restrito
+				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		http.logout(logout -> 
 			logout
@@ -119,5 +121,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			);
 			
 	}
+	
+//	public static void main(String[] args) {
+//		System.out.println(new BCryptPasswordEncoder().encode("12345678")); //hash no formato BCrypt
+//	}
 
 }

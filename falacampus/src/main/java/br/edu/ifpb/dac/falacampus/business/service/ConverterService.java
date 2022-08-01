@@ -57,7 +57,7 @@ public class ConverterService {
 		
 		User user = new User();
 		user.setName(name);
-		user.setRegistration(Long.parseLong(registration));
+		user.setRegistration(registration);
 		user.setRoles(roles);
 		
 		return user;

@@ -47,7 +47,7 @@ public class User implements UserDetails {
 	@NotNull
 	//@NotBlank
 	@Column(name = "user_registration")
-	private Long registration;
+	private String registration;
 //	
 //	@NotNull
 //	@Enumerated(EnumType.STRING)
@@ -56,7 +56,7 @@ public class User implements UserDetails {
 	
 	//@NotNull
 	@NotBlank
-	@Size(min=8, max=30)
+	//@Size(min=8, max=30)
 	@Column(name = "user_password")
 	private String password;
 	
@@ -67,15 +67,15 @@ public class User implements UserDetails {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<SystemRole> roles = new ArrayList<>();
-	@Column(name = "USER_TOKEN", nullable = true)
 	
+	@Column(name = "USER_TOKEN", nullable = true)
 	private String token;
 	
 	public User() {
 		
 	}
 	
-	public User(Long id, String name, String email, Long registration,  String password,
+	public User(Long id, String name, String email, String registration,  String password,
 			Departament departament) {
 		this.id = id;
 		this.name = name;
@@ -111,11 +111,11 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 
-	public Long getRegistration() {
+	public String getRegistration() {
 		return registration;
 	}
 
-	public void setRegistration(Long registration) {
+	public void setRegistration(String registration) {
 		this.registration = registration;
 	}
 	

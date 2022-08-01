@@ -12,63 +12,95 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
+import br.edu.ifpb.dac.falacampus.business.service.DepartamentService;
 import br.edu.ifpb.dac.falacampus.business.service.LoginService;
 import br.edu.ifpb.dac.falacampus.business.service.SuapService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
-
+import br.edu.ifpb.dac.falacampus.model.entity.Departament;
 import br.edu.ifpb.dac.falacampus.model.entity.User;
 
 @Service
-@Scope(value = WebApplicationContext.SCOPE_SESSION)
-
+//@Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private SuapService suapService;
 	@Autowired
+	private DepartamentService departamentService;
+	@Autowired
 	private ConverterService converterService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Value("${app.logintype}")
 	private String logintype;
 	private String suapToken;
 
-	
-
 	public User getLoggedUser() {
-	Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-				
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 		return (User) authentication.getPrincipal();
-		
+
 	}
-	
-	
-		public String suapLogin(String username, String password) throws NumberFormatException,Exception {
-			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-			String jsonToken = suapService.login(username, password);
-			this.suapToken= converterService.jsonToToken(jsonToken);
-			if(this.suapToken == null) {
-				throw new IllegalArgumentException("User or passowd invalido");
-			}
-			User user = new User();
-			try {
-				user= userService.findByRegistration(Long.parseLong(username)).get();
-				
-			} catch (Exception e) {
-				String json = suapService.findUser(this.suapToken, username);
-				user=converterService.jsonToUser(json);
-				user.setToken(this.suapToken);
-				user =userService.save(user);
-				
-			}
-			return suapToken;
+
+	public User suapLogin(String username, String password) throws NumberFormatException {
+
+		// Authentication authentication = authenticationManager.authenticate(new
+		// UsernamePasswordAuthenticationToken(username, password));
+		String jsonToken = suapService.login(username, password);
+		System.out.println("Retorno do SUAP: "+jsonToken);
+		User user = null;
+
+		
+		try {
+			this.suapToken = converterService.jsonToToken(jsonToken);
 			
+		}catch (NullPointerException e) {
+			e.printStackTrace();
 		}
 		
+		if (this.suapToken == null) {
+			throw new IllegalArgumentException("Incorrect Registration or Password");
+		}
+
+		//// Mock
+		Departament departament = departamentService.findById(100l);
+		if (departament == null) {
+			departament = departamentService.save(new Departament(100l, "teste"));
+		}
+		////////
+
+		try {
+			user = userService.findByUserName(username);
+
+			if (user == null) {
+
+				user = new User();
+				user.setName("teste name");
+				user.setEmail("teste email");
+				user.setDepartament(departament);
+				user.setPassword(password);
+				user.setRegistration(username);
+				user.setToken(this.suapToken);
+				user = userService.save(user);
+				// String jsToken = suapService.findUser(suapToken, username);
+				// user = converterService.jsonToUser(jsToken);
+
+			}
+
+			// user = userService.findByRegistration(Long.parseLong(username)).get();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return user;
+
+	}
+
 //		@Override
-//		public  User login(String username, String password)throws NumberFormatException {
+//		public  User login(String username, String password) throws NumberFormatException {
 //			String jsonToken = suapService.login(username, password);
 //			this.suapToken = converterService.jsonToToken(jsonToken);
 //			if (this.suapToken == null) {
@@ -77,12 +109,11 @@ public class LoginServiceImpl implements LoginService {
 //			User user = userService.findByName(username);
 //			
 //			if(user == null) {
-//				String json = suapService.findUser(suapToken,login);
+//				String json = suapService.findUser(suapToken, username);
 //				user =converterService.jsonToUser(json);
 //				user = userService.save(user);
 //			}
 //			return user;
 //		}
-	
 
 }

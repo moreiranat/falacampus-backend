@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.edu.ifpb.dac.falacampus.presentation.dto.ErrorDto;
 
-@RestControllerAdvice
+//@RestControllerAdvice
 public class ValidationErrorHandler {
 	
 	@Autowired
