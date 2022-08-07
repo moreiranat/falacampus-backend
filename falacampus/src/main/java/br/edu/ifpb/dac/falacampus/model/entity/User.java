@@ -56,7 +56,7 @@ public class User implements UserDetails {
 	
 	//@NotNull
 	@NotBlank
-	//@Size(min=8, max=30)
+	@Size(min=8, max=256)
 	@Column(name = "user_password")
 	private String password;
 	

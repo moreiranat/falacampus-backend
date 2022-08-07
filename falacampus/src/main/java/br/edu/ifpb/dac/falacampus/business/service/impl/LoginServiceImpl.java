@@ -63,31 +63,29 @@ public class LoginServiceImpl implements LoginService {
 		if (this.suapToken == null) {
 			throw new IllegalArgumentException("Incorrect Registration or Password");
 		}
+		
+		
+		//{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMzg4OSwidXNlcm5hbWUiOiIyNDAzOTQ0IiwiZXhwIjoxNjU5OTI1MDI5LCJlbWFpbCI6InRpYWdvLnJvY2hhQGlmcGIuZWR1LmJyIiwib3JpZ19pYXQiOjE2NTk4Mzg2Mjl9.AteKiYrEeAySiMJQo5HJ84hiFXOp4g4UaRdpM8I80qQ"}
+		
+		
+		String tokenTeste = jsonToken.substring(10,jsonToken.length()-2);
+		
+		String findStudent = this.suapService.findStudent(tokenTeste, username);
+		
+		user = converterService.jsonToUser(findStudent);
+		user.setToken(tokenTeste);
+		
+		System.out.println("Testando: "+user.getName()+"\n"+user.getDepartament().getName());
+		
+		
+		System.out.println("findStudent: "+findStudent);
 
-		//// Mock
-		Departament departament = departamentService.findById(100l);
-		if (departament == null) {
-			departament = departamentService.save(new Departament(100l, "teste"));
-		}
-		////////
+		
 
 		try {
-			user = userService.findByUserName(username);
-
-			if (user == null) {
-
-				user = new User();
-				user.setName("teste name");
-				user.setEmail("teste email");
-				user.setDepartament(departament);
-				user.setPassword(password);
-				user.setRegistration(username);
-				user.setToken(this.suapToken);
-				user = userService.save(user);
-				// String jsToken = suapService.findUser(suapToken, username);
-				// user = converterService.jsonToUser(jsToken);
-
-			}
+			user.setPassword("Temp");
+			user.setEmail("emailtemp@ifpb.edu.br");
+			userService.save(user);
 
 			// user = userService.findByRegistration(Long.parseLong(username)).get();
 

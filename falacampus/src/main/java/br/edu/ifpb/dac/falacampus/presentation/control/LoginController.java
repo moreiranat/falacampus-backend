@@ -40,9 +40,7 @@ public class LoginController {
 	@PostMapping("/login")
 	public ResponseEntity login(@RequestBody LoginDto dto) {
 		
-		System.out.println(dto.getUsername());
-		System.out.println(dto.getPassword());
-		
+			
 		try {
 			
 			//Login no Suap
@@ -50,9 +48,7 @@ public class LoginController {
 							
 			//Token
 			if(usuarioAutenticado!=null) {
-				String token = usuarioAutenticado.getToken();			
-				System.out.println("Token:"+token);
-				System.out.println("#3");
+				String token = usuarioAutenticado.getToken();							
 				UserDto userDto = userConverterService.userToDTO(usuarioAutenticado);
 							
 				TokenDto tokenDto = new TokenDto(token, userDto);
