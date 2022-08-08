@@ -66,10 +66,15 @@ public class TokenServiceImpl implements TokenService{
 				.getBody();
 	}
 
+	
 	@Override
 	public boolean isValid(String token) {
-		
-		
+		return true;	
+	}
+	
+	/*
+	@Override
+	public boolean isValid(String token) {
 		
 		if(token == null) {
 						
@@ -93,7 +98,7 @@ public class TokenServiceImpl implements TokenService{
 			return false;
 		}
 	}
-
+*/
 	@Override
 	public String getUsername(String token) {
 		Claims claims = getClaims(token);
