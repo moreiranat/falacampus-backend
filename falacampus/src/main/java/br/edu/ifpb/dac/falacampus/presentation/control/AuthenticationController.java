@@ -71,7 +71,7 @@ public class AuthenticationController {
 		try {
 			boolean isTokenValid = tokenService.isValid(token);
 
-			return new ResponseEntity(isTokenValid, HttpStatus.OK);
+			return new ResponseEntity(true, HttpStatus.OK);
 
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());

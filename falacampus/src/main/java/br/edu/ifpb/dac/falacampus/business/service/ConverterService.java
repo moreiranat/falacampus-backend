@@ -41,12 +41,12 @@ public class ConverterService {
 		return token;
 	}
 
-	public User jsonToUser(String json) {
+	public User jsonToUser(String jsonUser) {
 
-		JsonElement jsonElement = JsonParser.parseString(json);
+		JsonElement jsonElement = JsonParser.parseString(jsonUser);
 		JsonObject results = jsonElement.getAsJsonObject().get("results").getAsJsonArray().get(0).getAsJsonObject();
 
-		System.out.println(results);
+		
 		String name = results.get("nome").getAsString();
 		String registration = results.get("matricula").getAsString();
 		JsonElement office = results.get("cargo_emprego");

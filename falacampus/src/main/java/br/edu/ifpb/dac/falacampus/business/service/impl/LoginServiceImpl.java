@@ -52,9 +52,15 @@ public class LoginServiceImpl implements LoginService {
 
 	public User suapLogin(String username, String password) throws NumberFormatException {
 
-		String jsonToken = suapService.login(username, password);
+		
+		// 1) Login no SUAP, retorna token 
+		String jsonToken = suapService.login(username, password); 
 
 		System.out.println("Retorno SUAP: " + jsonToken);
+		/////
+		
+		
+		// 2) converter o token
 		try {
 			this.suapToken = converterService.jsonToToken(jsonToken);
 
@@ -65,29 +71,39 @@ public class LoginServiceImpl implements LoginService {
 		if (this.suapToken == null) {
 			throw new IllegalArgumentException("Incorrect Registration or Password");
 		}
-
-		String formatToken = jsonToken.substring(10, jsonToken.length() - 2);
-
-		String userFind = this.suapService.findUser(formatToken, username);
-
+		////////////
+		
+		
+		
+		//// 3) Busca informações do usuario no suap
+		String suapUserJson = this.suapService.findUser(this.suapToken, username);
+		//////
+		
+		
+		//// 4) converter o usuario do suap para usuario do sistema
+		/////   gerar o token do sistema
+		/////   autentica o usuario no sistema
 		User user = null;
 		try {
 
-			user = converterService.jsonToUser(userFind);
-			// user = userService.findByRegistration(username);
-			user.setToken(tokenService.generate(user));
+			user = converterService.jsonToUser(suapUserJson); // Pega os dados Nome Completo, Departamento e Roles
+			
+			user.setToken(tokenService.generate(user)); // Gera o token do sistema
+			
 			userService.update(user);
 
+			
+			/// autentica no spring security
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null,
 					user.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-
+			/////////
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
 		return user;
-
+		///////////////////////
 	}
 
 //		@Override

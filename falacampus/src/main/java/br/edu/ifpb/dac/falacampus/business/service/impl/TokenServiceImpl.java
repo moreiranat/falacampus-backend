@@ -52,7 +52,7 @@ public class TokenServiceImpl implements TokenService{
 				.claim(CLAIM_USERID, user.getId())
 				.claim(CLAIM_USERNAME, user.getUsername())
 				.claim(CLAIM_EXPIRATION, tokenExpiration)
-				.signWith(SignatureAlgorithm.HS256, secret.getBytes())
+				.signWith(SignatureAlgorithm.HS256, secret)
 				.compact();
 		return token;
 	}
@@ -75,8 +75,6 @@ public class TokenServiceImpl implements TokenService{
 		if(token == null) {
 						
 			return false;
-		}else {
-			token = token.trim();
 		}
 		
 		try {
