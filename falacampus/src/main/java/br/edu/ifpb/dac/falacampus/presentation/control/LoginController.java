@@ -57,7 +57,7 @@ public class LoginController {
 				UserDto userDto = userConverterService.userToDTO(usuarioAutenticado);
 				
 		
-				TokenDto tokenDto = new TokenDto(usuarioAutenticado.getToken(), userDto);
+				TokenDto tokenDto = new TokenDto(usuarioAutenticado.getToken());
 				
 				return new ResponseEntity(tokenDto, HttpStatus.OK);
 			}else {
