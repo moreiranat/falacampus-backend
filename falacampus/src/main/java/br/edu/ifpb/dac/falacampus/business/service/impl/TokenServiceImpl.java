@@ -26,10 +26,10 @@ public class TokenServiceImpl implements TokenService{
 	public static final String CLAIM_USERNAME = "username";
 	public static final String CLAIM_EXPIRATION = "expirationTime";
 	
-	@Value("${jwt.expiration}")
+	@Value("${falacampus.jwt.expiration}")
 	private String expiration;
 	
-	@Value("${jwt.secret}")
+	@Value("${falacampus.jwt.secret}")
 	private String secret;
 
 	@Override
@@ -43,6 +43,8 @@ public class TokenServiceImpl implements TokenService{
 		String tokenExpiration = expirationLocalDateTime.toLocalTime()
 				.format(DateTimeFormatter.ofPattern("HH:mm"));
 		
+	
+		
 		String token = Jwts
 				.builder()
 				.setExpiration(expirationDate)
@@ -50,7 +52,7 @@ public class TokenServiceImpl implements TokenService{
 				.claim(CLAIM_USERID, user.getId())
 				.claim(CLAIM_USERNAME, user.getUsername())
 				.claim(CLAIM_EXPIRATION, tokenExpiration)
-				.signWith(SignatureAlgorithm.HS512, secret)
+				.signWith(SignatureAlgorithm.HS256, secret.getBytes())
 				.compact();
 		return token;
 	}
@@ -66,8 +68,14 @@ public class TokenServiceImpl implements TokenService{
 
 	@Override
 	public boolean isValid(String token) {
+		
+		
+		
 		if(token == null) {
+						
 			return false;
+		}else {
+			token = token.trim();
 		}
 		
 		try {
@@ -75,9 +83,13 @@ public class TokenServiceImpl implements TokenService{
 			LocalDateTime expirationDate = claims.getExpiration().toInstant()
 			.atZone(ZoneId.systemDefault()).toLocalDateTime();
 			
+		
+			System.out.println("antes do return");
 			return !LocalDateTime.now().isAfter(expirationDate);
 			
 		} catch (Exception e){
+			
+			e.printStackTrace();
 			return false;
 		}
 	}
