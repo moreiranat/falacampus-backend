@@ -19,56 +19,100 @@ import br.edu.ifpb.dac.falacampus.model.entity.User;
 
 @Service
 public class ConverterService {
-	
+
 	@Autowired
 	private SystemRoleServiceImpl roleService;
-	
+
 	@Autowired
 	private DepartamentService departamentService;
 	
-	public String mapToJson(Map<String,String>map) {
+	@Autowired
+	private UserService userService;
+
+	public String mapToJson(Map<String, String> map) {
 		Gson gson = new Gson();
-		String json =gson.toJson(map);
+		String json = gson.toJson(map);
 		return json;
 	}
-	
+
 	public String jsonToToken(String json) {
 		JsonElement jsonElement = JsonParser.parseString(json);
 		String token = jsonElement.getAsJsonObject().get("token").getAsString();
 		return token;
 	}
-	
+
 	public User jsonToUser(String json) {
-		User user = new User();
-		
+
 		JsonElement jsonElement = JsonParser.parseString(json);
-		JsonObject results = jsonElement.getAsJsonObject()
-		.get("results")
-		.getAsJsonArray()
-		.get(0)
-		.getAsJsonObject();
-		
+		JsonObject results = jsonElement.getAsJsonObject().get("results").getAsJsonArray().get(0).getAsJsonObject();
+
+		System.out.println(results);
 		String name = results.get("nome").getAsString();
 		String registration = results.get("matricula").getAsString();
-		JsonElement office = results.get("cargo");
+		JsonElement office = results.get("cargo_emprego");
 		
-		List<SystemRole> roles = new ArrayList<>();
-		roles.add(roleService.findDefault());
 		
-		if(office == null) {
-			roles.add(roleService.findByName(SystemRoleService.AVAILABLE_ROLES.STUDENTS.name()));
-			List<Departament> find = departamentService.find(new Departament(1l, "Departamento Estudantil"));
-			user.setDepartament(find.get(0));
-			
-		} else {
-			roles.add(roleService.findByName(SystemRoleService.AVAILABLE_ROLES.EMPLOYEES.name()));
+		User user = userService.findByRegistration(registration);
+		
+		if(user==null) {
+			user = new User();
 		}
-		
-		
+
+		List<SystemRole> roles = new ArrayList<>();
+		Departament departament = null;
+
+		if (office != null) {
+			roles.add(roleService.findByName(SystemRoleService.AVAILABLE_ROLES.EMPLOYEES.name()));
+
+			JsonElement lotacao = results.get("lotacao_siape");
+			JsonObject lotacaoJson = lotacao.getAsJsonObject();
+			JsonElement sigla = lotacaoJson.get("sigla");
+			JsonElement nameDepartament = lotacaoJson.get("nome");
+
+			String departamentName = nameDepartament.getAsString();
+			
+			Departament findByNameDepartament = departamentService.findByName(departamentName);
+
+			if (findByNameDepartament == null) {
+				departament = departamentService.save(new Departament(departamentName));
+			} else {
+				departament = findByNameDepartament;
+			}
+
+		} else {
+			roles.add(roleService.findDefault());
+
+			JsonObject curso = results.get("curso").getAsJsonObject();
+			JsonElement cursoNameJson = curso.get("nome");
+			String cursoName = cursoNameJson.getAsString();
+			
+			
+			Departament findByNameDepartament = departamentService.findByName(cursoName);
+
+			if (findByNameDepartament == null) {
+				departament = departamentService.save(new Departament(cursoName));
+			} else {
+				departament = findByNameDepartament;
+			}
+			// List<Departament> find = departamentService.find(new Departament(1l,
+			// "Departamento Estudantil"));
+			// user.setDepartament(find.get(0));
+			// departament = find.get(0);
+		}
+
 		user.setName(name);
 		user.setRegistration(registration);
 		user.setRoles(roles);
+		user.setDepartament(departament);
+		user.setPassword("password");
+		user.setEmail("email@ifpb.edu.br");
 		
+		if(user.getId() != null) {
+			user = userService.update(user);
+		}else {
+			user = userService.save(user);
+		}
+
 		return user;
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import br.edu.ifpb.dac.falacampus.business.service.ConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.LoginService;
+import br.edu.ifpb.dac.falacampus.business.service.TokenService;
 import br.edu.ifpb.dac.falacampus.business.service.UserConverterService;
 import br.edu.ifpb.dac.falacampus.business.service.UserService;
 import br.edu.ifpb.dac.falacampus.business.service.impl.LoginServiceImpl;
@@ -35,6 +36,9 @@ public class LoginController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TokenService tokenService;
 
 	@SuppressWarnings("unchecked")
 	@PostMapping("/login")
@@ -45,13 +49,15 @@ public class LoginController {
 			
 			//Login no Suap
 			User usuarioAutenticado = loginService.suapLogin(dto.getUsername(), dto.getPassword());
-							
+						
+			
 			//Token
 			if(usuarioAutenticado!=null) {
-				String token = usuarioAutenticado.getToken();							
+				//String token = usuarioAutenticado.getToken();							
 				UserDto userDto = userConverterService.userToDTO(usuarioAutenticado);
-							
-				TokenDto tokenDto = new TokenDto(token, userDto);
+				
+		
+				TokenDto tokenDto = new TokenDto(usuarioAutenticado.getToken(), userDto);
 				
 				return new ResponseEntity(tokenDto, HttpStatus.OK);
 			}else {

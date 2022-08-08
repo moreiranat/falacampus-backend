@@ -48,9 +48,10 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		passwordEnconderService.encryptPassword(user);
-		List<SystemRole> roles = new ArrayList<>();
-		roles.add(roleService.findDefault());
-		user.setRoles(roles);
+		//
+		//List<SystemRole> roles = new ArrayList<>();
+		//roles.add(roleService.findDefault());
+		//user.setRoles(roles);
 		
 		return userRepository.save(user);
 
@@ -58,14 +59,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User update(User user) {
-		if (user.getId() != null) {
-			throw new IllegalStateException("User is already in the database");
+		if (user.getId() == null) {
+			throw new IllegalStateException("User id is null");
 		}
 		
 		passwordEnconderService.encryptPassword(user);
+		/*
+		
 		List<SystemRole> roles = new ArrayList<>();
 		roles.add(roleService.findDefault());
 		user.setRoles(roles);
+			*/	
 		return userRepository.save(user);
 	}
 
@@ -134,6 +138,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByToken(String token) {
 		return userRepository.findByToken(token);
+	}
+
+	@Override
+	public User findByRegistration(String username) {
+
+		return userRepository.findByRegistration(username);
 	}
 
 	

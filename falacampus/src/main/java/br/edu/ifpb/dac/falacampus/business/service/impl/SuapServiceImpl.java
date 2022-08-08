@@ -24,11 +24,7 @@ public class SuapServiceImpl implements SuapService {
 
 	@Override
 	public String login(String username, String password) {
-		
-		System.out.println("##########");
-		System.out.println(username);
-		System.out.println(password);
-		
+				
 		Map body = Map.of(USERNAME_JSON_FIELD, username, PASSWORD_JSON_FIELD, password);
 		
 		String json = converterService.mapToJson(body);

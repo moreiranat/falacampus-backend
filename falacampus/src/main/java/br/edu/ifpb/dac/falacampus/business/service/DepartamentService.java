@@ -16,7 +16,12 @@ public class DepartamentService {
 
 	@Autowired
 	private DepartamentRepository departamentRepository;
-
+	
+	
+	
+	public Departament findByName(String name) {
+		return departamentRepository.findByName(name);
+	}
 	public Departament save(Departament departament) {
 
 		return departamentRepository.save(departament);
